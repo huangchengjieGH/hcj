@@ -1,0 +1,91 @@
+<!--pages/nearby/nearby.wxml-->
+<import src="../res-template/res-template.wxml" />
+<view class='nearby-contrainer'>
+  <view class='search-title'>
+    <view class='search-res'>
+      <icon class='search-icon' type="search" size="13" color="#888"></icon>
+      <text class='search-txt'>找餐厅</text>
+    </view>
+  </view>
+  <view class='spliter-line'></view>
+  <view class='nearby-class'>
+    <view class="nearby {{shownavIndex == 1? 'active' : ''}}" bindtap='OnlistNearby' data-nav="1">
+      <text class='nearby-txt'>附近</text>
+      <view class="icon"></view>
+    </view>
+
+    <view class="total-dish {{shownavIndex == 2? 'active' : ''}}" bindtap='OnlistTotal' data-nav="2">
+      <text class='total-txt'>全部菜系</text>
+      <view class="icon"></view>
+    </view>
+
+    <view class="sorting {{shownavIndex == 3? 'active' : ''}}" bindtap='OnlistSorting' data-nav="3">
+      <text class='sorting-txt'>智能排序</text>
+      <view class="icon"></view>
+    </view>
+
+    <view class="filter {{shownavIndex == 4? 'active' : ''}}" bindtap='OnlistFilter' data-nav="4">
+      <text class='filter-txt'>筛选</text>
+      <view class="icon"></view>
+    </view>
+  </view>
+
+  <view class="fujin {{nearbyOpen ? 'slidown' : 'slidup'}} {{nearbyShow ? 'hide':''}}">
+    <!-- <view class="fujin fujin-left">
+      <view class="{{select == index ? 'current' : ''}}" wx:for="{{currentCity}}" bindtap="onselectleft" data-city='{{index}}'>
+         {{index}}
+      </view>
+    </view> -->
+    <scroll-view scroll-y="true" class="fujin fujin-left">
+      <view class="{{select == index ? 'current' : ''}}" wx:for="{{currentCity}}" bindtap="onselectleft" data-city='{{index}}'>
+         {{index}}
+      </view>
+    </scroll-view>
+
+    <scroll-view scroll-y="true" class="{{showright ? 'fujin fujin-right' : 'hide'}}">
+       <view  wx:for="{{cityright}}" bindtap="onselectright" data-city='{{item}}'>
+                {{item}}
+            </view>
+        </scroll-view>
+  </view>
+
+  <view class="dish-total {{totalOpen ? 'slidown' : 'slidup'}} {{totalShow ? 'hide':''}}">
+    <view class="dish-title">
+      <text class="dish-txt">{{DishClass.title}}</text>
+    </view>
+    <scroll-view scroll-y="true" class="dish-value">
+      <view wx:for="{{DishClass.Dish}}" wx:for-item="item">
+            {{item}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="in-sorting {{sortOpen ? 'slidown' : 'slidup'}} {{sortShow ? 'hide':''}}">
+    <view class="sorting-title">
+    <text class='sorting-txt2'>{{Sorting.title}}</text>
+    </view>
+    <view class="sorting-value">
+      <view wx:for="{{Sorting.sorting}}" wx:for-item="item">
+        {{item}}
+      </view>
+    </view>
+  </view>
+  
+  <view class="Filtering {{filterOpen ? 'slidown' : 'slidup'}} {{filterShow ? 'hide':''}}">
+    <view class="filter-title">
+     <text class="filter-txt2">{{Filter.title}}</text>
+    </view>
+    <view class="filter-value1">
+      <view class="filter-value2" wx:for="{{Filter.filter}}" wx:for-item="item">
+       {{item}}
+      </view>
+    </view>   
+ 
+  </view>
+   
+   <view class="resNearby-container">
+    <block wx:for="{{NearbyData.resDataArray}}" wx:for-item="nearbyData">
+      <template is="res" data="{{...nearbyData}}" />
+    </block>
+  </view>
+</view>

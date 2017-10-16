@@ -1,0 +1,77 @@
+.detail-contrainer{
+   display: flex;
+   flex-direction: column;
+   border-bottom: 1px solid #ededed;
+   border-top: 1px solid #ededed;
+   padding-bottom: 5px;
+}
+.classify{
+   border-bottom: 1px solid #ededed;
+   border-top: 1px solid #ededed;
+   padding-bottom: 5px;
+}
+.class-value{
+  font-size: 25rpx;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+  color: #6b6666;
+}
+.menu-desc{
+   display: flex;
+   flex-direction: row;
+}
+.dish-describe{
+  display: flex;
+   flex-direction: column;
+   margin-top: 20rpx;
+   margin-left: 20rpx;
+}
+.dish-name{
+  font-weight: 800;
+  font-size: 30rpx;
+}
+.dish-taste{
+  margin-top: 5rpx;
+  color:#6b6666;
+  font-size: 28rpx;
+}
+.dish-sale{
+  margin-top: 5rpx;
+  color:#6b6666;
+  font-size: 28rpx;
+}
+.dish-price{
+  color: red;
+  margin-top: 5rpx;
+  font-size: 28rpx;
+  font-weight: 800rpx;
+}
+.menu-img{
+ margin-left: 10rpx;
+ margin-top: 10rpx;
+ height: 180rpx;
+ width: 180rpx;
+}
+
+.jian-icon{
+  position: absolute;
+  right: 125rpx;
+   margin-top: 1rpx; 
+  height: 60rpx;
+  width: 60rpx;
+}
+.record-value{
+  position: absolute;
+  right: 95rpx;
+  margin-top: 15rpx;
+}
+.add-icon{
+  position: absolute;
+  right: 20rpx;
+  margin-top: 1rpx;
+  height: 60rpx;
+  width: 60rpx;
+}
+.hide{
+  display:none;
+}

@@ -1,0 +1,67 @@
+/* pages/cooperation/cooperation.wxss */
+.cooperation_contrainer{
+  display: flex;
+  flex-direction: column;
+}
+.spliter-line{
+  height: 20rpx;
+  width: 100%;
+  background: #e5e3e6;
+}
+.feedback-msg{
+ border: 1rpx solid #e5e3e6;
+ height: 80rpx;
+ width: 100%;
+}
+.feedback-txt{
+  position:absolute;
+  font-size: 35rpx;
+  color: red;
+  margin-left: 20rpx;
+  padding-top: 20rpx;
+}
+.res-name{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+.name-txt1{
+  font-size: 35rpx;
+}
+.name-txt2{
+  position: absolute;
+  font-size: 35rpx;
+  margin-top: 15rpx;
+  margin-left: 10rpx;
+  color: red;
+}
+.input{
+  border: 1rpx solid #e5e3e6;
+  width: 650rpx;
+  height: 60rpx;
+  margin-left: 10rpx;
+  margin-top: 15rpx;
+}
+.search_input{
+  width: 600rpx;
+  height: 50rpx;
+  margin-left: 10rpx;
+}
+.Tips{
+  position: absolute;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  color: #bbbbbb;
+}
+.confirm-btn{
+  color: white;
+  background: red;
+  margin-top: 150rpx;
+  height: 90rpx;
+  width: 85%;
+}
+.subject{
+  width: 100%;
+  height: 750rpx;
+  border-bottom: 1rpx solid #e5e3e6;
+}

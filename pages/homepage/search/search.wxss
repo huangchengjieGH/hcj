@@ -1,0 +1,76 @@
+
+.contrainer{
+  display: flex;
+  flex-direction: column;
+}
+.search_func{
+ display: flex;
+  flex-direction:row; 
+}
+.search_form{
+  display: flex;
+  flex-direction:row; 
+  margin-left:20rpx;
+  width: 630rpx;
+  height: 65rpx;
+  background-color:#f6f6f6;
+  border-radius:5px;
+}
+.search_view{
+  display: flex;
+  flex-direction:row;
+}
+.search_input{
+  width: 520rpx;
+  height: 65rpx;
+  margin-left:0rpx;
+  top:50rpx;
+  border:#ffffff 1px solid;
+  color:#000000; 
+  background-color:#f6f6f6;
+  font-size: 30rpx;
+  vertical-align: middle;
+}
+.cancel_input{
+font-size: 40rpx;
+font-weight: 300;
+color:#36ce1c;
+margin-left: 10rpx;
+margin-top: 10rpx;
+}
+.historysearch{
+  display: flex;
+  flex-direction:column;
+  background-color: #fff;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
+  padding-bottom: 5px;
+}
+.historysearchcolumn{
+  display: flex;
+  flex-direction:row;
+  
+}
+.historysearchtext{
+  font-size:30rpx;
+  vertical-align:middle;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  color:#838683;
+}
+.historysearchimg{
+  float: right;
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 530rpx;
+  margin-top: 5rpx;
+}
+.historysearchcontrainer{
+  margin-top: 20rpx;
+}
+.historysearchbutton{
+  text-align: left;
+}
+

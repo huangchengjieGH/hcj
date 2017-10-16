@@ -1,0 +1,25 @@
+.stars-contrainer{
+  display:flex;
+  flex-direction:row;
+}
+
+.stars{
+  display:flex;
+  flex-direction:row;
+  height:17rpx;
+  margin-right:24rpx;
+  margin-top:3rpx;
+}
+
+.stars image{
+  padding-left:3rpx;
+  height:30rpx;
+  width:30rpx;
+}
+
+.star-score{
+  margin-left: 5rpx;
+  color: #525e71;
+  font-size: 30rpx;
+  margin-top: 3rpx;
+}

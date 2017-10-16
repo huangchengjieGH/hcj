@@ -1,0 +1,74 @@
+<view class='city-contrainer'>
+  <view class="input">
+    <view class="input-city" catchtap='onInputcityTap'>
+      <icon type="search" size="18" color="purple" class="search-icon" />
+      <text class="input-txt">请输入城市名称</text>
+    </view>
+  </view>
+  <view class="locate-city">
+    <text class="locate-txt">定位城市</text>
+  </view>
+
+  <view class="city-name1">
+    <view class="city-name2" catchtap="onCityTap" data-cityId="{{locatedCity}}">
+      <text class="city-name3">{{locatedCity}}</text>
+    </view>
+  </view>
+
+  <view class="hot-city">
+    <text class="hot-txt">热门城市</text>
+  </view>
+
+  <view>
+    <view class="hot-top">
+      <view class="shanghai"  catchtap="onCityTap" data-cityId="{{hotCity[0]}}">
+        <text class="shanghai-txt">{{hotCity[0]}}</text>
+      </view>
+      <view class="shanghai" catchtap="onCityTap" data-cityId="{{hotCity[1]}}">
+        <text class="shanghai-txt">{{hotCity[1]}}</text>
+      </view>
+      <view class="shanghai" catchtap="onCityTap" data-cityId="{{hotCity[2]}}">
+        <text class="shanghai-txt">{{hotCity[2]}}</text>
+      </view>
+    </view>
+    <view class="hot-middle" catchtap="onCityTap" data-cityId="{{hotCity[3]}}">
+      <view class="shanghai">
+        <text class="shanghai-txt">{{hotCity[3]}}</text>
+      </view>
+      <view class="shanghai"catchtap="onCityTap" data-cityId="{{hotCity[4]}}">
+        <text class="shanghai-txt">{{hotCity[4]}}</text>
+      </view>
+      <view class="shanghai" catchtap="onCityTap" data-cityId="{{hotCity[5]}}">
+        <text class="shanghai-txt">{{hotCity[5]}}</text>
+      </view>
+    </view>
+    <view class="hot-bottom">
+      <view class="shanghai" catchtap="onCityTap" data-cityId="{{hotCity[6]}}">
+        <text class="shanghai-txt">{{hotCity[6]}}</text>
+      </view>
+      <view class="shanghai" catchtap="onCityTap" data-cityId="{{hotCity[7]}}">
+        <text class="shanghai-txt">{{hotCity[7]}}</text>
+      </view>
+      <view class="shanghai" catchtap="onCityTap" data-cityId="{{hotCity[8]}}">
+        <text class="shanghai-txt">{{hotCity[8]}}</text>
+      </view>
+    </view>
+  </view>
+
+<!--   <view class="slogan-city">
+
+    <view class="slogan-A0">
+      <block wx:for="{{locationData}}" wx:for-item="item">
+        <view class="slogan-A1">
+          <text class="slogan-A2">{{item.title}}</text>
+        </view>
+        <block wx:for="{{locationData[0].city}}" wx:for-item="item">
+          <view class="city-value">
+            <text class="city-txt">{{item}}</text>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view> -->
+
+</view>

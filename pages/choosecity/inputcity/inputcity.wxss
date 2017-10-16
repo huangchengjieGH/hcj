@@ -1,0 +1,50 @@
+/* pages/choosecity/inputcity/inputcity.wxss */
+.inputcity-contrainer{
+ display:flex;                 
+ flex-direction:column; 
+ margin-top: 10rpx;
+}
+.inputcity{
+   display:flex;                 
+ flex-direction:row; 
+}
+.search-input{
+  display:flex;                 
+ flex-direction:row; 
+  background-color: #f7f7f7;
+  border-radius:50rpx;
+  margin-left: 20rpx;
+  width: 600rpx;
+  height: 60rpx;
+}
+.search{
+ flex-direction:row; 
+ width: 400rpx;
+ height: 60rpx;
+ margin-left:20rpx;
+ opacity: 1;
+ background-color: #f7f7f7;
+ font-size: 30rpx;
+}
+.search-icon{
+ margin-top:15rpx;
+ margin-left:15rpx;
+}
+.cancel-txt{
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+  color: red
+}
+.top-line{
+  background-color: #eae8e8;
+  height: 2rpx;
+  margin-top: 10rpx;
+  width: 100%;
+}
+.line{
+  background-color: #eae8e8;
+  height: 2rpx;
+  margin-top: 70rpx;
+  width: 100%;
+}

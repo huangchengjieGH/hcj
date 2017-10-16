@@ -1,0 +1,31 @@
+<import src="../stars-template/stars-template.wxml" />
+<view class="shopmsg-contrainer">
+  <view class="avatar">
+     <view class="background"></view>
+     <image class="avatar-img" src="{{resMsg.imgUrl}}"></image>
+     <text class="avatar-txt">{{resMsg.name}}</text>
+     <view class="stars">
+     <!-- <image class="star" src="/images/icon/star.png"></image>
+     <text class="score">5.0</text> -->
+      <template is="starsTemplate" data="{{stars:stars,score:score}}" />
+        
+     </view>
+  </view>
+ <view class='spliter-line'></view>
+  <view class="phone-msg">
+    <text class="phone-txt">商家电话</text>
+    <text class="phone-value">15889668184</text>
+    <image class="arrow-icon" src="/images/icon/arrow-right.png"></image>
+  </view>
+
+  <view class="location-msg">
+    <text class="location">地址</text>
+    <text class="location-value">深圳市龙岗坂田街道28号</text>
+  </view>
+
+  <view class="worktime-msg">
+   <text class="worktime">营业时间</text>
+   <text class="worktime-value">10:30-14:00  16:30-22:30</text>
+  </view>
+
+</view>

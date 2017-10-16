@@ -1,0 +1,37 @@
+<!--pages/cooperation/cooperation.wxml-->
+<view class="cooperation_contrainer">
+  <view class='spliter-line'></view>
+
+  <view class="feedback-msg">
+    <text class="feedback-txt">请反馈以下信息</text>
+  </view>
+  <view class="subject">
+    <view class="res-name">
+      <text class="name-txt1">店名/餐厅名称</text>
+      <text class="name-txt2">*</text>
+    </view>
+    <view class="input">
+      <input value="{{search.searchValue}}" placeholder="店名/餐厅名称" class="
+      bindfocus=" focusSearch " bindinput="searchActiveChangeinput " confirm-type='confirm'/>
+    </view>
+    <view class="res-name">
+      <text class="name-txt1">地址</text>
+      <text class="name-txt2">*</text>
+    </view>
+    <view class="input">
+      <input value="{{search.searchValue}}" placeholder="请输入餐厅地址" class="
+      bindfocus=" focusSearch " bindinput="searchActiveChangeinput " confirm-type='confirm'/>
+    </view>
+     <view class="res-name">
+      <text class="name-txt1">联系方式</text>
+      <text class="name-txt2">*</text>
+    </view>
+    <view class="input">
+      <input value="{{search.searchValue}}" placeholder="请输入联系方式" class="
+      bindfocus=" focusSearch " bindinput="searchActiveChangeinput " confirm-type='confirm'/>
+    </view>
+    <text class="Tips">公告：信息反馈后工作人员将在1工作日内联系您</text>
+    <button class="confirm-btn">确认</button>
+  </view>
+   
+</view>

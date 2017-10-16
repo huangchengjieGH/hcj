@@ -1,0 +1,17 @@
+<view class="login-contrainer">
+<view class='spliter-line'></view>
+  <view class="get-phone">
+    <view class="phone-txt">
+      <input class="phone-input" type="number" maxlength="11" placeholder="请输入手机号码"  bindinput="phoneInput"/>
+    </view>
+    <view class="{{getCodeFlag?'get-code1':'get-code'}}" bindtap="getCode">
+      <text class="code-txt">获取验证码</text>
+    </view>
+  </view>
+  <view class="input-code">
+    <view class="code-view">
+      <input  type="number" maxlength="11" placeholder="请输入验证码" bindchange="codeInput" />
+    </view>
+  </view>
+  <button class="login-btn" type="primary" bindtap="submit">登录</button>
+</view>

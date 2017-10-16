@@ -1,0 +1,29 @@
+  <view class="contrainer">
+  <view class="search_func">
+    <form class="search_form" bindsubmit="searchSubmit">
+      <view class="search_view">
+        <view class="search_icon search_active" style="width:40rpx;">
+          <icon type="search" size="13" color="#888" style="float:left;position:absolute;margin-top:20rpx;margin-left:10rpx;z-index:3"></icon>
+        </view>
+        <input value="{{search.searchValue}}" placeholder="输入餐厅、菜系、商圈" class="search_input" bindfocus="focusSearch" bindinput="searchActiveChangeinput" confirm-type="search" name="teamSearchKeyWords" />
+        <icon type="clear" wx:if="{{search.showClearBtn}}" catchtap="searchActiveChangeclear" size="18" color="#aaa" style="position:absolute;right:110rpx;top:15rpx;z-index:3;"></icon>
+      </view>
+    </form>
+    <view class="cancel_input">
+      <text catchtap="CancelSearch">取消</text>
+    </view>
+  </view>
+
+  <view class="historysearch">
+    <view class="historysearchcolumn">
+      <text class="historysearchtext">历史搜索</text>
+      <image class="historysearchimg" catchtap="historysearchclear" src="/images/icon/lajixiang.png"></image>
+    </view>
+    <view class="historysearchcontrainer">
+    <block wx:for="{{historySearch}}" wx:for-item="item">
+        <button class="historysearchbutton">{{item}}</button>
+    </block>
+    </view>
+  </view>
+
+</view>

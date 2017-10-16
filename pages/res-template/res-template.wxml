@@ -1,0 +1,32 @@
+<import src="../stars-template/stars-template.wxml" />
+<template name="res">
+  <view class="reslist-contrainer" catchtap="onResTap" data-resId="{{item.message.resId}}">
+    <view class="res">
+      <view class="res-img">
+        <image class="res-img" src="{{item.message.imgUrl}}"></image>
+      </view>
+
+      <view class="res-msg">
+        <text class="res-name">{{item.message.name}}</text>
+        <view class="score">
+          <!--<image class="star"src="/images/icon/star.png"></image>
+          <text class="value">{{score}}</text>-->
+          <template is="starsTemplate" data="{{stars:item.message.stars,score:item.message.score}}" />
+        </view>
+        <view class="category">
+          <text class="cate-value">{{item.message.category}}</text>
+          <text class="money-symbol">¥</text>
+          <text class="per-consume">{{item.message.perConsume}}</text>
+          <text class="cate-value">/人</text>
+          <text class="distance">{{item.message.distance}}</text>
+          <text class="meter">m</text>
+        </view>
+        <view class="discount">
+          <image class="discount-img" src="/images/icon/discount.png"></image>
+          <text class="describe">{{item.message.discount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</template>

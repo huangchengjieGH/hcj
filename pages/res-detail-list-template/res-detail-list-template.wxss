@@ -1,0 +1,12 @@
+@import "../res-detail-template/res-detail-template.wxss";
+.classify{
+   border-bottom: 1px solid #ededed;
+   border-top: 1px solid #ededed;
+   padding-bottom: 5px;
+}
+.class-value{
+  font-size: 25rpx;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+  color: #6b6666;
+}

@@ -1,0 +1,85 @@
+@import "../stars-template/stars-template.wxss";
+.reslist-contrainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+  background-color: #fff;
+  border-bottom:1px solid #ededed;
+  border-top:1px solid #ededed;
+  padding-bottom:5px;
+}
+.res{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+}
+.res-img{
+  height: 200rpx;
+  width: 250rpx;
+  margin-left: 10rpx;
+}
+.res-msg{
+  margin-left: 40rpx;
+}
+.res-name{
+  font-size: 35rpx;
+  font-weight: 600;
+}
+.score{
+  margin-top: 10rpx;
+}
+.star{
+ height: 30rpx;
+ width: 30rpx;
+}
+.value{
+  margin-left: 20rpx;
+  color: #525e71;
+}
+.category{
+  margin-top: 1rpx;
+}
+.cate-value{
+  color: #525e71;
+  font-size: 30rpx;
+}
+.money-symbol{
+  color: #525e71;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+}
+.per-consume{
+  color: #525e71;
+  font-size: 30rpx;
+}
+.distance{
+  position: absolute;
+  color: #525e71;
+  right: 40rpx;
+  font-size: 30rpx;
+}
+.meter{
+  position: absolute;
+  color: #525e71;
+  right: 15rpx;
+  font-size: 30rpx;
+}
+.discount{
+  margin-top: 1rpx;
+  font-size: 30rpx;
+  
+}
+.discount-img{
+  height: 50rpx;
+  width: 50rpx;
+  margin-top: 10rpx;
+}
+.describe{
+  color: #525e71;
+  position: absolute;
+  margin-top: 15rpx;
+  margin-left: 10rpx;
+
+  
+}

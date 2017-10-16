@@ -1,0 +1,9 @@
+<import src="../res-template/res-template.wxml" />
+<template name="res-list">
+  <view class="resList-container">
+    <block wx:for="{{resDataArray}}" wx:for-item="resData">
+      <template is="res" data="{{...resData}}" />
+    </block>
+  </view>
+
+</template>
