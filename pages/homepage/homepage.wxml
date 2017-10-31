@@ -1,0 +1,71 @@
+<import src="../res-list-template/res-list-template.wxml" />
+<import src="../res-template/res-template.wxml" />
+<view class="contrainer">
+  <view class="banner">
+    <swiper class="swiper" indicator-dots="true" autoplay="true" interval="2000">
+      <swiper-item>
+        <image class="swiper-image" src="/images/image/aizhimian.jpg"></image>
+      </swiper-item>
+      <swiper-item>
+        <image class="swiper-image" src="/images/image/Casona.jpg"></image>
+      </swiper-item>
+      <swiper-item>
+        <image class="swiper-image" src="/images/image/siyaocanting.jpg"></image>
+      </swiper-item>
+      <swiper-item>
+        <image class="swiper-image" src="/images/image/lvshishan.jpg"></image>
+      </swiper-item>
+    </swiper>
+
+    <view class="search-top">
+      <view class="searchlocation" catchtap="searchLocation">
+        <text class="search-locationtxt">{{chooseCity}}</text>
+        <image class="search-img" src="/images/icon/arrow-down-white2.png"></image>
+      </view>
+      <view class="search-input">
+      <icon type="search" size="20" color="purple" class="search-icon" />
+     <!--  <input class="search" type="text" maxlength="50" confirm-type="search" placeholder="输入餐厅、菜系、商圈" bindtap="bindFocus" auto-focus>
+      </input> -->
+       <text class="search-txt" bindtap="bindFocus">输入餐厅、菜系、商圈</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="function-contrainer">
+    <view class="function-area">
+      <view class="saoyisao" catchtap="onScanCodeTap">
+        <image class="function-img" src="/images/icon/saoyisao.png"></image>
+        <text class="function-txt1">扫一扫</text>
+        <text class="function-txt2">查看菜单、点餐</text>
+      </view>
+      <view class="Lineup" catchtap="onlineupTap">
+        <image class="function-img" src="/images/icon/paiduiquhao.png"></image>
+        <text class="function-txt1">排队取号</text>
+        <text class="function-txt2">火爆餐厅远程取号</text>
+      </view>
+      <view class="Reservation" catchtap="onreserveTap">
+        <image class="function-img" src="/images/icon/yuyuedingzuo.png"></image>
+        <text class="function-txt1">预约订座</text>
+        <text class="function-txt2">提前预约点餐</text>
+      </view>
+    </view>
+<text>{{res}}</text>
+   <!--  <view class="find-res">
+      <button class="find-btn" bindtap="FindRes">找餐厅</button>
+    </view> -->
+  </view>
+  <view class="hot-res-list">
+    <view class="slogan">
+      <text class="title">附近热门</text>
+    </view>
+    <block wx:for="{{hotRes}}" wx:for-item="item">
+     <view class="res-list">
+      <template is="res" data="{{item}}" />
+      </view>
+    </block>
+   <!--  <view >
+        <template is="res-list" data="{{...hotRes}}" />
+    </view> -->
+
+  </view>
+</view>

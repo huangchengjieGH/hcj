@@ -1,0 +1,25 @@
+<view class="inputcity-contrainer">
+<view class="inputcity">
+  <view class="search-input">
+    <icon type="search" size="15" color="purple" class="search-icon" />
+    <input class="search" type="text" maxlength="50" confirm-type="done" placeholder="输入餐厅、菜系、商圈" bindchange="cityInput">
+    </input>
+  </view>
+  <text class="cancel-txt" catchtap='onCancelTap'>取消</text>
+  </view>
+<view class="top-line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+  <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+ <view class="line"/>
+</view>

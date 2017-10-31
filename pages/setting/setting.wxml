@@ -1,0 +1,37 @@
+<!--pages/setting/setting.wxml-->
+<view class='setting-contrainer'>
+  <view class='spliter-line'></view>
+  <view class='mycollect'>
+    <image class='collect-img' src='/images/icon/collect.png'></image>
+    <text class='collect-txt'>我的收藏</text>
+    <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
+  </view>
+
+  <view class='cooperation' bindtap='oncooperationTap'>
+    <image class='cooperation-img' src='/images/icon/cooperation.png'></image>
+    <text class='cooperation-txt'>加盟合作</text>
+    <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
+  </view>
+
+  <view class='about'>
+    <image class='about-img' src='/images/icon/star.png'></image>
+    <text class='about-txt'>关于软件</text>
+    <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
+  </view>
+
+  <view class='cache' catchtap='oncacheTap'>
+    <image class='cache-img' src='/images/icon/huancun.png'></image>
+    <text class='cache-txt'>清理缓存</text>
+    <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
+  </view>
+
+  <view class='contact'>
+    <image class='contact-img' src='/images/icon/call_me.png'></image>
+    <text class='contact-txt'>联系我们</text>
+    <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
+  </view>
+ <view class='spliter-line'></view>
+  <view class='quit'>
+     <text class='quit-txt'>退出登录</text>
+  </view>
+</view>

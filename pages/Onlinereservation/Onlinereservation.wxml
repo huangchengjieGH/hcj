@@ -1,0 +1,76 @@
+<view class='Onlineres-contrainer'>
+  <view class="res-msg">
+    <image class="res-img" src='{{Res_msg.imgUrl}}'></image>
+    <text class='res-txt'>{{Res_msg.name}}</text>
+  </view>
+
+  <view class='spliter-line'></view>
+
+  <view class="time-msg">
+    <view class='choose-date'>
+      <text class="today" style="{{today?'color:red':''}}" catchtap="ontodayTap">今天</text>
+      <text class="tomorrow" style="{{tomorrow?'color:red':''}}" catchtap="ontomorrowTap">明天</text>
+      <text class="aftertomorrow" style="{{aftertomorrow?'color:red':''}}" catchtap="onaftertomorrowTap">后天</text>
+      <view class="section">
+        <picker mode="date" value="{{date}}" start="{{start_date}}" end="2040-01-01" bindchange="bindDateChange">
+          <view class="picker" style="{{more?'color:red':''}}">
+            {{dates}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="scroll-view">
+      <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex">
+        <view class="scroll-times" wx:for="{{times}}" wx:for-item="item">
+           <view wx:if="{{item== chooseTimes}}">
+            <text class="scroll-txt2" catchtap="ontimesTap" data-Id="{{item}}">{{item}}</text>
+          </view>
+          <view wx:else>
+            <text class="scroll-txt" catchtap="ontimesTap" data-Id="{{item}}">{{item}}</text>
+          </view> 
+
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="person-num">
+    <text class="person-txt">人数：</text>
+    <image class="person-img1" src='/images/icon/jian.png' catchtap="ondecreaseTap"></image>
+    <text class="person-value">{{service_num}}</text>
+    <image class="person-img2" src='/images/icon/add.png' catchtap="onaddTap"></image>
+  </view>
+
+  <view class='spliter-line'></view>
+
+  <view class="vip-room">
+    <text class="vip-txt">包房:</text>
+    <switch class="switch" checked bindchange="switch1Change" />
+  </view>
+
+  <view class='spliter-line'></view>
+
+  <view class="book-name">
+    <text class="book-txt">姓名：</text>
+    <input placeholder="请输入姓名" class="search_input" confirm-type='done' bindconfirm="nameConfirm" />
+    <checkbox-group class="checkbox" bindchange="checkboxChange">
+      <label wx:for="{{checkBox}}" wx:for-item="item">
+        <checkbox value="{{item.name}}" />{{item.name}}
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="phonenum">
+    <text class="phone-txt">手机：</text>
+    <input placeholder="请输入手机号" class="search_input" confirm-type='done' bindconfirm="phoneConfirm" />
+  </view>
+
+  <view class='spliter-line'></view>
+  <view class="remarks">
+    <text class="remarks-txt">备注：</text>
+    <textarea maxlength='100' class="input-remark" bindconfirm="remarksConfirm" />
+  </view>
+
+  <view class="reserve-now" catchtap="onreserveTap" data-Id="{{reservestate}}">
+    <text class="reserve-txt">{{reservestate}}</text>
+  </view>
+</view>

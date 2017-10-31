@@ -1,0 +1,225 @@
+/* pages/Onlinereservation/Onlinereservation.wxss */
+.Onlineres-contrainer{
+  display: flex;
+  flex-direction: column;
+}
+.res-msg{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 150rpx;
+  border: 1rpx solid #bbbbbb;
+}
+.res-txt{
+  font-size: 40rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+}
+.res-img{
+  height: 120rpx;
+  width: 120rpx;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+}
+.time-msg{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+   height: 180rpx; 
+  border: 1rpx solid #bbbbbb;
+}
+.choose-date{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #bbbbbb;
+  height: 80rpx; 
+  width: 100%;
+}
+.today{
+  font-size: 40rpx;
+  margin-left: 60rpx;
+  margin-top: 10rpx;
+}
+.tomorrow{
+   font-size: 40rpx;
+  margin-left: 100rpx;
+  margin-top: 10rpx;
+}
+.aftertomorrow{
+   font-size: 40rpx;
+  margin-left: 100rpx;
+  margin-top: 10rpx;
+  width: 150rpx;
+  height: 60rpx;
+  border-right: 2rpx solid #bbbbbb;
+}
+.picker{
+  font-size: 40rpx;
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+}
+.more{
+   font-size: 40rpx;
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+}
+.time-txt1{
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.time-txt2{
+  font-size: 40rpx;
+  margin-left: 200rpx;
+  margin-top: 10rpx;
+}
+.time-img{
+  height: 35rpx;
+  width: 35rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+.scroll-view{
+  margin-right: 20rpx;
+}
+.scroll-times{
+  background: #1e89e0; 
+  width: 70px; 
+  height: 40px; 
+  display: inline-block;
+  margin-left:20rpx;
+  margin-top:10rpx;
+  border-radius: 4rpx;
+}
+.scroll-txt{
+  position: absolute;
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+    color:white;
+}
+.scroll-txt2{
+  position: absolute;
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+    color:#a3fe25;
+}
+
+.person-num{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #bbbbbb;  
+}
+.person-txt{
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.person-img1{
+  height: 60rpx;
+  width: 60rpx;
+  margin-left: 380rpx;
+  margin-top: 10rpx;
+}
+.person-value{
+  font-size: 40rpx;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+}
+.person-img2{
+  height: 65rpx;
+  width: 65rpx;
+  margin-top: 8rpx;
+  margin-left: 20rpx;
+}
+.vip-txt{
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.vip-room{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #bbbbbb; 
+}
+.switch{
+  margin-left: 450rpx;
+  margin-top: 8rpx;
+
+}
+.book-name{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #bbbbbb;  
+}
+.book-txt{
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.search_input{
+  background: #fff;
+  margin-top: 10rpx;
+  width: 300rpx;
+}
+.checkbox{
+  margin-left: 40rpx;
+  margin-top: 10rpx;
+}
+.phonenum{
+   display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #bbbbbb;  
+}
+.phone-txt{
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.remarks{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 200rpx;
+  border: 1rpx solid #bbbbbb;  
+}
+.remarks-txt{
+font-size: 40rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.reserve-now{
+   position: fixed;
+  bottom: 0rpx;
+  font-size: 25rpx;
+  background-color: red;
+  width: 100%;
+  height: 100rpx;
+}
+.input-remark{
+background: #fff;
+  margin-top: 10rpx;
+  width: 580rpx;
+  height: 180rpx;
+}
+.reserve-txt{
+   position: absolute;
+  color: white;
+  font-size: 40rpx;
+  padding-top: 20rpx;
+  padding-left: 300rpx;
+}
+.spliter-line{
+  height: 10rpx;
+  width: 100%;
+  background: #e5e3e6;
+}

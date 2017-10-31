@@ -1,0 +1,23 @@
+<template name="Res-detail">
+   <view class="menu-desc">
+        <image class="menu-img" src="{{imgUrl}}"></image>
+        <view class="dish-describe">
+          <text class="dish-name">{{name}}</text>
+          <text class="dish-taste">{{taste}}</text>
+          <view>
+            <text class="dish-sale">总售</text>
+            <text class="dish-sale">{{sales}}</text>
+            <text class="dish-sale">份</text>
+          </view>
+          <view>
+            <text class="dish-price">¥</text>
+            <text class="dish-price">{{price}}</text>
+            <image class="{{order_num==0?'hide':'jian-icon'}}" src="/images/icon/jian.png" catchtap="DelDishTap" data-deldishId="{{id}}"></image>
+            <text class="{{order_num==0?'hide':'record-value'}}">{{order_num}}</text>
+            <image class="add-icon" src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{id}}"></image>
+          </view>
+        </view>
+      </view>
+</template>
+
+

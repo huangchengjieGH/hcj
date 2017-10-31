@@ -1,0 +1,266 @@
+/* pages/pay/pay.wxss */
+
+.pay-contrainer{
+  display: flex;
+  flex-direction: column;
+}
+.res-msg{
+  border: 2rpx solid #b1adad;
+  width: 100%;
+  height: 90rpx;
+}
+.res-img{
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  height: 70rpx;
+  width: 70rpx;
+}
+.res-txt{
+  position: absolute;
+  top: 20rpx;
+  left: 90rpx;
+  font-size: 38rpx;
+}
+.basic-msg{
+   width: 100%;
+  height: 40rpx;
+  background: #e1e3e6;
+}
+.basic{
+  position: absolute;
+  font-size: 25rpx;
+  margin-left: 10rpx;
+  margin-top: 5rpx;
+}
+
+.order-num{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.order-value{
+  font-size: 25rpx;
+  margin-left: 38rpx;
+}
+.order-time{
+ /*  border: 2rpx solid #b1adad; */
+ /*  width: 100%;
+  height: 60rpx; */
+ /*  position: absolute; */
+}
+.time{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.time-value{
+  font-size: 25rpx;
+  margin-left: 10rpx;
+}
+.seat-msg{
+/*   border: 2rpx solid #b1adad; */
+ /*  width: 100%;
+  height: 60rpx; */
+  /* position: absolute; */
+}
+.seat{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.seat-value{
+  font-size: 25rpx;
+  margin-left: 40rpx;
+}
+.order-msg{
+  width: 100%;
+  height: 40rpx;
+  background: #e1e3e6;
+}
+.dish-list{
+  border: 2rpx solid #b1adad; 
+  width: 100%;
+  height: 65rpx;
+}
+.dish-name{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.dish-num{
+  margin-left: 340rpx;
+  font-size: 35rpx;
+  font-weight: 600;
+}
+.dish-num2{
+  font-size: 38rpx;
+  font-weight: 600;
+}
+.dish-price{
+  color: red;
+  margin-left: 40rpx;
+  font-size: 35rpx;
+  font-weight: 600;
+}
+.dish-price2{
+  color: red;
+  font-size: 35rpx;
+}
+.chawei-fee{
+  display: flex;
+  flex-direction: row;  
+  border: 2rpx solid #b1adad; 
+  width: 100%;
+  height: 65rpx;
+
+}
+.per-num{
+  background: #faf7f7;
+  height: 50rpx;
+  width: 300rpx;
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+  border-radius: 5px;
+  border: 1rpx solid #b1adad; 
+}
+.num-value{
+  margin-left: 20rpx;
+}
+.icon{
+    display: inline-block;
+    border: 4px solid transparent;
+    border-top: 4px solid #9b9b9b;
+    margin-left: 110px;
+}
+.per-icon{
+  margin-left: 180rpx;
+  font-size: 35rpx;
+  font-weight: 600;
+  margin-top: 10rpx;
+}
+.per-value{
+  margin-left: 5rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-top: 5rpx;
+}
+.unit-desc{
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  margin-top: 5rpx;
+}
+.temp{
+   position: absolute;
+    top:460rpx;
+    z-index: 4;  
+}
+.temp1{
+    display: none;
+    width: 280rpx;
+    margin-left: 20rpx;
+    /* max-height: 550rpx; */
+    overflow-y: scroll;
+    padding: 0 0 0 20rpx;
+    line-height:60rpx;
+    background: #fff;
+    border: 1px solid #42a4e2;
+}
+.slidown{
+    display: block;
+    animation: slidown .7s ease-in both;
+}
+.slidup{
+    display: block;
+    animation: slidup .7s ease-in both;
+}
+ @keyframes slidown{
+    from{
+        transform:  translateY(-3%);
+    }
+    to{
+        transform:  translateY(0%);
+    }
+}
+@keyframes slidup{
+    from{
+        transform:  translateY(0%);
+    }
+    to{
+        transform:  translateY(-3%);
+    }
+} 
+.numList{
+  background: #faf7f7;
+ /* border-bottom: 2rpx solid #b1adad;  */
+}
+.service{
+  border: 2rpx solid #b1adad; 
+  width: 100%;
+  height: 65rpx;
+}
+.service-txt{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.service-value{
+  margin-left: 390rpx;
+  color: red;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+.yuan{
+  margin-left: 10rpx;
+  font-size: 35rpx;
+}
+.discount{
+  border: 2rpx solid #b1adad; 
+  width: 100%;
+  height: 65rpx;
+}
+.discount-txt{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.discount-value{
+  margin-left: 360rpx;
+  color: red;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+.zhe{
+   margin-left: 10rpx;
+  font-size: 35rpx;
+}
+.total-txt{
+   font-size: 30rpx;
+  margin-left: 20rpx;
+  color: #101010;
+}
+.price-symbol{
+  color: red;
+  margin-left: 390rpx;
+  font-size: 35rpx;
+  font-weight: 600;
+}
+.total-value{
+  color: red;
+  font-size: 35rpx;
+}
+.pay{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+.pay-btn{
+  background-color: #27ec12;
+  font-size: 40rpx;
+  font-weight: 500;
+  color: white;
+  width: 100%;
+  height: 90rpx;
+}
+.disappear{
+    display: none;
+}

@@ -1,0 +1,77 @@
+<!--pages/pay/pay.wxml-->
+<view class='pay-contrainer'>
+  <view class='res-msg'>
+    <image class='res-img' src='/images/image/aizhimian.jpg'></image>
+    <text class='res-txt'>重庆鸡公煲</text>
+  </view>
+  <view class='basic-msg'>
+    <text class='basic'>基本信息</text>
+  </view>
+  <view>
+    <view>
+      <text class='order-num'>订单号：</text>
+      <text class='order-value'>kd201709201759</text>
+    </view>
+    <view class='order-time'>
+      <text class='time'>下单时间：</text>
+      <text class='time-value'>2017-9-20 18：00</text>
+    </view>
+    <view class='seat-msg'>
+      <text class='seat'>座位号：</text>
+      <text class='seat-value'>A40</text>
+    </view>
+  </view>
+  <view class='order-msg'>
+    <text class='basic'>订单信息</text>
+  </view>
+  <view class='dish-list'>
+    <text class='dish-name'>红烧狮子头</text>
+    <text class='dish-num'>X</text>
+    <text class='dish-num2'>2</text>
+    <text class='dish-price'>￥</text>
+    <text class='dish-price2'>100</text>
+  </view>
+
+  <view class='chawei-fee' bindtap='per_list'>
+    <view class='per-num'>
+      <text class='num-value'>{{numValue}}</text>
+      <view class="icon"></view>
+    </view>
+    <text class='per-icon'>X</text>
+    <text class='per-value'>2</text>
+    <text class='unit-desc'>元/茶位费</text>
+    <!-- <text>/茶位费</text> -->
+  </view>
+  
+  <view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
+     <view class='numList' wx:for="{{content}}" catchtap='onNumTap' data-numId="{{item}}">
+            {{item}}
+        </view>  
+  </view>
+
+  <view class='service'>
+    <text class='service-txt'>服务费</text>
+    <text class='service-value'>0</text>
+    <text class='yuan'>元</text>
+  </view>
+
+  <view class='discount'>
+    <text class='discount-txt'>会员折扣</text>
+    <text class='discount-value'>10.0</text>
+    <text class='zhe'>折</text>
+  </view>
+
+  <view class='total'>
+    <text class='total-txt'>总计：</text>
+    <text class='price-symbol'>￥</text>
+    <text class='total-value'>300.00</text>
+  </view>
+
+  <view class='pay'>
+    <button class='pay-btn' catchtap='onPaytap'>支付</button>
+  </view>
+</view>
+
+
+
+

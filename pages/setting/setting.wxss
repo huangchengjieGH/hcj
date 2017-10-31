@@ -1,0 +1,116 @@
+/* pages/setting/setting.wxss */
+.setting-contrainer{
+  display: flex;
+  flex-direction: column;
+}
+.spliter-line{
+  height: 20rpx;
+  width: 100%;
+  background: #e5e3e6;
+}
+.mycollect{
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #bbbbbb;
+  height: 80rpx;
+  width: 100%;
+}
+
+.collect-img{
+  height: 60rpx;
+  width: 60rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+
+.collect-txt{
+ font-size: 35rpx;
+ margin-top: 15rpx;
+}
+.arrow-right{
+  height: 30rpx;
+  width: 30rpx;
+  margin-top: 25rpx;
+  margin-left: 450rpx;
+}
+.cooperation{
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #bbbbbb;
+  height: 80rpx;
+  width: 100%;
+}
+.cooperation-img{
+   height: 60rpx;
+  width: 60rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.cooperation-txt{
+  font-size: 35rpx;
+ margin-top: 15rpx;
+}
+.about{
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #bbbbbb;
+  height: 80rpx;
+  width: 100%;
+}
+.about-img{
+ height: 55rpx;
+  width: 55rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.about-txt{
+ font-size: 35rpx;
+ margin-top: 15rpx;
+}
+.cache{
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #bbbbbb;
+  height: 80rpx;
+  width: 100%;
+}
+.cache-img{
+   height: 55rpx;
+  width: 55rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+
+.cache-txt{
+ font-size: 35rpx;
+ margin-top: 15rpx;
+}
+.contact{
+  display: flex;
+  flex-direction: row;
+  border: 1rpx solid #bbbbbb;
+  height: 80rpx;
+  width: 100%;
+}
+.contact-img{
+ height: 55rpx;
+  width: 55rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.contact-txt{
+font-size: 35rpx;
+ margin-top: 15rpx;
+}
+.quit{
+  border: 1rpx solid #bbbbbb;
+  height: 80rpx;
+  width: 100%;
+  /* text-align: center; */
+}
+.quit-txt{
+  position: absolute;
+  margin-top: 10rpx;
+  margin-left: 300rpx;
+  color: red;
+}

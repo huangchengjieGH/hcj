@@ -1,0 +1,121 @@
+/* pages/choosecity/choosecity.wxss */
+.city-contrainer{
+  display: flex;
+  flex-direction: column;
+}
+.input{
+  background: #e5e3e6;
+  height: 80rpx;
+  width: 100%;
+}
+.input-city{
+  background: #fff;
+  width: 500rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  margin-left: 125rpx;
+  margin-top: 15rpx;
+}
+.search-icon{
+  margin-left: 180rpx;
+  margin-top: 8rpx;
+}
+.input-txt{
+  position: absolute;
+  font-size: 30rpx;
+  margin-top: 5rpx;
+  color: #bbbbbb;
+  margin-left: 10rpx;
+}
+.locate-city{
+  background:#f3f2f2;
+  width: 100%;
+  height: 50rpx;
+}
+.locate-txt{
+  font-size: 30rpx;
+  color: #aaaaaa;
+  margin-left: 10rpx;
+}
+.city-name1{
+  background: white;
+  width: 100%;
+  height: 100rpx;
+}
+.city-name2{
+  background: #f3f2f2;
+  margin-top: 25rpx;
+  margin-left: 30rpx;
+  width: 180rpx;
+  height: 50rpx;
+}
+.city-name3{
+  position: absolute;
+  margin-left: 40rpx;
+  margin-top: 5rpx;
+  font-size: 30rpx;
+}
+.hot-city{
+  width: 100%;
+  height: 50rpx;
+  background: #f3f2f2;
+}
+.hot-txt{
+  font-size: 30rpx;
+  margin-left: 10rpx;
+  color: #aaaaaa;
+}
+.hot-top{
+  display: flex;
+  flex-direction: row;
+}
+.hot-middle{
+  display: flex;
+  flex-direction: row;
+}
+.hot-bottom{
+  display: flex;
+  flex-direction: row;
+}
+.shanghai{
+  margin-top: 20rpx;
+  margin-left: 70rpx;
+  background: #f3f2f2;
+  height: 60rpx;
+  width: 150rpx;
+}
+.shanghai-txt{
+  font-size: 30rpx;
+  margin-left: 35rpx;
+  margin-top: 10rpx;
+}
+.slogan-city{
+  margin-top: 20rpx;
+}
+.slogan-A1{
+  background: #eeeeef;
+  width: 100%;
+   height: 40rpx; 
+  display: flex;
+  flex-direction: column;
+}
+.slogan-A2{
+  position: absolute;
+  margin-top: 5rpx;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  color: #aaaaaa;
+}
+.city-value{
+   margin-left: 10rpx; 
+  border-bottom: 1rpx solid #bbbbbb;
+  width: 700rpx;
+  height: 55rpx;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+.city-txt{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}

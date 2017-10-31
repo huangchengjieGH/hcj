@@ -1,0 +1,11 @@
+<import src="../res-detail-template/res-detail-template.wxml" />
+<template name="Res-detail-list">
+  <view>
+  <view class="classify">
+     <text class="class-value">{{classify}}</text>
+    </view>
+     <block wx:for="{{detail_0}}" wx:for-item="resdetail">
+      <template is="Res-detail" data="{{...resdetail}}"></template>
+    </block> 
+  </view>
+</template>

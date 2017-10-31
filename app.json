@@ -1,0 +1,53 @@
+{
+  "pages":[
+    "pages/booking/booking",
+    "pages/myorder/myorder",
+    "pages/shopmsg/shopmsg",
+    "pages/homepage/homepage",
+    "pages/choosecity/inputcity/inputcity",
+    "pages/register/register",
+    "pages/cooperation/cooperation",
+    "pages/choosecity/choosecity",
+    "pages/nearby/nearby",
+    "pages/Onlinereservation/Onlinereservation",
+    "pages/reservation/reservation",
+    "pages/pay/pay",
+    "pages/homepage/search/search",
+     "pages/setting/setting",
+    "pages/index/index",
+    "pages/lineup/lineup",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+     "navigationBarBackgroundColor": "#fff", 
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "color": "#9e9698",
+    "selectedColor": "#f93e03",
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "text": "首页",
+        "iconPath": "images/icon/homepage.png",
+        "selectedIconPath": "/images/icon/homepage_hl.png"
+      },
+   
+      {
+        "pagePath": "pages/booking/booking",
+        "text": "点餐",
+        "iconPath": "images/icon/diancan.png",
+        "selectedIconPath": "/images/icon/diancan_hl.png"
+      },
+      {
+        "pagePath": "pages/myorder/myorder",
+        "text": "我的订单",
+        "iconPath": "images/icon/myorder.png",
+        "selectedIconPath": "/images/icon/myorder_hl.png"
+      }
+    ]
+  }
+
+}
