@@ -2,17 +2,17 @@
 <import src="../stars-template/stars-template.wxml" />
 <scroll-view scroll-y="true" class="Booking-contrainer">
   <view class="Top-msg" catchtap='onclicktop'>
-    <image class="res-img" src="{{res_msg.message.imgUrl}}"></image>
+    <image class="res-img" src="{{resMsg.seller.imgUrl}}"></image>
     <view class="res-msg">
       <view catchtap='onResTap'>
-        <text class="res-name">{{res_msg.message.name}}</text>
+        <text class="res-name">{{resMsg.seller.name}}</text>
         <image class="arrow-icon" src="/images/icon/w-arrow-right.png"></image>
       </view>
      <!--  <text class="detail">{{res_msg.message.describe}}</text> -->
      <view class="perConsume">
        <text class="perConsume-txt">人均：</text>
        <text class="perConsume-icon">￥</text>
-       <text class="perConsume-value">50</text>
+       <text class="perConsume-value">{{resMsg.seller.consumption}}</text>
      </view>
       <view class="stars">
       <template is="starsTemplate" data="{{stars:stars,score:''}}" />
@@ -23,18 +23,30 @@
   <view class="Middle-msg" catchtap='onclickmiddle'>
     <view>
       <image class="discount" src="/images/icon/discount.png"></image>
-      <text class="describe">{{res_msg.message.discount}}</text>
+      <text class="describe">会员享受8折优惠</text>
     </view>
     <text class="slogan">商品</text>
     <text>{{scene}}</text>
   </view>
 
+<!--   <view class="input">
+   <view class="input-seat">
+    <text class="input-txt">座位号</text>
+    <input placeholder="请输入您的座位号" class="input-value"
+     bindconfirm="seatInput" confirm-type='confirm'/>
+     </view>
+     <view class="input-btn">
+      <button class="input-cancle">取消</button>
+      <button class="input-confirm">确认</button>
+     </view>
+  </view> -->
+
   <view class="subject" catchtap='onclicksubject'>
     <scroll-view scroll-y="true" class="scroll-view">
-      <view wx:for="{{res_msg.message.classification}}" wx:for-item="item">
-        <view class='text' catchtap="onclassiTap" data-buttonId="{{item}}">
-          <view wx:if="{{item== classify}}">
-            <text class='classfytext' style='color:red'>{{item}}</text>
+      <view wx:for="{{goods_msg.data}}" wx:for-item="item">
+        <view class='text' catchtap="onclassiTap" data-buttonId="{{item.classifyName}}">
+          <view wx:if="{{item.classifyName== classify}}">
+            <text class='classfytext' style='color:red'>{{item.classifyName}}</text>
             <!-- <icon class='success-icon' type="success" size="10" color="red"/> -->
            <icon wx:if="{{index==0}}" class="{{class_Dish[0]==0?'hide':'success-icon'}}" type="success" size="10" color="red"/>
         <icon wx:elif="{{index==1}}" class="{{class_Dish[1]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
@@ -55,7 +67,7 @@
 
           </view>
           <view wx:else>
-            <text class='classfytext'>{{item}}</text>
+            <text class='classfytext'>{{item.classifyName}}</text>
             <!-- <icon  class='success-icon' type="success" size="10" color="red"/> -->
             <icon wx:if="{{index==0}}" class="{{class_Dish[0]==0?'hide':'success-icon'}}" type="success" size="10" color="red"/>
         <icon wx:elif="{{index==1}}" class="{{class_Dish[1]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
@@ -147,3 +159,18 @@
     </view>
   </view>
 </scroll-view>
+
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view> 
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}"> 
+
+ <view class="drawer_content"> 
+ <view class="top grid"> 
+ <label class="title col-0">座位号</label> 
+ <input placeholder="请输入您的座位号" class="input_base input_h30 col-1" bindinput="seatInput" confirm-type='confirm'></input> 
+ </view> 
+ </view> 
+ <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view> 
+</view>

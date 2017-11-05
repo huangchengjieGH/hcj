@@ -23,17 +23,10 @@ Page({
     /*记录用户动作状态 */
     actionflag: '请点餐',
     open_res_Id: null,
-    tableNum:'A40',
+    tableNum:null,
     orderId:'',
-    Test:[
-      {goodsId: 1,
-      count: 4
-      },
-      {
-        goodsId: 2,
-        count: 4
-      },
-    ],
+    showModalStatus: false,
+    orderStatus:'0',
   },
   GetQueryString: function (url, key) {
     var theRequest = new Object();
@@ -53,18 +46,18 @@ Page({
    */
   onLoad: function (options) {
     console.log("onLoad");
-    console.log(app.globalData.domain);
-    console.log(app.globalData.shopId);
+  //  console.log(app.globalData.domain);
+ //   console.log(app.globalData.shopId);
     /****获取二维码信息 */
     // var scene = decodeURIComponent(options.scene);
-    console.log(options);
-    var tableNum = options.tableNum;
+ //   console.log(options);
+   /*  var tableNum = options.tableNum;
     this.setData(
       {
         tableNum: tableNum
       }
-    )
-    console.log(this.data.tableNum)
+    ) */
+ //   console.log(this.data.tableNum)
   //  console.log("qrcode id : " +  id)
  /*    var scene = options.scene */
     /****获取二维码信息 */
@@ -72,8 +65,10 @@ Page({
     var url = decodeURIComponent(options.q);
     console.log(url);
     var tableNum = this.GetQueryString(url, 'tableNum');
-    console.log(tableNum);
-
+      this.setData({
+      tableNum: tableNum
+    })  
+     console.log("this.data.tableNum:" + this.data.tableNum);
     var open_res_Id = app.globalData.resId;
     this.setData({ 'open_res_Id': open_res_Id });
     var Detail = {};
@@ -83,7 +78,6 @@ Page({
     this.processGoodsData(goods); */
     /*  this.processOrderList(this.data.goods_msg);  */
     /* this.setData({ goods: goods });  */
-    this.setData({ classify: this.data.res_msg.message.classification[0]});
   },
 
   onShow: function () {
@@ -100,6 +94,7 @@ Page({
     var DetailData = {};
     var order_num = 0;
     var ServiceGoodsMsg = {};
+    var resMsg = {};
    /*  DetailData = postsdatabase.postList[this.data.open_res_Id]; */
     /*获取商家信息 */
     res_msg = resdatabase.Data_List[0];
@@ -112,17 +107,18 @@ Page({
       },
     }, function (res) {
       //   console.log("res")
-      //  console.log(res); 
+      console.log(res); 
       ServiceGoodsMsg = res;
       that.setData({
-        goods_msg: ServiceGoodsMsg
+        goods_msg: ServiceGoodsMsg,
+        resMsg: ServiceGoodsMsg.extra
       })
       that.processGoodsMsgData(ServiceGoodsMsg);
       /* goods = this.data.goods_msg.data[0].goods; */
-      console.log(that.data.goods_msg.data[0].goods);
+     // console.log(that.data.goods_msg.data[0].goods);
       that.processGoodsData(that.data.goods_msg.data[0].goods);
       that.processOrderList(that.data.goods_msg);
-      
+      that.setData({ classify: ServiceGoodsMsg.data[0].classifyName });
     }, function () {
       console.log("error")
       wx.hideToast();
@@ -354,10 +350,11 @@ Page({
   /*click the classify button */
   onclassiTap: function (event) {
     var buttonId = event.currentTarget.dataset.buttonid;
+    console.log("buttonId:" + buttonId);
     var index;
 
     for (var idx in this.data.res_msg.message.classification) {
-      if (this.data.res_msg.message.classification[idx] == buttonId) {
+      if (this.data.goods_msg.data[idx].classifyName == buttonId) {
         index = idx;
         break;
       }
@@ -522,6 +519,7 @@ Page({
   /****识别菜所在位置 */
     var flag = false;
     var goodsMsg = this.data.goods_msg.data;
+    if (this.data.orderStatus == '0') { 
     for (var idx in goodsMsg) {
       var subject = goodsMsg[idx];
       var classIndex = idx;
@@ -570,6 +568,7 @@ Page({
     } else {
       this.setData({ 'actionflag': '选好了' })
     }
+    }
   },
 
   /*click the button to add the  dish */
@@ -589,6 +588,7 @@ Page({
     /*****获取 num classIndex */
    /*  this.getDishlocation(this.data.goods_msg, adddishId); */
     var flag = false;
+    if (this.data.orderStatus == '0') {
     var goodsMsg = this.data.goods_msg.data;
     for (var idx in goodsMsg) {
       var subject = goodsMsg[idx];
@@ -605,8 +605,8 @@ Page({
         break;
       }
     }
-    console.log("afternum:" + num);
-    console.log("afterclassIndex:" + classIndex)
+    //console.log("afternum:" + num);
+    //console.log("afterclassIndex:" + classIndex)
 
     var string = "Goods[" + num + "].order_num";
     /* console.log(string); */
@@ -639,7 +639,7 @@ Page({
       this.setData({ 'actionflag': '选好了' })
     }
     
-
+    }
   },
   /*点击购物车显示菜单列表 */
   oncartTap: function (event) {
@@ -666,33 +666,46 @@ Page({
       null;
     }
     else if (actionId == '选好了') {
-      this.setData({ 'actionflag': '结账' })
-      this.getGoodsList(this.data.orderList);
-      let Test = this.data.GoodsList;
-      wx.showLoading(
-        {
-          title:"处理中"
-        }
-      )
-      /******添加处理icon */
-      util.requestByLogin({
-        url: app.globalData.domain + '/wx/order',
-        method: 'POST',
-        data: {
-          tableNum: that.data.tableNum,
-          goodsList: Test
-        },
-      }, function (res) {
-         console.log(res); 
-        /* orderId = data.id; */
-          wx.hideToast(); 
-        that.setData({ orderId: res.data.id});
+      if (this.data.tableNum != null && this.data.tableNum != '') {
+        
+        this.setData({ 
+          'actionflag': '结账' ,
+          orderStatus: '1'})
+        this.getGoodsList(this.data.orderList);
+        let Test = this.data.GoodsList;
+        wx.showLoading(
+          {
+            title: "处理中"
+          }
+        )
+
+        /******添加处理icon */
+        util.requestByLogin({
+          url: app.globalData.domain + '/wx/order',
+          method: 'POST',
+          data: {
+            tableNum: that.data.tableNum,
+            goodsList: Test
+          },
+        }, function (res) {
+          console.log('haah')
+          console.log(res);
+          /* orderId = data.id; */
+          wx.hideToast();
+          that.setData({ orderId: res.data.id });
         }, function () {
           console.log("error")
-          wx.hideToast(); 
+          wx.hideToast();
         }
-      );
-     
+        );
+      }
+       else {
+        console.log("seat is null");
+        if(this.data.totalnum > 0)
+        {
+           this.showInputSeat('open')
+        }
+      }
     }
     else if (actionId == '结账') {
       wx.navigateTo({
@@ -704,7 +717,7 @@ Page({
 
   /*点击了清空，清空购物车 */
   onOrderListTap:function(event){
-   /* console.log("dianjileqingkong"); */
+    if (this.data.orderStatus == '0'){
    this.clearUpCart(this.data.goods_msg,this.data.Goods);
    /*全局变量统计点菜数量，清0 */
    app.globalData.totalnum =0;
@@ -715,6 +728,7 @@ Page({
      showcartList:false,
      class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    })
+   }
   },
   /*呼叫服务员 */
   callingService: function (event) {
@@ -732,19 +746,104 @@ Page({
      url: '../shopmsg/shopmsg?id=' + 0,
    })
   },
-/*   upper: function (e) {
-    console.log("upper")
+  seatInput: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+     if (e.detail.value != ''){
+     that.setData({
+       tableNum: e.detail.value,
+    }) 
+
+    } 
+  },
+
+  powerDrawer: function (e) {
+    var that = this;
+    var currentStatu = e.currentTarget.dataset.statu;
+    this.showInputSeat(currentStatu);
+    if (this.data.tableNum != '' && this.data.tableNum != null){
+      this.setData({
+        orderStatus:'1'
+      })
+
+      this.setData({ 'actionflag': '结账' })
+      this.getGoodsList(this.data.orderList);
+      let Test = this.data.GoodsList;
+      wx.showLoading(
+        {
+          title: "处理中"
+        }
+      )
+
+      /******添加处理icon */
+      util.requestByLogin({
+        url: app.globalData.domain + '/wx/order',
+        method: 'POST',
+        data: {
+          tableNum: that.data.tableNum,
+          goodsList: Test
+        },
+      }, function (res) {
+        console.log('hahaha');
+        console.log(res);
+        /* orderId = data.id; */
+        wx.hideToast();
+        that.setData({ orderId: res.data.id });
+      }, function () {
+        console.log("error")
+        wx.hideToast();
+      }
+      );
+    }
+  },
+//控制输入弹窗
+  showInputSeat: function (currentStatu) {
+    /* 动画部分 */
+    // 第1步：创建动画实例 
+    var animation = wx.createAnimation({
+      duration: 200, //动画时长 
+      timingFunction: "linear", //线性 
+      delay: 0 //0则不延迟 
+    });
+
+    // 第2步：这个动画实例赋给当前的动画实例 
+    this.animation = animation;
+
+    // 第3步：执行第一组动画 
+    animation.opacity(0).rotateX(-100).step();
+
+    // 第4步：导出动画对象赋给数据对象储存 
     this.setData({
-      showTitle: true
+      animationData: animation.export()
     })
-  }, */
- /*  scrolltoupper:function(e){
-    console.log("scrolltoupper")
-  }  */
- /*  scrolling:function(e){
-    console.log("scrolling")
-    this.setData({
-      showTitle:false
-    })
-  } */
+
+    // 第5步：设置定时器到指定时候后，执行第二组动画 
+    setTimeout(function () {
+      // 执行第二组动画 
+      animation.opacity(1).rotateX(0).step();
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
+      this.setData({
+        animationData: animation
+      })
+
+      //关闭 
+      if (currentStatu == "close") {
+        this.setData(
+          {
+            showModalStatus: false
+          }
+        );
+      }
+    }.bind(this), 200)
+
+    // 显示 
+    if (currentStatu == "open") {
+      this.setData(
+        {
+          showModalStatus: true
+        }
+      );
+    }
+  }
+
 })

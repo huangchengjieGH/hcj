@@ -30,14 +30,14 @@ Page({
       })
     }
     );
-    this.getOrderList();
+   // this.getOrderList();
    /*  this.getOrderState(); */
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getOrderList();
   },
   /**获取订单列表 */
   getOrderList: function () {
@@ -70,32 +70,32 @@ Page({
     var temp = {};
     var orderList = [];
     for (var idx in data) {
-      switch (data[idx].lastOrderStream.status) {
+      switch (data[idx].lastOrderStream.type) {
+        case 0:
+          temp = {
+            id: data[idx].id,
+            num: data[idx].num,
+            orderPrice: data[idx].orderPrice,
+            tableNum: data[idx].tableNum,
+            orderState: '订单已完成',  
+            orderFunc: '开发票',
+            goodsList: data[idx].goodsList,
+            lastOrderStream:data[idx].lastOrderStream,
+          }
+          break;
         case 1:
           temp = {
             id: data[idx].id,
             num: data[idx].num,
             orderPrice: data[idx].orderPrice,
             tableNum: data[idx].tableNum,
-            orderState: '订单已完成',
-            orderFunc: '开发票',
+            orderState: '未支付',
+            orderFunc: '支付',
             goodsList: data[idx].goodsList,
             lastOrderStream:data[idx].lastOrderStream,
           }
           break;
         case 2:
-          temp = {
-            id: data[idx].id,
-            num: data[idx].num,
-            orderPrice: data[idx].orderPrice,
-            tableNum: data[idx].tableNum,
-            orderState: '待付款',
-            orderFunc: '申请取消订单',
-            goodsList: data[idx].goodsList,
-            lastOrderStream:data[idx].lastOrderStream,
-          }
-          break;
-        case 3:
           temp = {
             id: data[idx].id,
             num: data[idx].num,
@@ -107,7 +107,7 @@ Page({
             lastOrderStream:data[idx].lastOrderStream,
           }
           break;
-        case 4:
+        case 3:
           temp = {
             id: data[idx].id,
             num: data[idx].num,
@@ -134,7 +134,7 @@ Page({
     var temp = {};
     var orderData = [];
     for (var idx in data) {
-      if (data[idx].lastOrderStream.status == id) {
+      if (data[idx].lastOrderStream.type == id) {
         temp = data[idx];
         orderData.push(temp);
         temp = {};
@@ -192,7 +192,7 @@ Page({
    //     orderList: orderList
    //   }) 
     console.log(orderData) */
-    this.getOrderData(this.data.orderList,1);
+    this.getOrderData(this.data.orderList,0);
   },
   /*点击了待付款 */
   onpayTap: function (event) {
@@ -204,7 +204,7 @@ Page({
       paying_flag: true,
       cancel_flag: false,
     });
-    this.getOrderData(this.data.orderList,2);
+    this.getOrderData(this.data.orderList,1);
   },
   /*点击了已取消 */
   oncancelTap: function (event) {
@@ -216,7 +216,7 @@ Page({
       paying_flag: false,
       cancel_flag: true,
       });
-    this.getOrderData(this.data.orderList,3);
+    this.getOrderData(this.data.orderList,2);
   },
 /*点击了设置 */
 onsettingTap:function(event){

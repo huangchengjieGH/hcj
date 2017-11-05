@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    locationData: locationData.getlocation(),
+    
     locatedCity:'',
     hotCity:[
       "北京",

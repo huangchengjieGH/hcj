@@ -18,7 +18,7 @@ Page({
     sortShow: true,
     filterOpen: false,
     filterShow: true,
-    cityleft: cityData.getCity(),
+   // cityleft: cityData.getCity(),
     currentCity: {},
     cityright: {},
     showright: false,
