@@ -1,8 +1,8 @@
 <!--pages/pay/pay.wxml-->
 <view class='pay-contrainer'>
   <view class='res-msg'>
-    <image class='res-img' src='/images/image/aizhimian.jpg'></image>
-    <text class='res-txt'>重庆鸡公煲</text>
+    <image class='res-img' src='{{paymsg.imgUrl}}'></image>
+    <text class='res-txt'>{{paymsg.name}}</text>
   </view>
   <view class='basic-msg'>
     <text class='basic'>基本信息</text>
@@ -10,28 +10,29 @@
   <view>
     <view>
       <text class='order-num'>订单号：</text>
-      <text class='order-value'>kd201709201759</text>
+      <text class='order-value'>{{paymsg.orderMsg.num}}</text>
     </view>
     <view class='order-time'>
       <text class='time'>下单时间：</text>
-      <text class='time-value'>2017-9-20 18：00</text>
+      <text class='time-value'>{{paymsg.orderMsg.createdAt}}</text>
     </view>
     <view class='seat-msg'>
       <text class='seat'>座位号：</text>
-      <text class='seat-value'>A40</text>
+      <text class='seat-value'>{{paymsg.orderMsg.tableNum}}</text>
     </view>
   </view>
   <view class='order-msg'>
     <text class='basic'>订单信息</text>
   </view>
+  <view wx:for="{{paymsg.orderList}}" wx:for-item="item">
   <view class='dish-list'>
-    <text class='dish-name'>红烧狮子头</text>
+    <text class='dish-name'>{{item.name}}</text>
     <text class='dish-num'>X</text>
-    <text class='dish-num2'>2</text>
+    <text class='dish-num2'>{{item.order_num}}</text>
     <text class='dish-price'>￥</text>
-    <text class='dish-price2'>100</text>
+    <text class='dish-price2'>{{item.price}}</text>
   </view>
-
+   </view>
   <view class='chawei-fee' bindtap='per_list'>
     <view class='per-num'>
       <text class='num-value'>{{numValue}}</text>
@@ -64,11 +65,11 @@
   <view class='total'>
     <text class='total-txt'>总计：</text>
     <text class='price-symbol'>￥</text>
-    <text class='total-value'>300.00</text>
+    <text class='total-value'>{{paymsg.orderMsg.orderPrice}}</text>
   </view>
 
   <view class='pay'>
-    <button class='pay-btn' catchtap='onPaytap'>支付</button>
+    <button class='pay-btn' catchtap='onPaytap'>{{payWay}}</button>
   </view>
 </view>
 

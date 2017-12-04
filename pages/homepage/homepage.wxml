@@ -58,14 +58,14 @@
     <view class="slogan">
       <text class="title">附近热门</text>
     </view>
-    <block wx:for="{{hotRes}}" wx:for-item="item">
+   <!--  <block wx:for="{{shotRes}}" wx:for-item="item">
      <view class="res-list">
       <template is="res" data="{{item}}" />
       </view>
-    </block>
-   <!--  <view >
-        <template is="res-list" data="{{...hotRes}}" />
-    </view> -->
+    </block> -->
+     <view >
+        <template is="res" data="{{...shotRes}}" />
+    </view> 
 
   </view>
 </view>

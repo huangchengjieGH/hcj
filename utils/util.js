@@ -67,11 +67,36 @@ function requestByLogin(request, callback, errCallback) {
     method: request.method,
     dataType: request.dataType,
     success: function (res) {
-      if (res.data.status == 1) {
+      console.log(res);
+     /*   if (res.data.status == 1) {
         callback(res.data);
       } else {
         errCallback(res.data);
-      }
+      }  */
+       if (res.data.status == 1) {
+        callback(res.data);
+      } else if (res.data.status == -3) {
+        _self.login(function (token) {
+          wx.request({
+            url: request.url + "?token=" + token,
+            data: request.data,
+            header: request.header,
+            method: request.method,
+            dataType: request.dataType,
+            success: function (res) {
+              if (res.data.status == 1) {
+                callback(res.data);
+              } else {
+                console.log(res.data);
+              }
+            },
+            fail: function (res) { },
+            complete: function (res) { },
+          })
+        })
+      } else {
+        errCallback(res.data);
+      } 
     },
     fail: function (res) { },
     complete: function (res) { },
@@ -88,8 +113,9 @@ function requestByLogin(request, callback, errCallback) {
         dataType: request.dataType,
         success: function (res) {
           if (res.data.status == 1) {
-            callback(res.data.data);
+            callback(res.data);
           } else {
+            //console.log('dddd')
             console.log(res.data);
           }
         },
@@ -100,12 +126,13 @@ function requestByLogin(request, callback, errCallback) {
   }
 }
 function login(callback) {
-  wx.login({
-     async: false,  
+  console.log("login begin");
+  async: false,
+  wx.login({  
     success: function (res) {
+      console.log('utils.js+login+108')
       console.log(res);
-      wx.request({
-          async: false,  
+      wx.request({  
         url: setting.domain + '/wx/user/login?code=' + res.code + '&sellerId=' + setting.shopId,
         data: {},
         method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
@@ -115,12 +142,16 @@ function login(callback) {
           console.log(res);
           wx.setStorageSync('token', res.data.data);
           callback(res.data.data);
+          console.log('login success')
         },
-        fail: function () {
-          // fail
+        fail: function (res) {
+          console.log(res)
+          console.log('login fail')
         },
         complete: function () {
           // complete
+
+          console.log('login complete')
         }
       })
     },
@@ -136,31 +167,28 @@ function login(callback) {
 }
 function uploadUserInfo() {
   var _self = this;
-  wx.getUserInfo({
+  async: false,
+   wx.getUserInfo({
     success: function (res) {
-      // success
-      // console.log(res.userInfo);
-      // console.log("requestByLogin begin");
       _self.requestByLogin({
         url: 'https://restaurant.wegtech.cn/wx/user',
         method: 'POST',
         data: res.userInfo,
-        // header: {
-        //   'content-type': 'application/x-www-form-urlencoded'
-        // }
       }, function (data) {
-        // console.log(data);
-        },  function () {
-          console.log("error")
+        },  function (res) {
+          console.log("Error: function uploadUserInfo")
+          console.log(res) 
         }
       );
     },
-    fail: function () {
-      // fail
+    fail: function (res) {
+      console.log('upload fail');
+     // console.log(res);
     },
     complete: function () {
+      console.log(' upload complete')
     }
-  });
+  }); 
 }
 module.exports = {
   formatTime: formatTime,

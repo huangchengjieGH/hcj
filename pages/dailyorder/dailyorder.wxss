@@ -1,0 +1,222 @@
+/* pages/dailyorder/dailyorder.wxss */
+.daily-order{
+display: flex;
+flex-direction: column;
+}
+.top-page{
+/* position: fixed; */
+/* top: 0rpx; */
+width: 100%;
+height: 310rpx;
+border: 1rpx solid #ccc;
+}
+.date{
+display: flex;
+flex-direction: row;
+margin-left: 60rpx;
+margin-top: 20rpx;
+}
+.date-txt{
+border: 1rpx solid #ccc;
+font-size: 40rpx;
+height: 70rpx;
+width: 200rpx;
+text-align: center;
+border-radius: 4rpx;
+}
+.begin-date{
+border: 1rpx solid #ccc;
+font-size: 38rpx;
+margin-left: 60rpx;
+height: 70rpx;
+width: 350rpx;
+text-align: center;
+border-radius: 10rpx;
+}
+.icon-txt{
+margin-top: 5rpx;
+margin-left: 8rpx;
+}
+.icon1{
+position: absolute;
+display: inline-block;
+border: 4px solid transparent;
+border-top: 4px solid #9b9b9b;
+margin-top: 30rpx;
+right: 100rpx;
+}
+.search{
+border: 1rpx solid #ccc;
+height: 80rpx;
+width: 480rpx;
+border-radius: 30rpx;
+font-size: 40rpx;
+margin-top: 25rpx;
+background-color: #8bc34a;
+margin-left: 120rpx;
+}
+.search-txt{
+position: absolute;
+color: white;
+font-weight: 100rpx;
+margin-top: 10rpx;
+margin-left: 200rpx;
+}
+.pay-type{
+display: flex;
+flex-direction: row;
+margin-left: 60rpx;
+margin-top: 20rpx;
+}
+
+.pay-txt{
+border: 1rpx solid #ccc;
+font-size: 40rpx;
+height: 70rpx;
+width: 200rpx;
+text-align: center;
+border-radius: 4rpx;
+}
+.pay-value{
+border: 1rpx solid #ccc;
+font-size: 38rpx;
+margin-left: 60rpx;
+height: 70rpx;
+width: 350rpx;
+text-align: center;
+border-radius: 10rpx;
+}
+.temp{
+position: absolute;
+top:190rpx;
+right: 100rpx;
+z-index: 4;
+}
+.temp1{
+display: none;
+width: 300rpx;
+margin-left: 10rpx;
+/* max-height: 550rpx; */
+overflow-y: scroll;
+padding: 0 0 0 20rpx;
+line-height:60rpx;
+background: #fff;
+border: 1px solid #42a4e2;
+}
+.slidown{
+display: block;
+animation: slidown .7s ease-in both;
+}
+.slidup{
+display: block;
+animation: slidup .7s ease-in both;
+}
+@keyframes slidown{
+from{
+transform: translateY(-3%);
+}
+to{
+transform: translateY(0%);
+}
+}
+@keyframes slidup{
+from{
+transform: translateY(0%);
+}
+to{
+transform: translateY(-3%);
+}
+}
+.numList{
+background: #faf7f7;
+/* border-bottom: 2rpx solid #b1adad; */
+}
+.disappear{
+display: none;
+}
+.spliter-line{
+/* position: fixed;
+margin-top: 320rpx; */
+height: 10rpx;
+width: 100%;
+background: #F3F3F3;
+border-bottom: 1rpx solid #bbbbbb;
+}
+.total-count{
+/* position: fixed;
+margin-top: 330rpx; */
+height: 65rpx;
+width: 100%;
+border: 1rpx solid #ccc;
+}
+.total-txt{
+font-size: 30rpx;
+margin-left: 460rpx;
+}
+.total-value{
+font-size: 40rpx;
+margin-left: 20rpx;
+color: red;
+margin-top: 5rpx;
+}
+.scroll{
+width: 100%;
+/* height: 400rpx; */
+/* margin-top: 450rpx; */
+margin-bottom: 50rpx;
+}
+.dishValue6{
+background: white; width: 200rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid black;
+/* border-right: 1rpx solid #ccc; */
+text-align: center;
+font-size: 38rpx;
+/* color:#42a4e2; */
+background: #5ed925;
+}
+.dishValue0{
+background: white; width: 300rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx dashed #ccc; */
+text-align: center;
+font-size: 38rpx;
+color:#42a4e2;
+/* background: #5ed925; */
+}
+.dishValue{
+background: white; width: 300rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid black;
+/* border-right: 1rpx solid #ccc; */
+text-align: center;
+font-size: 38rpx;
+background: #5ed925;
+
+}
+.dishValue2{
+background: white; width: 200rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx dashed #ccc; */
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue3{
+background: white; width: 200rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx dashed #ccc; */
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue4{
+background: white; width: 200rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx dashed #ccc; */
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue5{
+background: white; width: 200rpx; height: 70rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx dashed #ccc; */
+text-align: center;
+font-size: 38rpx;
+}

@@ -1,5 +1,5 @@
 <!--pages/myorder/myorder.wxml-->
-<scroll-view scroll-y="true" class='myorder-contrainer'>
+<view class='myorder-contrainer'>
   <view class='myorder'>
     <view class='setting' catchtap='onsettingTap'>
       <image class='setting-img' src="/images/icon/setting.png"></image>
@@ -10,8 +10,8 @@
       <view class="{{login_flag?'userinfo':'hide'}}">
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
         <view>
-          <image class='mobile-img' src='/images/icon/mobile.png'></image>
-          <text class='mobile-value'>15889668184</text>
+          <!--  <image class='mobile-img' src='/images/icon/mobile.png'></image>
+          <text class='mobile-value'>15889668184</text>  -->
         </view>
       </view>
       <view class="{{login_flag?'hide':'Login'}}" catchtap="onLoginTap">
@@ -29,11 +29,12 @@
     <text class="{{paying_flag?'paying-order':'paying-order2'}}" catchtap="onpayTap" data-Id="10003">待付款</text>
     <text class="{{cancel_flag?'cancel-order':'cancel-order2'}}" catchtap="oncancelTap" data-Id="10004">已取消</text>
   </view>
+ <scroll-view scroll-y="true" class="subject-msg"> 
 <view wx:for="{{orderData}}" wx:for-item="item">
-  <view class='order-msg' catchtap='onOrderTap'>
+  <view class='order-msg' catchtap='onOrderTap' data-Id="{{item.id}}">
     <image class='res-img' src='/images/image/aizhimian.jpg'></image>
     <view class='order-msg2'>
-      <text class='res-name'>重庆鸡公煲</text>
+      <text class='res-name'>{{shopMsg.name}}</text>
       <text class='order-time'>2017-09-23 12:14</text>
       <view class='order-time'>
         <text>{{item.goodsList[0].name}}</text>
@@ -44,18 +45,17 @@
       <view class='state'>
         <image class='arrow' src='/images/icon/arrow-right.png'> </image>
         <text class='order-state'>{{item.orderState}}</text>
-
       </view>
       <view class='price'>
         <text class='price-symbol'>￥</text>
         <text>{{item.orderPrice}}</text>
       </view>
-      <view class='invoice'>
+      <view class='invoice' catchtap='onActionTap' data-Id="{{item.id}}" data-status="{{item.lastOrderStream.type}}">
         <text class='invoice-txt'>{{item.orderFunc}}</text>
       </view>
     </view>
   </view>
   <view class='spliter-line'></view>
   </view>
-
 </scroll-view>
+</view>

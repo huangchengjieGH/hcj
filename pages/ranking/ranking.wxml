@@ -1,0 +1,63 @@
+<view class='ranking-contrainer'>
+<view class='top-page'>
+<view class='date'>
+<view class='date-txt'>日期:</view>
+<!-- <view class='begin-date'>2017-11-16</view> -->
+<picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
+<view class="begin-date">
+{{beginDate}}
+</view>
+</picker>
+<view class="icon1"></view>
+<text class='icon-txt'>~</text>
+<!-- <view class='end-date'>2017-11-18</view> -->
+<picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onEndDateTap">
+<view class="end-date">
+{{endDate}}
+</view>
+</picker>
+<view class="icon2"></view>
+</view>
+
+<view class='func-area'>
+<view class='type-txt'>类型:</view>
+<view class='type-value' bindtap='perList01'>{{numValue01}}</view>
+<view class="icon3"></view>
+</view>
+
+<view class="temp temp1 {{openList01 ? 'slidown' : 'slidup'}} {{showList01 ? 'disappear':''}}">
+<view class='numList' wx:for="{{goodsClassify}}" catchtap='onNumTap01' data-numId="{{item.id}}">
+{{item.name}}
+</view>
+</view>
+
+<view class='func-area'>
+<view class='type-txt'>排名:</view>
+<view class='type-value'bindtap='perList02'>{{numValue02}}</view>
+<view class="icon3"></view>
+</view>
+<view class="temp2 temp1 {{openList02 ? 'slidown' : 'slidup'}} {{showList02 ? 'disappear':''}}">
+<view class='numList' wx:for="{{rankValue}}" catchtap='onNumTap02' data-numId="{{item}}">
+{{item}}
+</view>
+</view>
+
+<view class='search'>
+<text class='search-txt' catchtap='onSearchTap'>查询</text>
+</view>
+</view>
+<view class='spliter-line'></view>
+<view>
+<view class="dishname">菜名</view>
+<view class="typename">类型</view>
+<view class="num">数量</view>
+</view>
+<scroll-view class='scroll' scroll-y="true">
+<view wx:for="{{tableOrder}}" wx:for-item="item">
+<view class="dishValue" catchtap="ontimeTap" data-id="{{item.one}}">{{item.one}}</view>
+<view class="dishValue2">{{item.two}}</view>
+<view class="dishValue1">{{item.three}}</view>
+</view>
+</scroll-view>
+
+</view>

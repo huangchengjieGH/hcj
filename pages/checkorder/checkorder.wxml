@@ -1,0 +1,65 @@
+<view class='checkorder-contrainer'>
+
+  <scroll-view class='scroll' scroll-x="true" style=" white-space: nowrap; display: flex">
+    <checkbox-group bindchange="checkboxChange">
+      <view wx:for="{{tableOrder}}" wx:for-item="item">
+        <view class="{{index=='0'?'dishValue0':'dishValue'}}">
+          <view class='checkbox'>
+            <checkbox wx:if='{{index!=0}}' value="{{item.goodsId}}" checked="{{item.checked}}" /> {{item.name}}
+          </view>
+        </view>
+        <view class="dishValue2">{{item.price}}</view>
+        <view class="dishValue3">{{item.count}}</view>
+        <view class="dishValue4">{{item.totalPrice}}</view>
+        <view class="dishValue6">{{item.time}}</view>
+        <!-- <view class="dishValue6">{{item.six}}</view> -->
+      </view>
+    </checkbox-group>
+  </scroll-view>
+
+  <view class='seat-top'>
+    <text class='order-txt'>订单号:</text>
+    <text class='order-num'>123242342374</text>
+    <text class='seat-txt'>座位号:</text>
+    <text class='seat-num'>88</text>
+  </view>
+  <view class='bottom'>
+    <view class='bottom-one'>
+      <text class='num'>数量:</text>
+      <text class='num-value'>10</text>
+      <text class='price'>消费金额:</text>
+      <text class='price-value'>100.00</text>
+      <view class="{{cancelFlag?'cancel1':'cancel'}}" catchtap='onDeleteDishTap'>退菜</view>
+    </view>
+
+    <view class='bottom-two'>
+      <text class='discount'>折扣金额:</text>
+      <text class='discount-value'>0.00</text>
+      <view class='pay' catchtap='onCheckOutTap'>结帐</view>
+      <view class='print'>打单</view>
+    </view>
+
+  </view>
+
+  <!--弹窗-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+    <view class='paytype'>请选择顾客支付方式:</view>
+    <view class="drawer_content">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{items}}">
+          <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+        </label>
+      </radio-group>
+
+      <view class='pop-btn'>
+        <view class='cancel-btn' catchtap="onCancelTap">取消</view>
+        <view class='confirm-btn' catchtap="onConfirmTap">确定</view>
+      </view>
+
+    </view>
+  </view>
+  <!--弹窗-->
+</view>

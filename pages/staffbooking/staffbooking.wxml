@@ -1,0 +1,223 @@
+<import src="../res-detail-template/res-detail-template.wxml" />
+<import src="../stars-template/stars-template.wxml" />
+<scroll-view scroll-y="true" class="Booking-contrainer">
+  <view class="Top-msg" catchtap='onclicktop'>
+    <image class="res-img" src="/images/image/aizhimian.jpg"></image>
+    <view class="res-msg">
+      <view catchtap='onResTap'>
+        <text class="res-name">{{resMsg.seller.name}}</text>
+        <image class="arrow-icon" src="/images/icon/right.png"></image>
+      </view>
+      <!--  <text class="detail">{{res_msg.message.describe}}</text> -->
+      <view class="perConsume">
+        <text class="perConsume-txt">人均：</text>
+        <text class="perConsume-icon">￥</text>
+        <text class="perConsume-value">{{resMsg.seller.consumption}}</text>
+      </view>
+      <view class="stars">
+        <template is="starsTemplate" data="{{stars:stars,score:''}}" />
+      </view>
+    </view>
+  </view>
+
+  <view class="Middle-msg" catchtap='onclickmiddle'>
+    <!-- <image class="discount" src="/images/icon/discount.png"></image>
+      <text class="describe">会员享受8折优惠</text> -->
+    <text class="input-txt">编号</text>
+    <input placeholder="请输入菜的编号" class="input-value" bindblur="dishIDInput" confirm-type='confirm' />
+    <!-- <view>确认</view> -->
+  </view>
+
+  <!--   <view class="input">
+   <view class="input-seat">
+    <text class="input-txt">座位号</text>
+    <input placeholder="请输入您的座位号" class="input-value"
+     bindconfirm="seatInput" confirm-type='confirm'/>
+     </view>
+     <view class="input-btn">
+      <button class="input-cancle">取消</button>
+      <button class="input-confirm">确认</button>
+     </view>
+  </view> -->
+
+  <view class="subject" catchtap='onclicksubject'>
+    <scroll-view scroll-y="true" class="scroll-view">
+      <view wx:for="{{goods_msg.data}}" wx:for-item="item">
+        <view class='text' catchtap="onclassiTap" data-buttonId="{{item.classifyName}}">
+          <view wx:if="{{item.classifyName== classify}}">
+            <text class='classfytext' style='color:red'>{{item.classifyName}}</text>
+            <!-- <icon class='success-icon' type="success" size="10" color="red"/> -->
+            <icon wx:if="{{index==0}}" class="{{class_Dish[0]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==1}}" class="{{class_Dish[1]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==2}}" class="{{class_Dish[2]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==3}}" class="{{class_Dish[3]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==4}}" class="{{class_Dish[4]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==5}}" class="{{class_Dish[5]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==6}}" class="{{class_Dish[6]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==7}}" class="{{class_Dish[7]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==8}}" class="{{class_Dish[8]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==9}}" class="{{class_Dish[9]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==10}}" class="{{class_Dish[10]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==11}}" class="{{class_Dish[11]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==12}}" class="{{class_Dish[12]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==13}}" class="{{class_Dish[13]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==14}}" class="{{class_Dish[14]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:else class="hide" type="hide" size="10" color="red" />
+
+          </view>
+          <view wx:else>
+            <text class='classfytext'>{{item.classifyName}}</text>
+            <!-- <icon  class='success-icon' type="success" size="10" color="red"/> -->
+            <icon wx:if="{{index==0}}" class="{{class_Dish[0]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==1}}" class="{{class_Dish[1]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==2}}" class="{{class_Dish[2]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==3}}" class="{{class_Dish[3]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==4}}" class="{{class_Dish[4]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==5}}" class="{{class_Dish[5]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==6}}" class="{{class_Dish[6]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==7}}" class="{{class_Dish[7]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==8}}" class="{{class_Dish[8]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==9}}" class="{{class_Dish[9]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==10}}" class="{{class_Dish[10]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==11}}" class="{{class_Dish[11]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==12}}" class="{{class_Dish[12]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==13}}" class="{{class_Dish[13]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:elif="{{index==14}}" class="{{class_Dish[14]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
+            <icon wx:else class="hide" type="hide" size="10" color="red" />
+
+          </view>
+        </view>
+        <!--  <view class='success-icon'>
+           <icon type="success" size="10" color="red"/>
+        </view> -->
+        <!--  <view>{{index}}</view> -->
+      </view>
+    </scroll-view>
+    <view class="detail-contrainer">
+      <view class="classify">
+        <text class="class-value">{{classify}}</text>
+      </view>
+      <scroll-view scroll-y="true" class='subject-msg'>
+        <block wx:for="{{Goods}}" wx:for-item="resdetail">
+          <template is="Res-detail" data="{{...resdetail}}"></template>
+          <view class="line"></view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="{{actionflag == '结账'?'':'hide'}}">
+    <view class="{{showcartList?'hide':''}}" catchtap='callingService'>
+      <text class='calling-txt'>呼叫服务员</text>
+      <image class='calling-img' src='/images/icon/calling.png'></image>
+    </view>
+  </view>
+</scroll-view>
+
+<view class='bottom-view'>
+  <view class='bottom-left'>
+    <view class='cart'>
+      <view wx:if="{{totalnum== 0}}">
+        <text class='cart-num0'>{{totalnum}}</text>
+        <image class='cart-img' src="/images/icon/cart.png"></image>
+      </view>
+      <view wx:else catchtap="oncartTap">
+        <text class='cart-num'>{{totalnum}}</text>
+        <image class='cart-img' src="/images/icon/cart_hl.png"></image>
+      </view>
+    </view>
+    <view wx:if="{{totalnum== 0}}">
+      <text class='cart-txt'>未选购商品</text>
+    </view>
+    <view wx:else>
+      <text class='totalprice'>￥</text>
+      <text class='totalprice-value'>{{totalprice}}</text>
+    </view>
+  </view>
+  <view class="{{totalnum==0?'bottom-right0':'bottom-right'}}" bindtap='onactionTap' data-actionId="{{actionflag}}">
+    <text class='right-txt'>{{actionflag}}</text>
+  </view>
+</view>
+
+<view class="{{showcartList?'order-list':'hide'}}">
+  <view class='order-head'>
+    <view class='head-desc'>
+      <icon class='choosed-icon' type="success" size="18" color='#6467f3' />
+      <text class='choosed-txt'>已选商品</text>
+    </view>
+    <view class='clear-order'>
+      <!-- <image class='clear-img' src="/images/icon/lajixaing2.png"></image> -->
+      <icon type="clear" size="18" color='#afa7a7'></icon>
+      <text class='clear-txt' catchtap="onOrderListTap">清空</text>
+    </view>
+  </view>
+  <view class='order-msg' wx:for="{{orderList}}" wx:for-item="item">
+    <text class='order-name'>{{item.name}}</text>
+    <text class='price'>￥</text>
+    <text class='price-value'>{{item.price}}</text>
+    <image class='order-del' src="/images/icon/jian.png" catchtap="DelDishTap" data-deldishId="{{item.id}}"></image>
+    <text class='order-num'>{{item.order_num}}</text>
+    <image class='order-add' src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{item.id}}"></image>
+  </view>
+</view>
+
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <view class="drawer_content">
+    <view class="{{popFlag==0?'top grid':'hide'}}">
+      <image class='dish-img' src="{{detailDish.imgUrl}}"></image>
+      <text class='dish-name2'>{{detailDish.name}}</text>
+
+      <view class='saling'>
+        <text class='dish-sale2'>月售</text>
+        <text class='sale-value2'>{{detailDish.sales}}</text>
+      </view>
+
+      <view>
+        <text class='ss-price'>¥</text>
+        <text class='dd-price'>{{detailDish.price}}</text>
+      </view>
+
+      <icon class="cls-btn" type="clear" size="30" color="#D6D3D3" bindtap="powerDrawer" data-statu="close" />
+    </view>
+
+    <view class="{{popFlag==1?'pop-content':'hide'}}">
+      <view>
+        <text class='input-txt'>座位号:</text>
+        <input placeholder="请输入座位号" value="{{tableNum}}"class="seat-input" bindblur="seatInput" confirm-type='confirm' />
+      </view>
+
+      <view>
+        <text class='input-txt'>用餐人数:</text>
+        <input placeholder="请输入用餐人数" class="seat-input" bindblur="costomerNumInput" confirm-type='confirm' />
+      </view>
+    </view>
+
+    <view class='pop-btn'>
+      <view class='cancel-btn' catchtap="onCancelTap">取消</view>
+      <view class='confirm-btn' catchtap="onConfirmTap">确定</view>
+    </view>
+
+  </view>
+
+</view>
+
+<!-- bottom-banner -->
+<view class="bottom-banner">
+  <view class='report'>
+    <image class='report-img' src='/images/icon/order_hl.png'></image>
+    <text class='report-txt'>{{Flag}}</text>
+  </view>
+  <view class='ordermanage' catchtap="onOderManegeTap">
+    <image class='ordermanage-img' src='/images/icon/nearby.png'></image>
+    <text class='ordermanage-txt'>订单管理</text>
+  </view>
+  <view class='my' catchtap="onMyTap">
+    <image class='my-img' src='/images/icon/myorder.png'></image>
+    <text class='my-txt'>我的</text>
+  </view>
+</view>

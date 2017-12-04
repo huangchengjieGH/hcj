@@ -24,9 +24,14 @@ Page({
     actionflag: '请点餐',
     open_res_Id: null,
     tableNum:null,
+    customerNum: null,
     orderId:'',
     showModalStatus: false,
     orderStatus:'0',
+    orderMsg:'',
+    cashPay:false,
+    detailDish:{},
+    popFlag: 1,
   },
   GetQueryString: function (url, key) {
     var theRequest = new Object();
@@ -95,19 +100,19 @@ Page({
     var order_num = 0;
     var ServiceGoodsMsg = {};
     var resMsg = {};
-   /*  DetailData = postsdatabase.postList[this.data.open_res_Id]; */
+    
+   
     /*获取商家信息 */
     res_msg = resdatabase.Data_List[0];
     /*获取商品信息 */
-   util.requestByLogin({
+    util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
       method: 'GET',
       header: {
         'content-type': 'application/xml'
       },
     }, function (res) {
-      //   console.log("res")
-      console.log(res); 
+      console.log(res);
       ServiceGoodsMsg = res;
       that.setData({
         goods_msg: ServiceGoodsMsg,
@@ -115,17 +120,30 @@ Page({
       })
       that.processGoodsMsgData(ServiceGoodsMsg);
       /* goods = this.data.goods_msg.data[0].goods; */
-     // console.log(that.data.goods_msg.data[0].goods);
+      // console.log(that.data.goods_msg.data[0].goods);
       that.processGoodsData(that.data.goods_msg.data[0].goods);
       that.processOrderList(that.data.goods_msg);
       that.setData({ classify: ServiceGoodsMsg.data[0].classifyName });
+      //console.log('hahaha');
+      console.log(res.extra.seller.payType);
+      if (res.extra.seller.payType == 3) {
+        that.setData({
+          cashPay: true
+        })
+      } else {
+        /****测试线下结帐效果 */
+        that.setData({
+          cashPay: false
+        })
+      }
+
     }, function () {
-      console.log("error")
+      console.log("Error:function GetData")
       wx.hideToast();
     }
-    ); 
-   /*  goods_msg = goodsdatabase.Goods_List[0]; */
- /*    this.processGoodsMsgData(goods_msg); */
+    );
+
+
     this.setData(
       {
         res_msg: res_msg,
@@ -661,73 +679,57 @@ Page({
   onactionTap: function (event) {
     var that = this;
     var actionId = event.currentTarget.dataset.actionid;
+    var paymsg = {};
     console.log(actionId);
     if (actionId == '请点餐') {
       null;
     }
     else if (actionId == '选好了') {
-      if (this.data.tableNum != null && this.data.tableNum != '') {
-        
-        this.setData({ 
-          'actionflag': '结账' ,
-          orderStatus: '1'})
-        this.getGoodsList(this.data.orderList);
-        let Test = this.data.GoodsList;
-        wx.showLoading(
-          {
-            title: "处理中"
-          }
-        )
+      console.log(that.data.tableNum);
+      this.setData({
+        popFlag: '1'
+      })
+      this.showInputSeat('open'); 
 
-        /******添加处理icon */
-        util.requestByLogin({
-          url: app.globalData.domain + '/wx/order',
-          method: 'POST',
-          data: {
-            tableNum: that.data.tableNum,
-            goodsList: Test
-          },
-        }, function (res) {
-          console.log('haah')
-          console.log(res);
-          /* orderId = data.id; */
-          wx.hideToast();
-          that.setData({ orderId: res.data.id });
-        }, function () {
-          console.log("error")
-          wx.hideToast();
-        }
-        );
-      }
-       else {
-        console.log("seat is null");
-        if(this.data.totalnum > 0)
-        {
-           this.showInputSeat('open')
-        }
-      }
     }
     else if (actionId == '结账') {
-      wx.navigateTo({
-        url: '../pay/pay?id='+this.data.orderId
+      paymsg = this.getPaymentMsg();
+      let str = JSON.stringify(paymsg);
+      this.setData({
+        orderStatus: '0',
       })
+      wx.navigateTo({
+        url: '../pay/pay?str=' + str
+      })
+
+      
     }
   },
 
-
+  getPaymentMsg:function(event){
+    var temp = {
+      name:this.data.resMsg.seller.name,
+      imgUrl:this.data.resMsg.seller.imgUrl,
+      orderList:this.data.orderList,
+      orderMsg:this.data.orderMsg,
+      cashPay: this.data.cashPay
+    }
+    //console.log(temp);
+    return temp;
+  },
   /*点击了清空，清空购物车 */
   onOrderListTap:function(event){
     if (this.data.orderStatus == '0'){
-   this.clearUpCart(this.data.goods_msg,this.data.Goods);
-   /*全局变量统计点菜数量，清0 */
-   app.globalData.totalnum =0;
-   this.setData({
-     orderList:[],
-     totalnum:0,
-     totalprice:0,
-     showcartList:false,
-     class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-   })
+      this.clearUpCart(this.data.goods_msg, this.data.Goods);
+      /*全局变量统计点菜数量，清0 */
+      app.globalData.totalnum = 0;
+      this.setData({
+        orderList: [],
+        totalnum: 0,
+        totalprice: 0,
+        showcartList: false,
+        class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      })
    }
   },
   /*呼叫服务员 */
@@ -742,11 +744,21 @@ Page({
   },
   onResTap:function(event){
    /*  console.log(app.globalData.resId) */
-   wx.navigateTo({
-     url: '../shopmsg/shopmsg?id=' + 0,
-   })
+    var shopmsg={
+     imgUrl:this.data.resMsg.seller.imgUrl,
+     name:this.data.resMsg.seller.name,
+     score:'5.0',
+     phone: this.data.resMsg.seller.phone,
+     address:this.data.resMsg.seller.address,
+     worktime:'11:00-14:30 17:00-22:00'
+   }
+    let str = JSON.stringify(shopmsg);
+   console.log(shopmsg);
+    wx.navigateTo({
+     url: '../shopmsg/shopmsg?str=' + str,
+   }) 
   },
-  seatInput: function (e) {
+/*   seatInput: function (e) {
     var that = this;
     console.log(e.detail.value);
      if (e.detail.value != ''){
@@ -755,13 +767,44 @@ Page({
     }) 
 
     } 
-  },
+  }, */
+  costomerNumInput: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+    if (e.detail.value != '') {
+      that.setData({
+        tableNum: e.detail.value,
+      })
 
+    }
+  },
+  
+  onImgTap:function(e){
+    var imgId = e.currentTarget.dataset.imgid;
+    var temp = {};
+    console.log('点击了' + imgId);
+    for(var idx in this.data.Goods){
+      if (this.data.Goods[idx].id == imgId){
+        temp={
+          name: this.data.Goods[idx].name,
+          sales:this.data.Goods[idx].sales,
+          price:this.data.Goods[idx].price,
+          imgUrl:this.data.Goods[idx].imgUrl
+        }
+        this.setData({
+          detailDish: temp
+        })
+        break;
+      }
+    }
+    console.log(temp);
+    this.showInputSeat('open')
+  },
   powerDrawer: function (e) {
     var that = this;
     var currentStatu = e.currentTarget.dataset.statu;
     this.showInputSeat(currentStatu);
-    if (this.data.tableNum != '' && this.data.tableNum != null){
+/*     if (this.data.tableNum != '' && this.data.tableNum != null){
       this.setData({
         orderStatus:'1'
       })
@@ -775,7 +818,6 @@ Page({
         }
       )
 
-      /******添加处理icon */
       util.requestByLogin({
         url: app.globalData.domain + '/wx/order',
         method: 'POST',
@@ -784,24 +826,24 @@ Page({
           goodsList: Test
         },
       }, function (res) {
-        console.log('hahaha');
         console.log(res);
-        /* orderId = data.id; */
         wx.hideToast();
-        that.setData({ orderId: res.data.id });
+        that.setData({ 
+          orderId: res.data.id ,
+          orderMsg: res.data});
       }, function () {
-        console.log("error")
+        console.log("Error: function:powerDrawer")
         wx.hideToast();
       }
       );
-    }
+    } */
   },
 //控制输入弹窗
   showInputSeat: function (currentStatu) {
     /* 动画部分 */
     // 第1步：创建动画实例 
     var animation = wx.createAnimation({
-      duration: 200, //动画时长 
+      duration: 150, //动画时长 
       timingFunction: "linear", //线性 
       delay: 0 //0则不延迟 
     });
@@ -843,6 +885,117 @@ Page({
           showModalStatus: true
         }
       );
+    }
+  },
+  onCancelTap: function (e) {
+    console.log('点击了取消');
+    this.showInputSeat('close')
+  },
+
+  onConfirmTap: function (e) {
+    console.log('点击了确定');
+    var that = this;
+    var paymsg = {};
+    this.showInputSeat('close')
+    //正常场景
+    if (that.data.tableNum != null && that.data.tableNum != '' && !this.data.cashPay && that.data.customerNum != '') {
+
+      this.setData({
+        'actionflag': '结账',
+        orderStatus: '1'
+      })
+      this.getGoodsList(this.data.orderList);
+      let Test = this.data.GoodsList;
+      wx.showLoading(
+        {
+          title: "处理中"
+        }
+      )
+
+      /******添加处理icon */
+      util.requestByLogin({
+        url: app.globalData.domain + '/wx/order',
+        method: 'POST',
+        data: {
+          tableNum: that.data.tableNum,
+          goodsList: Test
+        },
+      }, function (res) {
+        console.log(res);
+        /* orderId = data.id; */
+        wx.hideToast();
+        that.setData({
+          orderId: res.data.id,
+          orderMsg: res.data
+        });
+      }, function () {
+        console.log("Error: function onactionTap")
+        wx.hideToast();
+      }
+      );
+    }
+    else {
+      console.log("seat is null");
+      /* if (that.data.totalnum > 0 && !that.data.cashPay) {
+        that.showInputSeat('open')
+      } */
+    }
+    //屏蔽结帐功能场景
+    if (that.data.tableNum != null && that.data.tableNum != '' && that.data.cashPay && that.data.customerNum != '') {
+      that.setData({
+        orderStatus: '1'
+      })
+      that.getGoodsList(that.data.orderList);
+      let Test = that.data.GoodsList;
+      wx.showLoading(
+        {
+          title: "处理中"
+        }
+      )
+
+      /******添加处理icon */
+      util.requestByLogin({
+        url: app.globalData.domain + '/wx/order',
+        method: 'POST',
+        data: {
+          tableNum: that.data.tableNum,
+          goodsList: Test
+        },
+      }, function (res) {
+        console.log(res);
+        /* orderId = data.id; */
+        wx.hideToast();
+        that.setData({
+          orderId: res.data.id,
+          orderMsg: res.data
+        });
+        /**订单提交后转到订单页面 */
+        paymsg = that.getPaymentMsg();
+        let str = JSON.stringify(paymsg);
+        that.setData({
+          orderStatus: '0',
+        })
+        /*订单提交后清空列表 */
+        that.clearUpCart(that.data.goods_msg, that.data.Goods);
+        /*全局变量统计点菜数量，清0 */
+        app.globalData.totalnum = 0;
+        that.setData({
+          orderList: [],
+          totalnum: 0,
+          totalprice: 0,
+          showcartList: false,
+          class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        })
+        //console.log(paymsg);
+        wx.navigateTo({
+          url: '../pay/pay?str=' + str
+        })
+      }, function () {
+        console.log("Error: function onactionTap")
+        wx.hideToast();
+      }
+      );
+
     }
   }
 

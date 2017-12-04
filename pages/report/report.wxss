@@ -1,0 +1,239 @@
+/* pages/report/report.wxss */
+/*mask*/
+.drawer_screen {
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0;
+left: 0;
+z-index: 1000;
+background: #000;
+opacity: 0.5;
+overflow: hidden;
+}
+/*content*/
+.drawer_box {
+width: 630rpx;
+height: 550rpx;
+overflow: hidden;
+position: fixed;
+top: 50%;
+left: 0;
+z-index: 1001;
+background: #FAFAFA;
+margin: -150px 50rpx 0 50rpx;
+border-radius: 3px;
+}
+/* .drawer_title{
+padding:15px;
+font: 20px "microsoft yahei";
+text-align: center;
+} */
+.drawer_content {
+height: 100%;
+overflow-y: scroll; /*超出父盒子高度可滚动*/
+display: flex;
+flex-direction: column;
+}
+.boss-page{
+display: flex;
+flex-direction: column;
+}
+.top-page{
+width: 100%;
+height: 200rpx;
+border: 1rpx solid #ccc;
+}
+.date{
+display: flex;
+flex-direction: row;
+margin-left: 18rpx;
+margin-top: 20rpx;
+}
+.date-txt{
+border: 1rpx solid #ccc;
+font-size: 40rpx;
+height: 60rpx;
+width: 160rpx;
+text-align: center
+}
+.begin-date{
+border: 1rpx solid #ccc;
+font-size: 38rpx;
+margin-left: 20rpx;
+height: 60rpx;
+width: 240rpx;
+text-align: left;
+border-radius: 20rpx;
+}
+.icon-txt{
+margin-top: 5rpx;
+margin-left: 8rpx;
+}
+.end-date{
+border: 1rpx solid #ccc;
+font-size: 38rpx;
+margin-left: 10rpx;
+height: 60rpx;
+width: 240rpx;
+text-align: left;
+border-radius: 20rpx;
+}
+.icon1{
+position: absolute;
+display: inline-block;
+border: 4px solid transparent;
+border-top: 4px solid #9b9b9b;
+margin-top: 25rpx;
+right: 320rpx;
+}
+.icon2{
+position: absolute;
+display: inline-block;
+border: 4px solid transparent;
+border-top: 4px solid #9b9b9b;
+margin-top: 25rpx;
+right: 40rpx;
+}
+.search{
+border: 1rpx solid #ccc;
+height: 80rpx;
+width: 180rpx;
+border-radius: 30rpx;
+font-size: 40rpx;
+margin-top: 18rpx;
+background-color: #8bc34a;
+margin-left: 280rpx;
+}
+.search-txt{
+position: absolute;
+color: white;
+font-weight: 100rpx;
+margin-top: 10rpx;
+margin-left: 50rpx;
+}
+.spliter-line{
+height: 10rpx;
+width: 100%;
+background: #F3F3F3;
+border-bottom: 1rpx solid #bbbbbb;
+}
+
+.scroll{
+width: 100%;
+height: 700rpx;
+}
+.time{
+background: white; width: 370rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid black;
+/* border-bottom: 1rpx solid black; */
+text-align: center;
+font-size: 38rpx;
+background: #5ed925;
+}
+.money{
+background: white; width: 370rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid black;
+text-align: center;
+font-size: 38rpx;
+background: #5ed925;
+}
+.dishValue{
+background: white; width: 370rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx solid black; */
+text-align: center;
+font-size: 38rpx;
+color: #0b5dd9;
+}
+.dishValue1{
+background: white; width: 370rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid #ccc;
+/* border-right: 1rpx dashed #ccc; */
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue2{
+background: white; width: 370rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.range{
+position: fixed;
+height: 60rpx;
+width: 150rpx;
+bottom: 110rpx;
+border:1rpx solid #ccc;
+background: #5ed925;
+text-align: center;
+color: white;
+margin-left: 150rpx;
+}
+.chart-icon{
+position: fixed;
+height: 70rpx;
+width: 80rpx;
+bottom: 110rpx;
+margin-left: 500rpx;
+}
+.charts{
+margin-top: 80rpx;
+
+height: 550rpx;
+}
+
+.bottom-banner{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0rpx;
+  border-top: 1rpx solid #ccc;
+}
+.report{
+  display: flex;
+  flex-direction: column;
+  margin-top: 8rpx;
+  margin-left: 100rpx;
+  margin-bottom: 5rpx;
+}
+.report-img{
+  height: 45rpx;
+  width: 55rpx;
+  
+}
+.report-txt{
+  font-size: 28rpx;
+  color: red;
+}
+.ordermanage{
+   display: flex;
+  flex-direction: column;
+  margin-top: 8rpx;
+  margin-left: 170rpx;
+  margin-bottom: 5rpx;
+}
+.ordermanage-img{
+ height: 48rpx;
+  width: 55rpx;
+  margin-left: 30rpx;
+}
+.ordermanage-txt{
+  font-size: 28rpx;
+  /* color: #ccc; */
+}
+.my{
+   display: flex;
+  flex-direction: column;
+   margin-top: 8rpx;
+  margin-left: 160rpx;
+  margin-bottom: 5rpx;
+}
+.my-img{
+  height: 45rpx;
+  width: 55rpx;
+}
+.my-txt{
+  font-size: 28rpx;
+}

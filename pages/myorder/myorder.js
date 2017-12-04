@@ -12,9 +12,11 @@ Page({
     done_flag:false,
     paying_flag:false,
     cancel_flag:false,
-    login_flag:false,
+    login_flag:true,
     orderList:[],
     orderData:[],
+    shopMsg:{},
+    cashPay:true,
   },
 
   /**
@@ -38,6 +40,7 @@ Page({
    */
   onShow: function () {
     this.getOrderList();
+    this.getShopList();
   },
   /**获取订单列表 */
   getOrderList: function () {
@@ -46,13 +49,43 @@ Page({
       url: app.globalData.domain + '/wx/order',
       method: 'GET',
     }, function (res) {
-       console.log(res); 
+      //console.log(res); 
        that.processOrderData(res.data);  
    /*     that.setData({
         orderList:data
       })  */
-    }, function () {
-      console.log("error")
+    }, function (res) {
+      console.log("Error: function getOrderList");
+      console.log(res);
+    }
+    );
+  },
+  /*获取商家信息 */
+  getShopList: function () {
+    var that = this;
+    var paymsg = {};
+    util.requestByLogin({
+      url: app.globalData.domain + '/wx/goods',
+      method: 'GET',
+    }, function (res) {
+      console.log(res);
+      that.setData({
+         shopMsg:res.extra.seller,
+      })
+      paymsg = that.getPaymentMsg(res);
+      if (res.extra.seller.payType == 3) {
+        that.setData({
+          cashPay: true
+        })
+      } else {
+        /****测试线下结帐效果 */
+        that.setData({
+          cashPay: false
+        })
+      }
+    }, function (res) {
+      console.log("Error: function getShopList");
+      console.log(res);
     }
     );
   },
@@ -117,6 +150,18 @@ Page({
             orderFunc: '点餐',
             goodsList: data[idx].goodsList,
             lastOrderStream:data[idx].lastOrderStream,
+          }
+          break;
+        case 4:
+          temp = {
+            id: data[idx].id,
+            num: data[idx].num,
+            orderPrice: data[idx].orderPrice,
+            tableNum: data[idx].tableNum,
+            orderState: '线下支付',
+            orderFunc: '再来一单',
+            goodsList: data[idx].goodsList,
+            lastOrderStream: data[idx].lastOrderStream,
           }
           break;
         default:
@@ -221,13 +266,94 @@ Page({
 /*点击了设置 */
 onsettingTap:function(event){
   wx.navigateTo({
-    url: '../setting/setting',
+    url: '../settings/setting',
   })
 },
-  onOrderTap:function(event){
+onOrderTap:function(event){
+  //  wx.switchTab({
+     // url: '../booking/booking'
+  //  })  
+  var orderId = event.currentTarget.dataset.id;
+  console.log(orderId);
+  var detailMsg={};
+  detailMsg = this.getPaymentMsg(this.data.orderData, orderId);
+  let str = JSON.stringify(detailMsg);
+  console.log(str);
+  wx.navigateTo({
+    url: '../detailorder/detailorder?str='+str,
+  })
+  },
+getPaymentMsg: function (res,orderId) {
+  var orderMsg = {};
+  for (var idx in res){
+    if (res[idx].id == orderId){
+      orderMsg = res[idx];
+      break;
+    }
+    
+    }
+  //console.log(orderMsg);
+  var temp = {
+    name: this.data.shopMsg.name,
+    imgUrl: this.data.shopMsg.imgUrl,
+   // orderList: this.data.orderList,
+    orderMsg: orderMsg,
+    cashPay: this.data.cashPay
+  }
+  //console.log(temp);
+  return temp;
+},
+onActionTap:function(event){
+  var id = event.currentTarget.dataset.id;
+  var status = event.currentTarget.dataset.status;
+  console.log(status);
+  console.log(id);
+  if (!this.data.cashPay && status==1){
+  this.pay(id, function (res) {
+    console.log("res=" + res);
+  })
+ }
+  else{
     wx.switchTab({
       url: '../booking/booking'
-    })  
-  },
+    }) 
+  }
+},
+/*****测试付款函数 */
+pay: function (id, callback) {
+  console.log("id=" + id);
+  var _self = this;
+  util.requestByLogin({
+    url: app.globalData.domain + '/wx/pay',
+    method: 'POST',
+    data: {
+      orderId: id
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  }, function (res) {
+    console.log("res=" + res)
+    wx.requestPayment({
+      timeStamp: res.data.timestamp,
+      nonceStr: res.data.nonceStr,
+      package: 'prepay_id=' + res.data.prepay_id,
+      signType: 'MD5',
+      paySign: res.data.paySign,
+      success: function (res) {
+        callback(res);
+      },
+      fail: function (res) {
+        callback(res);
+      },
+      complete: function (res) {
+        callback(res);
+      }
+    })
+  }, function () {
+    console.log("error")
+  }
+  )
+}
 
 })

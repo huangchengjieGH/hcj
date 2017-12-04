@@ -1,0 +1,191 @@
+/* pages/bosscheck/bosscheck.wxss */
+.checkorder-contrainer{
+display: flex;
+flex-direction: column;
+}
+.seat-top{
+/* display: flex;
+flex-direction: row; */
+height: 80rpx;
+width: 100%;
+border: 1rpx solid #bbbbbb;
+background: #0085DD;
+position: fixed;
+top: 0rpx;
+}
+.order-txt{
+font-size: 40rpx;
+color: white;
+margin-top: 10rpx;
+margin-left: 20rpx;
+}
+.order-num{
+font-size: 40rpx;
+color: white;
+margin-top: 14rpx;
+margin-left: 20rpx;
+}
+.seat-txt{
+font-size: 40rpx;
+color: white;
+margin-top: 10rpx;
+margin-left: 80rpx;
+}
+.seat-num{
+font-size: 40rpx;
+color: white;
+margin-top: 15rpx;
+margin-left: 20rpx;
+}
+.order-line{
+width: 100%;
+height: 100rpx;
+}
+.hhhh{
+width: 100%;
+height: 1000rpx;
+border: 1rpx solid #bbbbbb;
+}
+.classify{
+display: flex;
+flex-direction: row;
+}
+.caipin{
+border: 1rpx solid #bbbbbb;
+width: 180rpx;
+height: 65rpx;
+}
+.test{
+width: 180rpx;
+height: 65rpx;
+}
+/* .scroll-view{
+display: flex;
+flex-direction: row;
+} */
+.spliter-line{
+height: 10rpx;
+width: 100%;
+background: #F3F3F3;
+border-bottom: 1rpx solid #F3F3F3;
+}
+
+.scroll{
+margin-bottom: 200rpx;
+margin-top:80rpx;
+}
+.dishValue{
+background: white; width: 120px; height: 35px; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue2{
+background: white; width: 80px; height: 35px; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue3{
+background: white; width: 80px; height: 35px; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue4{
+background: white; width: 80px; height: 35px; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue5{
+background: white; width: 80px; height: 35px; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.dishValue6{
+background: white; width: 150px; height: 35px; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx;
+}
+.bottom{
+width: 100%;
+height: 100px;
+position: fixed;
+bottom: 0rpx;
+border: 1rpx solid #ccc;
+}
+.bottom-one{
+display: flex;
+flex-direction: row;
+margin-left: 20rpx;
+margin-top: 25rpx;
+}
+.num{
+font-size: 40rpx;
+}
+.num-value{
+font-size: 40rpx;
+margin-top: 5rpx;
+margin-left: 40rpx;
+color: red;
+}
+.price{
+margin-left: 30rpx;
+font-size: 40rpx;
+}
+.price-value{
+font-size: 40rpx;
+margin-top: 5rpx;
+margin-left: 40rpx;
+color: red;
+}
+.cancel{
+/* position: absolute; */
+margin-left: 20rpx;
+margin-top: 5rpx;
+border: 1rpx solid #ccc;
+height: 65rpx;
+width: 150rpx;
+text-align: center;
+font-size: 40rpx;
+background: #0085DD;
+color: white;
+}
+.bottom-two{
+display: flex;
+flex-direction: row;
+margin-left: 20rpx;
+margin-top: 10rpx;
+}
+.discount{
+font-size: 40rpx;
+}
+.discount-value{
+font-size: 40rpx;
+margin-top: 5rpx;
+margin-left: 40rpx;
+color: red;
+}
+.pay{
+margin-left: 60rpx;
+border: 1rpx solid #ccc;
+height: 65rpx;
+width: 150rpx;
+text-align: center;
+font-size: 40rpx;
+background: #0085DD;
+color: white;
+}
+.print{
+margin-left: 55rpx;
+border: 1rpx solid #ccc;
+height: 65rpx;
+width: 150rpx;
+text-align: center;
+font-size: 40rpx;
+background: #0085DD;
+color: white;
+}

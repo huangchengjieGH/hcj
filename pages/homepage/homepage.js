@@ -30,22 +30,24 @@ Page({
     /* this.processResData("HotRes","附近热门"); */
     this.getHotResData("hotRes");
     this.located();
+    this.getServiceResData();
     console.log("onLoad")
   },
   /* get data from service */
   getHotResData: function (settedKey) {
     var hotRes = [];
     var resData = {};
-    var tempResData={};
+    var tempResData = {};
     resData = resdatabase.Data_List;
+    console.log("resData");
     console.log(resData);
     for (var idx in resData) {
       var subject = resData[idx];
-      if (subject.message.isHot == 1){
+      if (subject.message.isHot == 1) {
         var temp = {
           resId: subject.message.resId,
           isHot: subject.message.isHot,
-          name:subject.message.name,
+          name: subject.message.name,
           imgUrl: subject.message.imgUrl,
           score: subject.message.score,
           category: subject.message.category,
@@ -53,24 +55,58 @@ Page({
           distance: subject.message.distance,
           discount: subject.message.discount,
           describe: subject.message.describe,
-          classification:subject.message.classification,
+          classification: subject.message.classification,
           stars: util.convertToStarsArray(subject.message.score),
         }
-      var status = subject.status;
-      var msg = subject.msg;
-      var extra = subject.extra;
-        tempResData={
-        status: status,
-        msg: msg,
-        message:temp,
-        extra: extra,
+        var status = subject.status;
+        var msg = subject.msg;
+        var extra = subject.extra;
+        tempResData = {
+          status: status,
+          msg: msg,
+          message: temp,
+          extra: extra,
+        }
+        hotRes.push(tempResData);
+        tempResData = {};
       }
-       hotRes.push(tempResData);
-      tempResData={};
     }
+    this.setData({ hotRes: hotRes });
+  },
+  getServiceResData: function (event) { 
+    var that = this;
+    /*获取商品信息 */
+    util.requestByLogin({
+      url: app.globalData.domain + '/wx/goods',
+      method: 'GET',
+      header: {
+        'content-type': 'application/xml'
+      },
+    }, function (res) {
+      console.log("Service data:")
+      console.log(res);
+      that.processServiceData(res.extra);
+    }, function () {
+      console.log("Error:function GetData")
     }
- 
-    this.setData({ hotRes: hotRes});
+    );
+  },
+
+  processServiceData:function(res){
+    var temp = {
+      resId: res.seller.id,
+      isHot: '1',
+      name: res.seller.name,
+      imgUrl: res.seller.imgUrl,
+      score: '5',
+      category: '粤菜',
+      perConsume: res.seller.consumption,
+      distance: '100',
+      discount: '会员享受8折优惠',
+      describe: '鸡公煲是重庆烧鸡公...',
+      stars: util.convertToStarsArray('5'),
+    }
+    this.setData({ shotRes: temp });
   },
   /*Get the local database data and process the data */
   processResData: function (settedKey, categoryTitle) {

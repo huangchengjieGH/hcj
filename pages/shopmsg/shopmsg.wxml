@@ -14,18 +14,18 @@
  <view class='spliter-line'></view>
   <view class="phone-msg">
     <text class="phone-txt">商家电话</text>
-    <text class="phone-value">15889668184</text>
+    <text class="phone-value">{{resMsg.phone}}</text>
     <image class="arrow-icon" src="/images/icon/arrow-right.png"></image>
   </view>
 
   <view class="location-msg">
     <text class="location">地址</text>
-    <text class="location-value">深圳市龙岗坂田街道28号</text>
+    <text class="location-value">{{resMsg.address}}</text>
   </view>
 
   <view class="worktime-msg">
    <text class="worktime">营业时间</text>
-   <text class="worktime-value">10:30-14:00  16:30-22:30</text>
+   <text class="worktime-value">{{resMsg.worktime}}</text>
   </view>
 
 </view>

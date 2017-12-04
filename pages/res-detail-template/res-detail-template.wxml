@@ -1,6 +1,6 @@
 <template name="Res-detail">
    <view class="menu-desc">
-        <image class="menu-img" src="{{imgUrl}}"></image>
+        <image class="menu-img" src="{{imgUrl}}" catchtap="onImgTap" data-imgId="{{id}}"></image>
         <view class="dish-describe">
           <text class="dish-name">{{name}}</text>
           <text class="dish-taste">{{taste}}</text>
@@ -17,7 +17,8 @@
             <image class="add-icon" src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{id}}"></image>
           </view>
         </view>
-      </view>
+        <!-- <image class='soldout' src='/images/image/soldout.jpg'></image> -->
+   </view>
 </template>
 
 

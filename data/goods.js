@@ -17,6 +17,7 @@ var Goods_List =[
             "sales": 4,
             "imgUrl": "/images/image/aizhimian.jpg",
             "status": 1,
+        
             "taste": "微辣", /*新增：菜品口味 */
           },
           {

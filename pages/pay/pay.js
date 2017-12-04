@@ -12,17 +12,26 @@ Page({
     showList: true,
     numValue:1,
     order:'',
+    payWay: '微信支付'
   },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var orderId=options.id;
+     // var orderId=options.id;
+      let paymsg = JSON.parse(options.str);
       var that = this;
-      console.log(orderId);
-      util.requestByLogin({
-        url: app.globalData.domain + '/wx/order/' + orderId,
+      this.setData({
+        paymsg:paymsg
+      })
+      if(paymsg.cashPay){
+        console.log("服务员买单")
+        this.setData({payWay: '餐后请找服务员结帐'})
+      }
+     // console.log(orderId);
+       util.requestByLogin({
+        url: app.globalData.domain + '/wx/order/' + that.data.paymsg.orderMsg.id,
         method: 'GET',
       }, function (res) {
         console.log(res);
@@ -30,7 +39,7 @@ Page({
           order: res.data
         })
       }
-      );
+      ); 
   },
   /*****测试付款函数 */
   pay: function (id, callback) {
@@ -93,13 +102,10 @@ Page({
    /*付款 */
   onPaytap:function(event){
     console.log('点击了付款按钮');
-       this.pay(this.data.order.id, function (res) {
+   if(this.data.paymsg.cashPay==false){
+        this.pay(this.data.order.id, function (res) {
         console.log("res="+res);
-        // if (res.errMsg == "requestPayment:ok") {
-        //   console.log("success");
-        // }
       })
-
-  
+    } 
   }
 })

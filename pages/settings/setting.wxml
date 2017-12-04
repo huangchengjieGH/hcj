@@ -25,13 +25,28 @@
     <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
   </view>
 
-  <view class='contact'>
+  <view class='contact' catchtap='oncontactTap'>
     <image class='contact-img' src='/images/icon/call_me.png'></image>
     <text class='contact-txt'>联系我们</text>
     <image class='arrow-right' src='/images/icon/arrow-right.png'></image>
   </view>
- <view class='spliter-line'></view>
+  <view class='spliter-line'></view>
+
+  <view class='permission'>
+    <view class='role'>
+      <text class='role-txt'>角色</text>
+      <view class='role-value'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{items}}">
+            <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+
+  <!--  <view class='spliter-line'></view> -->
   <view class='quit'>
-     <text class='quit-txt'>退出登录</text>
+    <text class='quit-txt'>退出登录</text>
   </view>
 </view>

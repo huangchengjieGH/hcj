@@ -1,0 +1,71 @@
+<!--pages/report/report.wxml-->
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+<view class="drawer_content" wx:if="{{user!=0}}">
+<view class="top grid">
+<label class="title col-0">座位号</label>
+<input placeholder="请输入您的座位号" class="input_base input_h30 col-1" bindinput="seatInput" confirm-type='confirm'></input>
+<view class="btn_ok" catchtap="powerConfirm" data-statu="close">确定</view>
+</view>
+</view>
+<view class='charts' scroll-x="true" style=" white-space: nowrap; display: flex" wx:if="{{user==0}}">
+<canvas style="width: 800px; height: 400px;" canvas-id="columnCanvas"></canvas>
+</view>
+</view>
+
+<view class="{{user!=0?'hide':'boss-page'}}">
+  <view class='top-page'>
+    <view class='date'>
+      <view class='date-txt'>日期:</view>
+     <!--  <view class='begin-date' catchtap='onBeginDateTap'>2017-11-16</view> -->
+     <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
+          <view class="begin-date">
+            {{beginDate}}
+          </view>
+        </picker>
+      <view class="icon1"></view>
+      <text class='icon-txt'>~</text>
+      <!-- <view class='end-date'>2017-11-18</view> -->
+      <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onEndDateTap">
+          <view class="end-date">
+            {{endDate}}
+          </view>
+        </picker>
+      <view class="icon2"></view>
+    </view>
+    <view class='search'>
+      <text class='search-txt' catchtap='onSearchTap'>查询</text>
+    </view>
+  </view>
+  <view class='spliter-line'></view>
+  <view>
+    <view class="time">时间</view>
+    <view class="money">营业额</view>
+  </view>
+  <scroll-view class='scroll' scroll-y="true">
+    <view wx:for="{{turnOverData}}" wx:for-item="item">
+      <view class="{{item.date=='总计'?'dishValue1':'dishValue'}}" catchtap="ontimeTap" data-id="{{item.date}}">{{item.date}}</view>
+      <view class="dishValue2">{{item.turnover}}</view>
+    </view>
+  </scroll-view>
+  <view class='range' catchtap='onRankTap'>排行榜</view>
+  <image class='chart-icon' src='/images/icon/chart.png' catchtap="onChartTap" data-id="open"></image>
+</view>
+
+<view class="bottom-banner">
+   <view class='report'>
+      <image class='report-img' src='/images/icon/order_hl.png'></image>
+      <text class='report-txt'>报表</text>
+   </view>
+   <view class='ordermanage' catchtap="onOderManegeTap">
+      <image class='ordermanage-img' src='/images/icon/nearby.png'></image>
+      <text class='ordermanage-txt'>订单管理</text>
+   </view>
+    <view class='my' catchtap="onMyTap">
+      <image class='my-img' src='/images/icon/myorder.png'></image>
+      <text class='my-txt'>我的</text>
+   </view>
+</view>

@@ -12,7 +12,7 @@
 
 }
 .background{
-  background-color: #e6bc7e;
+  background-color: #0085DD;
   height: 60rpx;
 }
 .avatar-img{

@@ -15,21 +15,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     var resId = options.id;
-     this.GetData();
+    // var resId = options.id;
+    let resMsg = JSON.parse(options.str);
+    this.setData({
+      resMsg: resMsg
+    })
+    console.log(resMsg);
+    // this.GetData();
   },
   
   /*Get local database */
-  GetData: function (event) {
+/*   GetData: function (event) {
     var res_msg = {};
-    /*获取商家信息 */
+   
     res_msg = resdatabase.Data_List[0];
     this.setData(
       {
         resMsg: res_msg.message,
       },
     );
-  },
+  }, */
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

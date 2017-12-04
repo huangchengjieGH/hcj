@@ -51,6 +51,7 @@
  margin-top: 10rpx;
  height: 180rpx;
  width: 180rpx;
+ margin-bottom: 10rpx;
 }
 
 .jian-icon{
@@ -71,6 +72,12 @@
   margin-top: 1rpx;
   height: 60rpx;
   width: 60rpx;
+}
+.soldout{
+  height: 120rpx;
+  width: 120rpx;
+  margin-left: 40rpx;
+  margin-top: 40rpx;
 }
 .hide{
   display:none;

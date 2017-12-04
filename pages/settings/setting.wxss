@@ -106,6 +106,8 @@ font-size: 35rpx;
   border: 1rpx solid #bbbbbb;
   height: 80rpx;
   width: 100%;
+  position: fixed;
+  bottom: 150rpx;
   /* text-align: center; */
 }
 .quit-txt{
@@ -113,4 +115,38 @@ font-size: 35rpx;
   margin-top: 10rpx;
   margin-left: 300rpx;
   color: red;
+}
+.permission{
+width: 100%;
+display: flex;
+flex-direction: row;
+/* border: 1rpx solid #1e89e0 */
+}
+.role{
+margin-top: 10rpx;
+font-size: 40rpx;
+border-bottom: 1rpx solid #ccc;
+height: 320rpx;
+width: 100%;
+/* background: #0085DD; */
+/* color: white; */
+}
+.role-txt{
+margin-left: 20rpx;
+margin-top: 10rpx;
+font-size: 40rpx;
+color: blue;
+}
+.role-value{
+margin-left: 150rpx;
+margin-top: 20rpx;
+font-size: 40rpx;
+/* border: 1rpx solid #ccc; */
+height: 200rpx;
+width: 300rpx;
+color: black;
+}
+.radio-group{
+display: flex;
+flex-direction: column;
 }

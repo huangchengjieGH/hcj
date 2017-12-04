@@ -251,13 +251,13 @@
 .pay{
   position: fixed;
   width: 100%;
-  bottom: 0;
+  bottom:2rpx;
 }
 .pay-btn{
-  background-color: #27ec12;
+  background-color: #EA5574;
   font-size: 40rpx;
   font-weight: 500;
-  color: white;
+  color: #fff;
   width: 100%;
   height: 90rpx;
 }

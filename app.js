@@ -1,5 +1,6 @@
 //app.js
 var util = require('./utils/util.js');
+var setting = require('./setting/setting.js')
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -31,10 +32,11 @@ App({
     totalnum:0,
     totalprice:100,
     resId:null,
-    domain:'https://restaurant.wegtech.cn',
     city:'',
     locatedCity:'',
-    shopId:1,
+    domain:setting.domain,
+    shopId: setting.shopId,
+    role:0,
   },
   // onLaunch(){
   //   util.uploadUserInfo();
