@@ -1,1 +1,5 @@
-{}
+{
+  "navigationBarBackgroundColor": "white",
+  "navigationBarTitleText": "每日订单",
+  "navigationBarTextStyle": "black"
+}

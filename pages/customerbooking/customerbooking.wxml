@@ -1,0 +1,133 @@
+<scroll-view class="booking-contrainer">
+  <scroll-view scroll-x="true" class="scroll-classify">
+    <view class="classify" wx:for="{{goods_msg.data}}" wx:key="{{index}}" wx:for-item="isClassify">
+      <view class="classify-txt" catchtap="onclassiTap" data-Name="{{isClassify.classifyName}}" data-Id="{{index}}">
+        <text style="{{isClassify.classifyName == classify?'color:#16dc19':'color:white'}}">{{isClassify.classifyName}}</text>
+        <icon class="{{class_Dish[index]==0?'hide':'success-icon'}}" type="success" size="11" color="red" />
+        <view class="line"></view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <scroll-view scroll-y="true" class="wx-view_TQ4nqD">
+    <block wx:for="{{Goods}}" wx:for-index="{{pindex}}" wx:for-item="goods" wx:key="{{pindex}}">
+      <view class="panel_title">
+        {{goods.classifyName}}
+      </view>
+      <view class="view_tdlUCs">
+        <block wx:for="{{goods.goodLists}}" wx:key="{{index}}">
+          <view class="bottomGrayboder2 rightGrayboder2 list-items-square2">
+            <image class="image_HsAX8s" mode="aspectFill" src="{{item.imgUrl}}" catchtap="onImgTap" data-imgId="{{item.id}}" />
+           <view style='display: flex;flex-direction: row;'>
+            <view style='width:170rpx;background-color:#fff;border-radius:1px;'>
+              <view class="text_JkhshF2">{{item.name}}</view>
+              <view class="c-block text_WEMSkk">
+                <text> ￥{{item.price}}</text>
+              </view>
+            </view>
+                 <image class="addicon" src="/images/icon/add.png" catchtap="onImgTap" data-imgId="{{item.id}}"></image>    
+             </view>
+
+          </view>
+
+        </block>
+      </view>
+
+    </block>
+  </scroll-view>
+
+  <view class='bottom-view'>
+    <view class='bottom-left'>
+      <view class='cart'>
+        <view wx:if="{{totalnum== 0}}">
+          <text class='cart-num0'>{{totalnum}}</text>
+          <image class='cart-img' src="/images/icon/cart.png"></image>
+        </view>
+        <view wx:else catchtap="oncartTap">
+          <text class='cart-num'>{{totalnum}}</text>
+          <image class='cart-img' src="/images/icon/cart_hl.png"></image>
+        </view>
+      </view>
+      <view wx:if="{{totalnum== 0}}">
+        <text class='cart-txt'>未选购商品</text>
+      </view>
+      <view wx:else>
+        <text class='totalprice'>￥</text>
+        <text class='totalprice-value'>{{totalprice}}</text>
+      </view>
+    </view>
+    <view class="{{totalnum==0?'bottom-right0':'bottom-right'}}" bindtap='onactionTap' data-actionId="{{actionflag}}">
+      <text class='right-txt'>{{actionflag}}</text>
+    </view>
+  </view>
+
+  <view class="{{showcartList?'order-list':'hide'}}">
+    <view class='order-head'>
+      <view class='head-desc'>
+        <icon class='choosed-icon' type="success" size="18" color='#6467f3' />
+        <text class='choosed-txt'>已选商品</text>
+      </view>
+      <view class='clear-order' catchtap="onOrderListTap">
+        <!-- <image class='clear-img' src="/images/icon/lajixaing2.png"></image> -->
+        <icon type="clear" size="18" color='#afa7a7'></icon>
+        <text class='clear-txt'>清空</text>
+      </view>
+    </view>
+    <view class='order-msg' wx:for="{{orderList}}" wx:for-item="item">
+      <text class='order-name'>{{item.name}}</text>
+      <text class='price'>￥</text>
+      <text class='price-value'>{{item.price}}</text>
+      <image class='order-del' src="/images/icon/jian.png" catchtap="DelDishTap" data-deldishId="{{item.id}}"></image>
+      <text class='order-num'>{{item.order_num}}</text>
+      <image class='order-add' src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{item.id}}"></image>
+    </view>
+  </view>
+
+</scroll-view>
+
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <view class="drawer_content">
+    <view class="{{popFlag==0?'top grid':'hide'}}">
+      <image class='dish-img' src="{{detailDish.imgUrl}}"></image>
+      <view style='display: flex;flex-direction: row;margin-top:10rpx;'>
+        <text class='dish-name2'>{{detailDish.name}}</text>
+        <view>
+          <text class='ss-price'>¥</text>
+          <text class='dd-price'>{{detailDish.price}}</text>
+        </view>
+      </view>
+
+      <view class='saling'>
+        <text class='dish-sale2'>月售</text>
+        <text class='sale-value2'>{{detailDish.sales}}</text>
+      </view>
+
+      <view class="addcart" catchtap="AddDishTap" data-adddishId="{{detailDish.id}}">加入购物车</view>
+
+      <!-- <icon class="cls-btn" type="clear" size="30" color="#D6D3D3" bindtap="powerDrawer" data-statu="close" />  -->
+    </view>
+
+    <view class="{{popFlag==1?'pop-content':'hide'}}">
+      <view>
+        <text class='input-txt'>座位号:</text>
+        <input placeholder="请输入座位号" value="{{tableNum}}" class="seat-input" bindblur="seatInput" confirm-type='confirm' />
+      </view>
+
+      <view>
+        <text class='input-txt'>用餐人数:</text>
+        <input placeholder="请输入用餐人数" class="seat-input" bindblur="costomerNumInput" confirm-type='confirm' />
+      </view>
+    </view>
+    <view class="{{popFlag==1?'pop-btn':'hide'}}">
+      <view class='cancel-btn' catchtap="onCancelTap">取消</view>
+      <view class='confirm-btn' catchtap="onConfirmTap">确定</view>
+    </view>
+  </view>
+  <!--  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view> -->
+
+</view>

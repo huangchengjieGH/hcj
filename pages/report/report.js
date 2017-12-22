@@ -8,34 +8,9 @@ Page({
    */
   data: {
     user: '0',
-    tableOrder: [
-      { one: '2017/11/01', two: '5000' },
-      { one: '2017/11/02', two: '9000' },
-      { one: '2017/11/04', two: '9666' },
-      { one: '2017/11/05', two: '9577' },
-      { one: '2017/11/06', two: '9777' },
-      { one: '2017/11/07', two: '9899' },
-      { one: '2017/11/08', two: '9999' },
-      { one: '2017/11/09', two: '9777' },
-      { one: '2017/11/10', two: '9444' },
-      { one: '总计', two: '91139' },
-    ],
     chartData: ['2012/09', '2013/09', '2014/09', '2015/09', '2016/09', '2017/09', '2018/09', '2019/09'],
     chartValue: [15, 20, 45, 37, 4, 80, 78, 90],
-    turnOverData: [
-      {
-        "date": "2017-09-28",
-        "turnover": 34
-      },
-      {
-        "date": "2017-10-09",
-        "turnover": 568
-      },
-      {
-        "date": "2017-10-10",
-        "turnover": 1480
-      }
-    ]
+    totalPrice: '0',
   },
 
   /**
@@ -43,7 +18,7 @@ Page({
    */
   onLoad: function (options) {
     this.formatDate();
-   // this.getServiceTurnOverData();
+    this.getServiceTurnOverData();
   },
   /**
    * 生命周期函数--监听页面显示
@@ -62,12 +37,19 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/report/turnover',
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       data: {
         begindate: that.data.beginDate,
         enddate: that.data.endDate
       },
     }, function (res) {
-      console.log(res);
+      console.log(res.data);
+      that.setData({
+        "turnOverData" : res.data
+      })
+      that.processTurnOverData(res.data)
       wx.hideToast();
 
     }, function () {
@@ -75,6 +57,26 @@ Page({
       wx.hideToast();
     }
     );
+  },
+  processTurnOverData:function(data){
+    var sum = 0.0;
+    var chartData = [];
+    var chartValue = [];
+    var date;
+    var count = 0;
+    for(var idx in data){
+      date = data[idx].date.toString().substring(5, 10);
+      chartData.push(date);
+      chartValue.push(data[idx].turnover);
+      sum += data[idx].turnover;
+      ++count;
+    }
+    this.setData({
+      "totalPrice":sum,
+      "chartData": chartData,
+      "chartValue": chartValue,
+      "count":count,
+    })
   },
   powerConfirm: function (e) {
     var that = this;
@@ -142,14 +144,26 @@ Page({
     })
   },
   onRankTap: function (event) {
+    var dateMsg = {};
+    dateMsg = this.getDateMsg();
+    let str = JSON.stringify(dateMsg);
+    console.log(str);
     wx.navigateTo({
-      url: '../ranking/ranking',
+      url: '../ranking/ranking?str=' + str,
     })
   },
-  weCharts: function (event) {
+  getDateMsg: function (event) {
+    var temp = {
+      beginDate: this.data.beginDate,
+      endDate: this.data.endDate
+    }
+    //console.log(temp);
+    return temp;
+  },
+  weCharts: function (canvasId,chartType) {
     new wxCharts({
-      canvasId: 'columnCanvas',
-      type: 'column',
+      canvasId: canvasId,
+      type: chartType,
       categories: this.data.chartData,
       series: [{
         name: '营业额',
@@ -160,7 +174,7 @@ data: [70, 40, 65, 100, 34, 18,67,90]
 } */],
       yAxis: {
         format: function (val) {
-          return val + '万';
+          return val;
         }
       },
       width: 320,
@@ -173,7 +187,14 @@ data: [70, 40, 65, 100, 34, 18,67,90]
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var beginDate = "";
-
+    console.log(date.getDate());
+    console.log(date.getMonth() + 1);
+    if(month < 10){
+      month = '0' + month;
+    }
+    if(day < 10){
+      day = '0' +day;
+    }
     beginDate = year + '-' + month + '-' + day;
     this.setData({
       "beginDate": beginDate,
@@ -201,11 +222,30 @@ data: [70, 40, 65, 100, 34, 18,67,90]
   },
   onSearchTap: function (event) {
     console.log('点击了查询');
+    this.getServiceTurnOverData();
   },
-  onChartTap: function (e) {
+  onColumnTap: function (e) {
+    this.setData({
+      canvas: 'columnCanvas'
+    })
     var currentStatu = e.currentTarget.dataset.id;
+    var length = this.data.turnOverData.length;
     this.showInputSeat(currentStatu);
-    this.weCharts();
+    if (length>0){
+      this.weCharts('columnCanvas', 'column');
+    }
+    
+  },
+  onLineTap: function (e) {
+    this.setData({
+      canvas: 'lineCanvas'
+    })
+    var currentStatu = e.currentTarget.dataset.id;
+    var length = this.data.turnOverData.length;
+    this.showInputSeat(currentStatu);
+    if (length > 0) {
+    this.weCharts('lineCanvas', 'line'); 
+    }
   },
 /*   onReportTap: function (e) {
     console.log('report')

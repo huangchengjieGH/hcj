@@ -7,10 +7,10 @@ Page({
    */
   data: {
     items: [
-      { name: '老板', value: '0', checked: 'true' },
+      { name: '老板', value: '0' },
       { name: '经理', value: '1' },
       { name: '员工', value: '2' },
-      { name: '顾客', value: '3' },
+     /*  { name: '顾客', value: '3' }, */
     ],
     Flag: '',
   },
@@ -29,7 +29,7 @@ Page({
         { name: '老板', value: '0', checked: 'true' },
         { name: '经理', value: '1' },
         { name: '员工', value: '2' },
-        { name: '顾客', value: '3' },
+       /*  { name: '顾客', value: '3' }, */
       ]
       this.setData({
         items: temp
@@ -40,7 +40,7 @@ Page({
         { name: '老板', value: '0' },
         { name: '经理', value: '1', checked: 'true' },
         { name: '员工', value: '2' },
-        { name: '顾客', value: '3' },
+    /*     { name: '顾客', value: '3' }, */
       ]
       this.setData({
         items: temp
@@ -50,7 +50,7 @@ Page({
         { name: '老板', value: '0' },
         { name: '经理', value: '1' },
         { name: '员工', value: '2', checked: 'true' },
-        { name: '顾客', value: '3' },
+        /* { name: '顾客', value: '3' }, */
       ]
       this.setData({
         items: temp
@@ -60,7 +60,7 @@ Page({
         { name: '老板', value: '0' },
         { name: '经理', value: '1' },
         { name: '员工', value: '2' },
-        { name: '顾客', value: '3', checked: 'true' },
+        /* { name: '顾客', value: '3', checked: 'true' }, */
       ]
       this.setData({
         items: temp
@@ -73,13 +73,16 @@ Page({
       this.setData({
         Flag: '报表'
       })
+  
     } else if (app.globalData.role == '3') {
-
+  
     } else {
 
       this.setData({
         Flag: '点餐'
       })
+
+
     }
 
   },
@@ -105,11 +108,29 @@ Page({
       phoneNumber: '15999902125' //仅为示例，并非真实的电话号码
     })
   },
+  test:function(e){
+
+  },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
     app.globalData.role = e.detail.value;
     this.setRole();
     this.getFlag();
+   
+    if (app.globalData.role == '0') {
+      wx.redirectTo({
+        url: '../ordermanager/ordermanager',
+      })
+    } else if (app.globalData.role == '3') {
+      wx.switchTab({
+        url: '../bookking/booking'
+      })
+    } else {
+      wx.redirectTo({
+        url: '../ordermanager/ordermanager',
+      })
+    }
+
   }
 
 })

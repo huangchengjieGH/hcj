@@ -1,58 +1,42 @@
 Page({
   data: {
-    showModalStatus: false
+    showModalStatus: false,
+    inputShowed: false,
+    inputVal: "",
   },
-  powerDrawer: function (e) {
-    var currentStatu = e.currentTarget.dataset.statu;
-    this.util(currentStatu)
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
   },
-  util: function (currentStatu) {
-    /* 动画部分 */
-    // 第1步：创建动画实例 
-    var animation = wx.createAnimation({
-      duration: 200, //动画时长 
-      timingFunction: "linear", //线性 
-      delay: 0 //0则不延迟 
-    });
 
-    // 第2步：这个动画实例赋给当前的动画实例 
-    this.animation = animation;
-
-    // 第3步：执行第一组动画 
-    animation.opacity(0).rotateX(-100).step();
-
-    // 第4步：导出动画对象赋给数据对象储存 
+  hideInput: function () {
+    console.log("hideInput");
     this.setData({
-      animationData: animation.export()
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  inputTyping: function (e) {
+    console.log("inputTyping");
+    var queryString = e.detail.value;
+    this.setData({
+      inputVal: queryString,
+    });
+  },
+  onChangeShowState: function () {
+    console.log("onChangeShowState");
+    var that = this;
+    that.setData({
+      showCategory: (!that.data.showCategory),
     })
-
-    // 第5步：设置定时器到指定时候后，执行第二组动画 
-    setTimeout(function () {
-      // 执行第二组动画 
-      animation.opacity(1).rotateX(0).step();
-      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象 
-      this.setData({
-        animationData: animation
-      })
-
-      //关闭 
-      if (currentStatu == "close") {
-        this.setData(
-          {
-            showModalStatus: false
-          }
-        );
-      }
-    }.bind(this), 200)
-
-    // 显示 
-    if (currentStatu == "open") {
-      this.setData(
-        {
-          showModalStatus: true
-        }
-      );
-    }
-  }
-
+  },
+  showInput: function () {
+    console.log("onChangeShowState");
+    this.setData({
+      inputShowed: true
+    });
+  },
 })

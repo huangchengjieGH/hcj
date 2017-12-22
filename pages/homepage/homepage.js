@@ -9,6 +9,23 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isClassifyList: [
+      {
+        "name": "扫一扫",
+        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540752899_e94cb34b8a13e0ca337a69ba60051f85.png",
+      },
+      {
+        "name": "排队取号",
+        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540788289_3b7635520c14a19ccc3dbb11f316d402.png",
+      },
+      {
+        "name": "预约订座",
+        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507545243129_c2936f19bf3907c3cad6b8fbd152cf34.png",
+      }
+    ],
+    showModalStatus: false,
+    inputShowed: false,
+    inputVal: "",
     HotRes:{},
     kd:"n5YQsyVbgiAqumkwvfzybGj7DjKMstlQ",
    markers : [],
@@ -17,6 +34,13 @@ Page({
    address: '',     //地址  
    cityInfo: {},     //城市信息  
    chooseCity:'',
+   isBannerList: [
+     {"imgUrl": "/images/image/banner01.jpeg" },
+     { "imgUrl": "/images/image/banner02.jpg" },
+     { "imgUrl": "/images/image/canzhuo.jpeg" },
+     
+
+   ],
   },
 
   /**
@@ -79,6 +103,9 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
       method: 'GET',
+      data: {
+        sellerId: app.globalData.shopId,
+      },
       header: {
         'content-type': 'application/xml'
       },
@@ -154,14 +181,40 @@ Page({
 
     })
   },
+  /****input */
+  hideInput: function () {
+    console.log("hideInput");
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  inputTyping: function (e) {
+    console.log("inputTyping");
+    var queryString = e.detail.value;
+    this.setData({
+      inputVal: queryString,
+    });
+  },
+  onChangeShowState: function () {
+    console.log("onChangeShowState");
+    var that = this;
+    that.setData({
+      showCategory: (!that.data.showCategory),
+    })
+  },
+  showInput: function () {
+    console.log("onChangeShowState");
+    this.setData({
+      inputShowed: true
+    });
+  },
   //click the res img
   onResTap:function(event){
    var resId = event.currentTarget.dataset.resid;
-   console.log("resId:"+resId)
-    app.globalData.resId = resId;
-    console.log("homapage:" + app.globalData.resId);  
+    app.globalData.resId = resId; 
    wx.switchTab ({
-     url: '../booking/booking'
+     url: '../customerbooking/customerbooking'
 
    })  
   },

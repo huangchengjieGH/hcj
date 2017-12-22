@@ -108,6 +108,9 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
       method: 'GET',
+      data: {
+        sellerId: app.globalData.shopId,
+      },
       header: {
         'content-type': 'application/xml'
       },
@@ -693,14 +696,14 @@ Page({
 
     }
     else if (actionId == '结账') {
-      paymsg = this.getPaymentMsg();
+     /*  paymsg = this.getPaymentMsg();
       let str = JSON.stringify(paymsg);
       this.setData({
         orderStatus: '0',
       })
       wx.navigateTo({
         url: '../pay/pay?str=' + str
-      })
+      }) */
 
       
     }
@@ -781,6 +784,9 @@ Page({
   
   onImgTap:function(e){
     var imgId = e.currentTarget.dataset.imgid;
+    this.setData({
+      popFlag:0
+    })
     var temp = {};
     console.log('点击了' + imgId);
     for(var idx in this.data.Goods){
@@ -900,10 +906,10 @@ Page({
     //正常场景
     if (that.data.tableNum != null && that.data.tableNum != '' && !this.data.cashPay && that.data.customerNum != '') {
 
-      this.setData({
+      /* this.setData({
         'actionflag': '结账',
         orderStatus: '1'
-      })
+      }) */
       this.getGoodsList(this.data.orderList);
       let Test = this.data.GoodsList;
       wx.showLoading(
@@ -928,6 +934,35 @@ Page({
           orderId: res.data.id,
           orderMsg: res.data
         });
+
+        /**订单提交后转到订单页面 */
+        paymsg = that.getPaymentMsg();
+        let str = JSON.stringify(paymsg);
+        that.setData({
+          orderStatus: '0',
+        })
+        /*订单提交后清空列表 */
+        that.clearUpCart(that.data.goods_msg, that.data.Goods);
+        /*全局变量统计点菜数量，清0 */
+        app.globalData.totalnum = 0;
+        that.setData({
+          orderList: [],
+          totalnum: 0,
+          totalprice: 0,
+          showcartList: false,
+          class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        })
+        /*改变状态*/
+        if (that.data.totalnum == 0) {
+          that.setData({ 'actionflag': '请点餐' })
+        } else {
+          that.setData({ 'actionflag': '选好了' })
+        }
+        //console.log(paymsg);
+        wx.navigateTo({
+          url: '../pay/pay?str=' + str
+        })
+
       }, function () {
         console.log("Error: function onactionTap")
         wx.hideToast();
@@ -986,6 +1021,12 @@ Page({
           showcartList: false,
           class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         })
+        /*改变状态*/
+        if (that.data.totalnum == 0) {
+          that.setData({ 'actionflag': '请点餐' })
+        } else {
+          that.setData({ 'actionflag': '选好了' })
+        }
         //console.log(paymsg);
         wx.navigateTo({
           url: '../pay/pay?str=' + str

@@ -1,17 +1,11 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 Page({
 
   /**
   * 页面的初始数据
   */
   data: {
-
-    tableOrder: [
-      { name: '菜名', goodsId: '1', price: '价格', count: '数量', totalPrice: '总额', time: '下单时间' },
-      { name: '猪肝饭', goodsId: '2', price: '25', count: '1', totalPrice: '25', time: '2017/11/18 12:00' },
-      { name: '卤肉饭', goodsId: '5', price: '18', count: '1', totalPrice: '18', time: '2017/11/18 12:00' },
-      { name: '鱿鱼饭', goodsId: '1', price: '19', count: '1', totalPrice: '19', time: '2017/11/18 12:00' },
-    ],
     items: [
       { name: '现金', value: '现金', checked: 'true' },
       { name: '支付宝', value: '支付宝' },
@@ -20,6 +14,8 @@ Page({
       { name: '其他', value: '其他' },
     ],
     cancelFlag: false,
+    popType:'1',
+    payType:'现金'
   },
 
   /**
@@ -38,6 +34,7 @@ Page({
       })
     },
     );
+    this.getServiceOneOrderData();
   },
   getServiceOneOrderData: function (e) {
     var that = this;
@@ -50,11 +47,15 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/report/oneorder',
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       data: {
         orderId: that.data.orderId,
       },
     }, function (res) {
-      console.log(res);
+      console.log(res.data);
+      that.processOneOrderData(res.data)
       wx.hideToast();
 
     }, function () {
@@ -62,6 +63,47 @@ Page({
       wx.hideToast();
     }
     );
+  },
+  processOneOrderData:function(data){
+     var that = this;
+     var temp = {};
+     var tableOrder = [];
+     var count = 0;
+     var price = 0.0;
+     var time = '',
+     temp = {
+       name: '菜名', 
+       goodsId: '1', 
+       price: '价格', 
+       count: '数量', 
+       totalPrice: '总额',
+       time: '下单时间' 
+     }
+     tableOrder.push(temp);
+     for(var idx in data){
+       time = util.formatTime(new Date(data[idx].time));
+       temp = {
+         name:data[idx].name,
+         goodsId: data[idx].goodsId,
+         price: data[idx].price,
+         count: data[idx].count,
+         totalPrice: data[idx].totalPrice,
+          time:time
+       }
+       count += data[idx].count;
+       price += data[idx].totalPrice;
+       tableOrder.push(temp);
+     }
+    that.setData({
+      tableOrder: tableOrder,
+      count: count,
+      price: price,
+      customerNum: data[0].customerNum,
+      tableNum: data[0].tableNum,
+      num: data[0].num,
+      orderId: data[0].id,
+
+    })
   },
   checkboxChange: function (e) {
     var cancelDish = [];
@@ -82,34 +124,49 @@ Page({
   onDeleteDishTap: function (event) {
     console.log("delete");
     var that = this;
-    var delDishArray = this.data.cancelDish;
-    if (this.data.cancelFlag) {
-      for (var idx in delDishArray) {
-        wx.showLoading(
-          {
-            title: "处理中"
-          }
-        )
-        /******添加处理icon */
-        util.requestByLogin({
-          url: app.globalData.domain + '/ordermanage/deldish',
-          method: 'POST',
-          data: {
-            orderId: that.data.orderId,
-          },
-        }, function (res) {
-          console.log(res);
-          wx.hideToast();
-
-        }, function () {
-          console.log("Error: function onDeleteDishTap")
-          wx.hideToast();
+    this.deleteDishes();
+  },
+  deleteDishes:function(e){
+    var cancelDish = this.data.cancelDish;
+    var orderId = this.data.orderId;
+    for (var idx in cancelDish){
+      wx.showLoading(
+        {
+          title: "处理中"
         }
-        );
+      )
+      /******添加处理icon */
+      util.requestByLogin({
+        url: app.globalData.domain + '/ordermanage/deldish',
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          id: orderId,
+          goodsId: cancelDish[idx]
+        },
+      }, function (res) {
+        console.log(res);
+        wx.hideToast();
+
+      }, function () {
+        console.log("Error: function onDeleteDishTap")
+        wx.hideToast();
       }
+      );
+
     }
+    this.setData({
+      cancelDish:[],
+      cancelFlag:false
+    })
+    this.getServiceOneOrderData();
   },
   onCheckOutTap: function (event) {
+    this.setData({
+      popType:'0'
+    })
     this.showInputSeat('open');
   },
   onCancelTap: function (e) {
@@ -127,11 +184,14 @@ Page({
     )
     /******添加处理icon */
     util.requestByLogin({
-      url: app.globalData.domain + '/ordermanage/deldish',
+      url: app.globalData.domain + '/ordermanage/checkout',
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       data: {
         orderId: that.data.orderId,
-        seatId: that.data.seatNum,
+        seatId: that.data.tableNum,
         payType: that.data.payType,
         operator: that.data.userInfo.nickName
       },
@@ -211,6 +271,62 @@ Page({
       payType:payType
     })
 
+  },
+  onModifyTap:function(){
+    this.setData({
+      popType:'1'
+    })
+    this.showInputSeat('open');
+  },
+  tableNumInput: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+    if (e.detail.value != '') {
+      that.setData({
+        tableNum: e.detail.value,
+      })
+    }
+    //修改用餐人数接口
+  },
+  costomerNumInput: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+    if (e.detail.value != '') {
+      that.setData({
+        customerNum: e.detail.value,
+      })
+    }
+    //修改用餐人数接口
+  },
+  onCustomerNumTap:function(e){
+    var that = this;
+    this.showInputSeat('close');
+    wx.showLoading(
+      {
+        title: "处理中"
+      }
+    )
+    /******添加处理icon */
+    util.requestByLogin({
+      url: app.globalData.domain + '/ordermanage/modify',
+      method: 'PUT',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        orderId: that.data.orderId,
+        tableNum: that.data.tableNum,
+        customerNum: that.data.customerNum,
+      },
+    }, function (res) {
+      console.log(res);
+      wx.hideToast();
+
+    }, function () {
+      console.log("Error: function radioChange")
+      wx.hideToast();
+    }
+    );
   },
   /**
   * 生命周期函数--监听页面初次渲染完成

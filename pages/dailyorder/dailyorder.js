@@ -1,3 +1,5 @@
+var app = getApp();
+var util = require('../../utils/util.js');
 Page({
 
   /**
@@ -36,9 +38,10 @@ Page({
     this.setData({
       beginDate: timeId
     })
+    this.getServiceDailyOrderData();
   },
 
-  getServiceDailkyOrderData: function (e) {
+  getServiceDailyOrderData: function (e) {
     var that = this;
     wx.showLoading(
       {
@@ -49,12 +52,16 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/report/dailyorder',
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       data: {
         begindate: that.data.beginDate,
         paytype: that.data.numValue
       },
     }, function (res) {
       console.log(res);
+      that.processDailyOrderData(res.data);
       wx.hideToast();
 
     }, function () {
@@ -62,6 +69,45 @@ Page({
       wx.hideToast();
     }
     );
+  },
+  processDailyOrderData:function(data){
+    var temp = {};
+    var totalPrice = 0.0;
+    var dailyOrder = [];
+    var count = 0;
+    temp = {
+      id: '-1',
+      num: '订单号', 
+      orderPrice: '金额', 
+      customerNum: '用餐人数', 
+      payType: '支付方式', 
+      operator: '收银员'
+    }
+    dailyOrder.push(temp);
+    for (var idx in data){
+      if (data[idx].customerNum == "")
+        data[idx].customerNum = null;
+      if (data[idx].payType == "")
+        data[idx].payType = null;
+      if (data[idx].operator == "")
+        data[idx].operator = null;
+      temp = {
+        id : data[idx].id,
+        num:data[idx].num,
+        orderPrice: data[idx].orderPrice,
+        customerNum: data[idx].customerNum,
+        payType:data[idx].payType,
+        operator: data[idx].operator
+      }
+      ++count;
+      dailyOrder.push(temp);
+      totalPrice += data[idx].orderPrice;
+    }
+    this.setData({
+      dailyOrder: dailyOrder,
+      totalPrice: totalPrice,
+      count: count
+    })
   },
   formatDate: function (event) {
     const date = new Date();
@@ -118,7 +164,7 @@ Page({
   },
   onSearchTap:function(e){
     console.log('click search');
-    //this.getServiceDailkyOrderData();
+    this.getServiceDailyOrderData();
   },
   /**
   * 生命周期函数--监听页面初次渲染完成

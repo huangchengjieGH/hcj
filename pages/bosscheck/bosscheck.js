@@ -1,3 +1,5 @@
+var app = getApp();
+var util = require('../../utils/util.js');
 Page({
 
   /**
@@ -29,7 +31,7 @@ Page({
       orderId: orderId
     })
     console.log(orderId);
-    //this.getServiceOneOrderData();
+    this.getServiceOneOrderData();
   },
  
   getServiceOneOrderData: function (e) {
@@ -43,11 +45,15 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/report/oneorder',
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       data: {
         orderId: that.data.orderId,
       },
     }, function (res) {
       console.log(res);
+      that.processOneOrderData(res.data);
       wx.hideToast();
 
     }, function () {
@@ -55,6 +61,43 @@ Page({
       wx.hideToast();
     }
     );
+  },
+  processOneOrderData:function(data){
+    var temp = {};
+    var tableOrder = [];
+    var Price = 0.0;
+    var time = "";
+    temp = {
+      name: '菜名',
+      price: '价格', 
+      count: '数量', 
+      totalPrice: '总额', 
+      time: '下单时间'
+    };
+    tableOrder.push(temp);
+    for(var idx in data){
+      time = util.formatTime(new Date(data[idx].time));
+     temp = {
+       num: data[idx].num,
+       tableNum:data[idx].tableNum,
+       customerNum: data[idx].customerNum,
+       name:data[idx].name,
+       price:data[idx].price,
+       count:data[idx].count,
+       totalPrice: data[idx].totalPrice,
+       time: time
+
+     },
+     tableOrder.push(temp);
+     Price += data[idx].totalPrice;
+    }
+    this.setData({
+      tableOrder: tableOrder,
+      Price: Price,
+      num: data[0].num,
+      tableNum: data[0].tableNum,
+      customerNum: data[0].customerNum
+    })
   },
   /**
   * 生命周期函数--监听页面初次渲染完成

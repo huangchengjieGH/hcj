@@ -1,4 +1,5 @@
 // pages/ordermanager/ordermanager.js
+var util = require('../../utils/util.js');
 var app = getApp();
 Page({
 
@@ -12,49 +13,8 @@ Page({
     numValue: '全部',
     order: '',
     Flag:'',
-    seat:[
-      {
-        seatNum:'1',
-        status:'0',
-        orderId:6
-      },
-      {
-        seatNum: '2',
-        status: '1',
-        orderId: 10
-      },
-      {
-        seatNum: '3',
-        status: '0',
-        orderId: 11
-      },
-      {
-        seatNum: '4',
-        status: '0',
-        orderId: 12
-      },
-      {
-        seatNum: '5',
-        status: '1',
-        orderId: 13
-      },
-      {
-        seatNum: '6',
-        status: '1',
-        orderId: 14
-      },
-      {
-        seatNum: '7',
-        status: '0',
-        orderId: 14
-      },
-      {
-        seatNum: '8',
-        status: '0',
-        orderId: 14
-      },
-    ]
-
+    seat:[],
+    tableList:[],
   },
 
   /**
@@ -62,108 +22,56 @@ Page({
   */
   onLoad: function (options) {
     this.getFlag();
-    this.getSeatGourp(this.data.seat);
+   // this.getSeatGourp();
+    this.getServiceSeatData();
+  },
+  onReady: function () {
+   
+  },
+  getServiceSeatData:function(){ 
+    console.log("test");  
+    var that = this;
+    /******添加处理icon */
+    util.requestByLogin({
+      url: app.globalData.domain + '/ordermanage/seat',
+      method: 'GET',
+    }, function (res) {
+     // console.log(res.data);
+      that.setData({
+        seat:res.data
+      })
+      that.getSeatGourp(res.data);
+    }, function () {
+      console.log("Error: function getServiceSeatData")
+    }
+    );
   },
   getSeatGourp: function (seat){
+    var seat = this.data.seat;
     var seatArray = [];
     var temp = {};
     var seatGroup = [];
+    var tableList = [];
     var i = 0;
     for (var idx in seat){ 
       if (this.data.numValue == '全部'){
-        seatArray[i] = {   status:seat[idx].status,
-                         orderId: seat[idx].orderId,
-                         seatNum: seat[idx].seatNum
-                         };
-          
-        ++i;
-        if ((idx + 1) % 3 == 0) {
-          seatArray[idx] = {
-            status: seat[idx].status,
-            orderId: seat[idx].orderId,
-            seatNum: seat[idx].seatNum
-          };
-          temp = {
-            one: seatArray[0],
-            two: seatArray[1],
-            three: seatArray[2],
-          }
-          seatGroup.push(temp);
-          temp = '';
-          i = 0;
-          seatArray = [];
-        } 
+        tableList = seat;
+        break;
 
       } else if (this.data.numValue == '使用中'){
         if (seat[idx].status == '0'){
-          seatArray[i] = {
-            status: seat[idx].status,
-            orderId: seat[idx].orderId,
-            seatNum: seat[idx].seatNum
-          }
-
-          ++i;
-          if ( i % 3 == 0) {
-            seatArray[idx] = {
-              status: seat[idx].status,
-              orderId: seat[idx].orderId,
-              seatNum: seat[idx].seatNum
-            };
-            temp = {
-              one: seatArray[0],
-              two: seatArray[1],
-              three: seatArray[2],
-            }
-            seatGroup.push(temp);
-            temp = '';
-            i = 0;
-            seatArray = [];
-          }
-
+          tableList.push(seat[idx]);
         }
 
       } else if (this.data.numValue == '空闲'){
         if (seat[idx].status == '1') {
-          seatArray[i] = {
-            status: seat[idx].status,
-            orderId: seat[idx].orderId,
-            seatNum: seat[idx].seatNum
-          }
-
-          ++i;
-          if (i % 3 == 0) {
-            seatArray[idx] = {
-              status: seat[idx].status,
-              orderId: seat[idx].orderId,
-              seatNum: seat[idx].seatNum
-            };
-            temp = {
-              one: seatArray[0],
-              two: seatArray[1],
-              three: seatArray[2],
-            }
-            seatGroup.push(temp);
-            temp = '';
-            i = 0;
-            seatArray = [];
-          }
+          tableList.push(seat[idx]);
         }
       }
            
     }
-    console.log(seatArray);
-    console.log(seatArray.length);
-    if (seatArray.length>0){
-        temp = {
-          one: seatArray[0],
-          two: seatArray[1],
-          three: seatArray[2],
-        }
-        seatGroup.push(temp);
-        temp = '';    
-    }
     this.setData({
-      seatGroup: seatGroup
+      tableList: tableList
     })
   },
 onSeatTap: function (event) {
@@ -182,7 +90,7 @@ onSeatTap: function (event) {
     if (status==1){
 
       wx.navigateTo({
-        url: '../staffbooking/staffbooking?seatNum=' + seatNum
+        url: '../staffsbooking/staffsbooking?seatNum=' + seatNum
       })
     }
     
@@ -246,16 +154,14 @@ onSeatTap: function (event) {
     }
 
   },
-  /**
-  * 生命周期函数--监听页面初次渲染完成
-  */
-  onReady: function () {
-  },
+
 
   /**
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
+    var that = this;
+    this.interval = setInterval(this.getServiceSeatData, 5000);
   },
 
   /**
@@ -267,7 +173,9 @@ onSeatTap: function (event) {
   /**
   * 生命周期函数--监听页面卸载
   */
+  //页面卸载，清除画布绘制计时器
   onUnload: function () {
+    clearInterval(this.interval)
   },
 
   /**

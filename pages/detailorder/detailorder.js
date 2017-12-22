@@ -1,4 +1,6 @@
 // pages/detailorder/detailorder.js
+var app = getApp();
+var util = require('../../utils/util.js');
 Page({
 
   /**

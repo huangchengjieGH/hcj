@@ -2,7 +2,7 @@
 <import src="../stars-template/stars-template.wxml" />
 <scroll-view scroll-y="true" class="Booking-contrainer">
   <view class="Top-msg" catchtap='onclicktop'>
-    <image class="res-img" src="/images/image/aizhimian.jpg"></image>
+    <image class="res-img" src="/images/image/Casona.jpg"></image>
     <view class="res-msg">
       <view catchtap='onResTap'>
         <text class="res-name">{{resMsg.seller.name}}</text>
@@ -21,33 +21,22 @@
   </view>
 
   <view class="Middle-msg" catchtap='onclickmiddle'>
-    <view>
+    <!-- <view>
       <image class="discount" src="/images/icon/discount.png"></image>
       <text class="describe">会员享受8折优惠</text>
-    </view>
+    </view> -->
     <text class="slogan">商品</text>
     <text>{{scene}}</text>
   </view>
 
-  <!--   <view class="input">
-   <view class="input-seat">
-    <text class="input-txt">座位号</text>
-    <input placeholder="请输入您的座位号" class="input-value"
-     bindconfirm="seatInput" confirm-type='confirm'/>
-     </view>
-     <view class="input-btn">
-      <button class="input-cancle">取消</button>
-      <button class="input-confirm">确认</button>
-     </view>
-  </view> -->
 
   <view class="subject" catchtap='onclicksubject'>
     <scroll-view scroll-y="true" class="scroll-view">
       <view wx:for="{{goods_msg.data}}" wx:for-item="item">
-        <view class='text' catchtap="onclassiTap" data-buttonId="{{item.classifyName}}">
+        <view class='text' catchtap="onclassiTap" data-Name="{{item.classifyName}}" data-Id="{{item.classifyName}}">
           <view wx:if="{{item.classifyName== classify}}">
             <text class='classfytext' style='color:red'>{{item.classifyName}}</text>
-            <!-- <icon class='success-icon' type="success" size="10" color="red"/> -->
+
             <icon wx:if="{{index==0}}" class="{{class_Dish[0]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
             <icon wx:elif="{{index==1}}" class="{{class_Dish[1]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
             <icon wx:elif="{{index==2}}" class="{{class_Dish[2]==0?'hide':'success-icon'}}" type="success" size="10" color="red" />
@@ -88,10 +77,6 @@
 
           </view>
         </view>
-        <!--  <view class='success-icon'>
-           <icon type="success" size="10" color="red"/>
-        </view> -->
-        <!--  <view>{{index}}</view> -->
       </view>
     </scroll-view>
     <view class="detail-contrainer">
@@ -129,8 +114,8 @@
     <view class="{{totalnum==0?'bottom-right0':'bottom-right'}}" bindtap='onactionTap' data-actionId="{{actionflag}}">
       <text class='right-txt'>{{actionflag}}</text>
     </view>
-
   </view>
+
   <view class="{{showcartList?'order-list':'hide'}}">
     <view class='order-head'>
       <view class='head-desc'>
@@ -152,12 +137,15 @@
       <image class='order-add' src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{item.id}}"></image>
     </view>
   </view>
+
+
   <view class="{{actionflag == '结账'?'':'hide'}}">
     <view class="{{showcartList?'hide':''}}" catchtap='callingService'>
       <text class='calling-txt'>呼叫服务员</text>
       <image class='calling-img' src='/images/icon/calling.png'></image>
     </view>
   </view>
+
 </scroll-view>
 
 <!--mask-->
@@ -185,17 +173,17 @@
     </view>
 
     <view class="{{popFlag==1?'pop-content':'hide'}}">
-     <!--  <view>
+       <view>
         <text class='input-txt'>座位号:</text>
-        <input placeholder="请输入座位号" class="seat-input" bindblur="seatInput" confirm-type='confirm' />
-      </view> -->
+        <input placeholder="请输入座位号" value="{{tableNum}}" class="seat-input" bindblur="seatInput" confirm-type='confirm' />
+      </view> 
 
       <view>
         <text class='input-txt'>用餐人数:</text>
         <input placeholder="请输入用餐人数" class="seat-input" bindblur="costomerNumInput" confirm-type='confirm' />
       </view>
     </view>
-    <view class='pop-btn'>
+    <view class="{{popFlag==1?'pop-btn':'hide'}}">
       <view class='cancel-btn' catchtap="onCancelTap">取消</view>
       <view class='confirm-btn' catchtap="onConfirmTap">确定</view>
     </view>

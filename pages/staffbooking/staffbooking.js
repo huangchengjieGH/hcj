@@ -29,7 +29,7 @@ Page({
     showModalStatus: false,
     orderStatus: '0',
     orderMsg: '',
-    cashPay: false,
+    cashPay: true,
     detailDish: {},
     Flag: '',
     popFlag:0,
@@ -98,6 +98,9 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
       method: 'GET',
+      data: {
+        sellerId: app.globalData.shopId,
+      },
       header: {
         'content-type': 'application/xml'
       },
@@ -841,6 +844,9 @@ Page({
   },
   onImgTap: function (e) {
     var imgId = e.currentTarget.dataset.imgid;
+    this.setData({
+      popFlag:0,
+    })
     var temp = {};
     console.log('点击了' + imgId);
     for (var idx in this.data.Goods) {
@@ -959,8 +965,8 @@ onConfirmTap: function (e) {
     var paymsg = {};
     this.showInputSeat('close')
     //正常场景
-    if (that.data.tableNum != null && that.data.tableNum != '' && !this.data.cashPay && that.data.customerNum != '') {
-
+    if (that.data.tableNum != null && that.data.tableNum != '' && !that.data.cashPay && that.data.customerNum != '') {
+      console.log("线上结帐场景");
       this.setData({
         'actionflag': '结账',
         orderStatus: '1'
@@ -979,6 +985,7 @@ onConfirmTap: function (e) {
         method: 'POST',
         data: {
           tableNum: that.data.tableNum,
+          customerNum: that.data.customerNum,
           goodsList: Test
         },
       }, function (res) {
@@ -1003,6 +1010,7 @@ onConfirmTap: function (e) {
     }
     //屏蔽结帐功能场景
     if ( that.data.tableNum != null && that.data.tableNum != '' && that.data.cashPay && that.data.customerNum != '') {
+      console.log("线下结帐场景");
       that.setData({
         orderStatus: '1'
       })
@@ -1020,6 +1028,7 @@ onConfirmTap: function (e) {
         method: 'POST',
         data: {
           tableNum: that.data.tableNum,
+          customerNum: that.data.customerNum,
           goodsList: Test
         },
       }, function (res) {

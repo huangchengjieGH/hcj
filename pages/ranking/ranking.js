@@ -1,21 +1,18 @@
+var app = getApp();
+var util = require('../../utils/util.js');
 Page({
 
   /**
   * 页面的初始数据
   */
   data: {
-    goodsClassify: [
-      { id:-1,name:'全部'},
-      { id:1,name:'厨师长推荐'},
-      { id: 2, name: '本店招牌'}
-      ],
-    rankValue: ['前10名', '后10名'],
+    rankValue: ['倒序', '顺序'],
     openList01: true,
     showList01: true,
     openList02: true,
     showList02: true,
     numValue01: '全部',
-    numValue02: '前10名',
+    numValue02: '倒序',
     order: '0',
     classifyid:'-1',
     tableOrder: [
@@ -36,7 +33,14 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    this.formatDate();
+    let dateMsg = JSON.parse(options.str);
+    //this.formatDate();
+    this.setData({
+      beginDate: dateMsg.beginDate,
+      endDate: dateMsg.endDate
+    })
+    this.getServiceRankingData();
+    this.getServiceGoodsClassifyData();
   },
   getServiceRankingData: function (e) {
     var that = this;
@@ -49,6 +53,9 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/report/ranking',
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       data: {
         begindate: that.data.beginDate,
         enddate: that.data.endDate,
@@ -56,7 +63,10 @@ Page({
         order: that.data.order,
       },
     }, function (res) {
-      console.log(res);
+     // console.log(res.data);
+      that.setData({
+        tableOrder:res.data
+      })
       wx.hideToast();
 
     }, function () {
@@ -75,18 +85,35 @@ Page({
     /******添加处理icon */
     util.requestByLogin({
       url: app.globalData.domain + '/ordermanage/classify',
-      method: 'GET',
-      header: {
-        'content-type': 'application/xml'
-      }
+      method: 'GET'
     }, function (res) {
       console.log(res);
+      that.getGoodsClassify(res.data);
       wx.hideToast();
     }, function () {
       console.log("Error: function onactionTap")
       wx.hideToast();
     }
     );
+  },
+  getGoodsClassify:function(data){
+    var temp = {};
+    var goodsClassify = [];
+    temp = {
+      id:'-1',
+      name:'全部'
+    }
+    goodsClassify.push(temp);
+    for(var idx in data){
+      temp = {
+        id : data[idx].id,
+        name: data[idx].name
+      }
+      goodsClassify.push(temp);
+    }
+   this.setData({
+     goodsClassify: goodsClassify
+   })
   },
   onNumTap01: function (event) {
     var that = this;
@@ -111,7 +138,7 @@ Page({
   onNumTap02: function (event) {
     var onnumId = event.currentTarget.dataset.numid;
     var order = '';
-    if (onnumId == '后10名'){
+    if (onnumId == '顺序'){
       order = '1';
     } else{
       order = '0';
@@ -191,7 +218,7 @@ Page({
     })
   },
   onSearchTap: function (event) {
-    console.log('点击了查询');
+    this.getServiceRankingData();
   },
   /**
   * 生命周期函数--监听页面初次渲染完成

@@ -1,17 +1,47 @@
-<!--button-->
-<view class="btn" bindtap="powerDrawer" data-statu="open">button</view> 
-  
-<!--mask-->
-<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view> 
-<!--content-->
-<!--使用animation属性指定需要执行的动画-->
-<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}"> 
+<scroll-view class="Wrapscroll-view">
 
- <view class="drawer_content"> 
- <view class="top grid"> 
- <label class="title col-0">座位号</label> 
- <input class="input_base input_h30 col-1" name="rName" value="可自行定义内容"></input> 
- </view> 
- </view> 
- <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view> 
-</view>
+<!--   <view class="page__bd search-y">
+    <view class="weui_cell searchbar">
+      <view class="weui-cell__hd search_btn" bindtap="onChangeShowState">
+        <image mode="aspectFit" src="/images/icon/list.png" />
+      </view>
+      <view class="weui-cell_bd">
+        <view class="weui_search-bar">
+          <view class="weui-search-bar_form">
+            <view class="weui-search-bar_box">
+              <icon class="weui_icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar_input" confirm-type="search" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="hideInput" bindconfirm="inputTyping" />
+              <view class="weui_icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
+            </view>
+            <label class="weui-search-bar_label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui_icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar_text">搜索</view>
+            </label>
+          </view>
+          <view class="weui-search-bar_cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+      </view>
+    </view>
+  </view> -->
+
+
+  <view class="weui_search-bar">
+          <view class="weui-search-bar_form">
+            <view class="weui-search-bar_box">
+              <icon class="weui_icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar_input" confirm-type="search" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="hideInput" bindconfirm="inputTyping" />
+              <view class="weui_icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
+            </view>
+            <label class="weui-search-bar_label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui_icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar_text">搜索</view>
+            </label>
+          </view>
+          <view class="weui-search-bar_cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+
+</scroll-view>

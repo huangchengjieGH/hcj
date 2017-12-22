@@ -5,8 +5,8 @@
   margin-top: 20rpx;
   margin-bottom: 30rpx;
   background-color: #fff;
-  border-bottom:1px solid #ededed;
-  border-top:1px solid #ededed;
+  border-bottom:1px dashed #ededed;
+  border-top:1px dasheds #ededed;
   padding-bottom:5px;
 }
 .res{

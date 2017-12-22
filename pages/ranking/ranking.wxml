@@ -42,8 +42,8 @@
 </view>
 </view>
 
-<view class='search'>
-<text class='search-txt' catchtap='onSearchTap'>查询</text>
+<view class='search' catchtap='onSearchTap'>
+<text class='search-txt'>查询</text>
 </view>
 </view>
 <view class='spliter-line'></view>
@@ -54,9 +54,9 @@
 </view>
 <scroll-view class='scroll' scroll-y="true">
 <view wx:for="{{tableOrder}}" wx:for-item="item">
-<view class="dishValue" catchtap="ontimeTap" data-id="{{item.one}}">{{item.one}}</view>
-<view class="dishValue2">{{item.two}}</view>
-<view class="dishValue1">{{item.three}}</view>
+<view class="dishValue" catchtap="ontimeTap" data-id="{{item.one}}">{{item.name}}</view>
+<view class="dishValue2">{{item.classify}}</view>
+<view class="dishValue1">{{item.count}}</view>
 </view>
 </scroll-view>
 

@@ -12,7 +12,8 @@ Page({
     showList: true,
     numValue:1,
     order:'',
-    payWay: '微信支付'
+    payWay: '微信支付',
+    orderDate:'',
   },
   
   /**
@@ -30,7 +31,7 @@ Page({
         this.setData({payWay: '餐后请找服务员结帐'})
       }
      // console.log(orderId);
-       util.requestByLogin({
+    util.requestByLogin({
         url: app.globalData.domain + '/wx/order/' + that.data.paymsg.orderMsg.id,
         method: 'GET',
       }, function (res) {
@@ -40,6 +41,13 @@ Page({
         })
       }
       ); 
+    this.changeTimeFormat();
+  },
+  changeTimeFormat:function(e){
+    var orderDate = util.formatTime(new Date(this.data.paymsg.orderMsg.createdAt));
+    this.setData({
+      orderDate: orderDate
+    })
   },
   /*****测试付款函数 */
   pay: function (id, callback) {

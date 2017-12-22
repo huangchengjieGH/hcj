@@ -2,7 +2,7 @@
 <import src="../stars-template/stars-template.wxml" />
 <scroll-view scroll-y="true" class="Booking-contrainer">
   <view class="Top-msg" catchtap='onclicktop'>
-    <image class="res-img" src="/images/image/aizhimian.jpg"></image>
+    <image class="res-img" src="/images/image/Casona.jpg"></image>
     <view class="res-msg">
       <view catchtap='onResTap'>
         <text class="res-name">{{resMsg.seller.name}}</text>
@@ -21,10 +21,8 @@
   </view>
 
   <view class="Middle-msg" catchtap='onclickmiddle'>
-    <!-- <image class="discount" src="/images/icon/discount.png"></image>
-      <text class="describe">会员享受8折优惠</text> -->
     <text class="input-txt">编号</text>
-    <input placeholder="请输入菜的编号" class="input-value" bindblur="dishIDInput" confirm-type='confirm' />
+    <input placeholder="请输入菜的编号或名称" class="input-value" bindconfirm="dishIDInput" confirm-type='confirm' />
     <!-- <view>确认</view> -->
   </view>
 
@@ -197,7 +195,7 @@
       </view>
     </view>
 
-    <view class='pop-btn'>
+    <view class="{{popFlag==1?'pop-btn':'hide'}}">
       <view class='cancel-btn' catchtap="onCancelTap">取消</view>
       <view class='confirm-btn' catchtap="onConfirmTap">确定</view>
     </view>

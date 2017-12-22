@@ -1,6 +1,6 @@
 <import src="../stars-template/stars-template.wxml" />
 <template name="res">
-  <view class="reslist-contrainer" catchtap="onResTap" data-resId="{{resId}}">
+  <view class="reslist-contrainer" >
     <view class="res">
       <view class="res-img">
         <image class="res-img" src="{{imgUrl}}"></image>

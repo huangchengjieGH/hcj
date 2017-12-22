@@ -149,9 +149,13 @@ height: 65rpx;
 width: 100%;
 border: 1rpx solid #ccc;
 }
+.total-order{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
 .total-txt{
 font-size: 30rpx;
-margin-left: 460rpx;
+margin-left: 280rpx;
 }
 .total-value{
 font-size: 40rpx;
@@ -168,48 +172,49 @@ margin-bottom: 50rpx;
 .dishValue6{
 background: white; width: 200rpx; height: 70rpx; display: inline-block;
 border: 1rpx solid black;
-/* border-right: 1rpx solid #ccc; */
 text-align: center;
 font-size: 38rpx;
-/* color:#42a4e2; */
 background: #5ed925;
 }
 .dishValue0{
 background: white; width: 300rpx; height: 70rpx; display: inline-block;
 border: 1rpx solid #ccc;
-/* border-right: 1rpx dashed #ccc; */
 text-align: center;
 font-size: 38rpx;
 color:#42a4e2;
-/* background: #5ed925; */
 }
 .dishValue{
-background: white; width: 300rpx; height: 70rpx; display: inline-block;
+background: white; 
+width: 300rpx; 
+height: 70rpx; 
+display: inline-block;
 border: 1rpx solid black;
-/* border-right: 1rpx solid #ccc; */
 text-align: center;
 font-size: 38rpx;
 background: #5ed925;
 
 }
 .dishValue2{
-background: white; width: 200rpx; height: 70rpx; display: inline-block;
+background: white; 
+width: 200rpx; 
+height: 70rpx;
+display: inline-block;
 border: 1rpx solid #ccc;
-/* border-right: 1rpx dashed #ccc; */
 text-align: center;
 font-size: 38rpx;
 }
 .dishValue3{
-background: white; width: 200rpx; height: 70rpx; display: inline-block;
+background: white;
+width: 200rpx; 
+height: 70rpx; 
+display: inline-block;
 border: 1rpx solid #ccc;
-/* border-right: 1rpx dashed #ccc; */
 text-align: center;
 font-size: 38rpx;
 }
 .dishValue4{
 background: white; width: 200rpx; height: 70rpx; display: inline-block;
 border: 1rpx solid #ccc;
-/* border-right: 1rpx dashed #ccc; */
 text-align: center;
 font-size: 38rpx;
 }

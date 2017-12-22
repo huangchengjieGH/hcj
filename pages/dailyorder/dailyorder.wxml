@@ -33,8 +33,10 @@
 
   <view class='spliter-line'></view>
   <view class='total-count'>
-    <text class='total-txt'>营业总额</text>
-    <text class='total-value'>10000</text>
+    <text class='total-order'>订单总数:</text>
+    <text class='total-value'>{{count}}</text>
+    <text class='total-txt'>营业总额:</text>
+    <text class='total-value'>{{totalPrice}}</text>
   </view>
   <scroll-view class='scroll' scroll-x="true" style=" white-space: nowrap; display: flex">
     <view wx:for="{{dailyOrder}}" wx:for-item="item">

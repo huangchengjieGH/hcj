@@ -546,6 +546,11 @@ radio{
 .pop-content{
   margin-top: 50rpx;
 }
+.input-txt{
+  margin-left: 20rpx;
+  font-size: 35rpx;
+  margin-top: 12rpx;
+}
 .seat-input{
   height: 60rpx;
   width: 500rpx;

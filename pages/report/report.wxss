@@ -47,37 +47,37 @@ border: 1rpx solid #ccc;
 .date{
 display: flex;
 flex-direction: row;
-margin-left: 18rpx;
+margin-left: 15rpx;
 margin-top: 20rpx;
 }
 .date-txt{
 border: 1rpx solid #ccc;
 font-size: 40rpx;
 height: 60rpx;
-width: 160rpx;
+width: 140rpx;
 text-align: center
 }
 .begin-date{
 border: 1rpx solid #ccc;
 font-size: 38rpx;
-margin-left: 20rpx;
+margin-left: 15rpx;
 height: 60rpx;
-width: 240rpx;
-text-align: left;
+width: 260rpx;
 border-radius: 20rpx;
+text-align: center;
 }
 .icon-txt{
 margin-top: 5rpx;
-margin-left: 8rpx;
+margin-left: 5rpx;
 }
 .end-date{
 border: 1rpx solid #ccc;
 font-size: 38rpx;
 margin-left: 10rpx;
 height: 60rpx;
-width: 240rpx;
-text-align: left;
+width: 260rpx;
 border-radius: 20rpx;
+text-align: center;
 }
 .icon1{
 position: absolute;
@@ -93,7 +93,7 @@ display: inline-block;
 border: 4px solid transparent;
 border-top: 4px solid #9b9b9b;
 margin-top: 25rpx;
-right: 40rpx;
+right: 20rpx;
 }
 .search{
 border: 1rpx solid #ccc;
@@ -168,19 +168,25 @@ border:1rpx solid #ccc;
 background: #5ed925;
 text-align: center;
 color: white;
-margin-left: 150rpx;
+margin-left: 60rpx;
 }
 .chart-icon{
 position: fixed;
 height: 70rpx;
 width: 80rpx;
 bottom: 110rpx;
-margin-left: 500rpx;
+margin-left: 340rpx;
+}
+.chart-icon2{
+position: fixed;
+height: 70rpx;
+width: 80rpx;
+bottom: 110rpx;
+margin-left: 580rpx;
 }
 .charts{
-margin-top: 80rpx;
-
-height: 550rpx;
+margin-top: 60rpx;
+height: 420rpx;
 }
 
 .bottom-banner{
@@ -236,4 +242,21 @@ height: 550rpx;
 }
 .my-txt{
   font-size: 28rpx;
+}
+.total-count{
+/* position: fixed;
+margin-top: 330rpx; */
+height: 65rpx;
+width: 100%;
+border: 1rpx solid #ccc;
+}
+.total-txt{
+font-size: 30rpx;
+margin-left: 460rpx;
+}
+.total-value{
+font-size: 40rpx;
+margin-left: 20rpx;
+color: red;
+margin-top: 5rpx;
 }

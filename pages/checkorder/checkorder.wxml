@@ -18,24 +18,40 @@
   </scroll-view>
 
   <view class='seat-top'>
-    <text class='order-txt'>订单号:</text>
-    <text class='order-num'>123242342374</text>
-    <text class='seat-txt'>座位号:</text>
-    <text class='seat-num'>88</text>
+    <view style='margin-top:20rpx;margin-left:20rpx;'>
+      <text class='order-txt'>订单号:</text>
+      <text class='order-num'>{{num}}</text>
+    </view>
+
+    <view style='display:flex;flex-direction:row;'>
+      <view>
+        <text class='seat-txt'>座位号:</text>
+        <text class='seat-num'>{{tableNum}}</text>
+      </view>
+
+      <view>
+        <text class='seat-txt'>用餐人数:</text>
+        <text class='seat-num'>{{customerNum}}</text>
+        <image class='modify-btn' src='/images/icon/modify.png' catchtap='onModifyTap'></image>
+      </view>
+    </view>
+
+<view class='addDish' catchtap='onAddDishTap'>加菜</view>
+
   </view>
   <view class='bottom'>
     <view class='bottom-one'>
       <text class='num'>数量:</text>
-      <text class='num-value'>10</text>
+      <text class='num-value'>{{count}}</text>
       <text class='price'>消费金额:</text>
-      <text class='price-value'>100.00</text>
+      <text class='price-value'>{{price}}</text>
       <view class="{{cancelFlag?'cancel1':'cancel'}}" catchtap='onDeleteDishTap'>退菜</view>
     </view>
 
     <view class='bottom-two'>
       <text class='discount'>折扣金额:</text>
       <text class='discount-value'>0.00</text>
-      <view class='pay' catchtap='onCheckOutTap'>结帐</view>
+      <view class='pay' catchtap='onCheckOutTap'>撤台</view>
       <view class='print'>打单</view>
     </view>
 
@@ -46,8 +62,8 @@
   <!--content-->
   <!--使用animation属性指定需要执行的动画-->
   <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
-    <view class='paytype'>请选择顾客支付方式:</view>
-    <view class="drawer_content">
+    <view class="{{popType==0?'paytype':'hide'}}">请选择顾客支付方式:</view>
+    <view class="{{popType==0?'drawer_content':'hide'}}">
       <radio-group class="radio-group" bindchange="radioChange">
         <label class="radio" wx:for="{{items}}">
           <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
@@ -60,6 +76,19 @@
       </view>
 
     </view>
+
+    <view class="{{popType==1?'costomer-num':'hide'}}">
+      <text class='input-txt'>座位号:</text>
+      <input placeholder="请更改座位号" value="{{tableNum}}" class="costomer-input" bindblur="tableNumInput" confirm-type='confirm' />
+      <text class='input-txt'>用餐人数:</text>
+      <input placeholder="请更改用餐人数" value="{{customerNum}}" class="costomer-input" bindblur="costomerNumInput" confirm-type='confirm' />
+
+      <view class='pop-btn2'>
+        <view class='cancel-btn' catchtap="onCancelTap">取消</view>
+        <view class='confirm-btn' catchtap="onCustomerNumTap">确定</view>
+      </view>
+    </view>
+
   </view>
   <!--弹窗-->
 </view>

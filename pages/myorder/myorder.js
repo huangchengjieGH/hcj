@@ -67,6 +67,9 @@ Page({
     util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
       method: 'GET',
+      data: {
+        sellerId: app.globalData.shopId,
+      },
     }, function (res) {
       console.log(res);
       that.setData({

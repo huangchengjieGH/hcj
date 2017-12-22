@@ -58,7 +58,7 @@
             {{item}}
         </view>  
   </view> -->
-
+<view class='spliter-line'></view>
   <view class='service'>
     <text class='service-txt'>服务费</text>
     <text class='service-value'>0</text>

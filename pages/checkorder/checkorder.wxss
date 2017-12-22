@@ -4,9 +4,9 @@ display: flex;
 flex-direction: column;
 }
 .seat-top{
-/* display: flex;
-flex-direction: row; */
-height: 80rpx;
+ display: flex;
+flex-direction: column; 
+height: 160rpx;
 width: 100%;
 border: 1rpx solid #bbbbbb;
 background: #0085DD;
@@ -29,13 +29,19 @@ margin-left: 20rpx;
 font-size: 40rpx;
 color: white;
 margin-top: 10rpx;
-margin-left: 80rpx;
+margin-left: 40rpx;
 }
 .seat-num{
 font-size: 40rpx;
 color: white;
 margin-top: 15rpx;
 margin-left: 20rpx;
+}
+.modify-btn{
+  position: absolute;
+  height: 50rpx;
+  width: 50rpx;
+  margin-left: 15rpx;
 }
 .order-line{
 width: 100%;
@@ -72,7 +78,7 @@ border-bottom: 1rpx solid #F3F3F3;
 
 .scroll{
 margin-bottom: 200rpx;
-margin-top:80rpx;
+margin-top:160rpx;
 }
 .dishValue0{
 background: white; width: 120px; height: 35px; display: inline-block;
@@ -111,7 +117,7 @@ text-align: center;
 font-size: 35rpx;
 }
 .dishValue6{
-background: white; width: 150px; height: 35px; display: inline-block;
+background: white; width: 200px; height: 35px; display: inline-block;
 border: 1rpx solid #ccc;
 text-align: center;
 font-size: 35rpx;
@@ -149,9 +155,8 @@ margin-left: 40rpx;
 color: red;
 }
 .cancel{
-/* position: absolute; */
-margin-left: 20rpx;
-margin-top: 5rpx;
+position: absolute; 
+right: 18rpx;
 border: 1rpx solid #ccc;
 height: 65rpx;
 width: 150rpx;
@@ -162,9 +167,8 @@ background: #cac8c8;
 color: white;
 }
 .cancel1{
-/* position: absolute; */
-margin-left: 20rpx;
-margin-top: 5rpx;
+ position: absolute; 
+right: 18rpx;
 border: 1rpx solid #ccc;
 height: 65rpx;
 width: 150rpx;
@@ -198,6 +202,19 @@ text-align: center;
 font-size: 40rpx;
 background: #0085DD;
 color: white;
+margin-top: 10rpx;
+}
+.addDish{
+position: fixed;
+bottom: 220rpx;
+right: 20rpx;
+border: 1rpx solid #ccc;
+height: 65rpx;
+width: 150rpx;
+text-align: center;
+font-size: 40rpx;
+background: #0085DD;
+color: white;
 }
 .print{
 margin-left: 55rpx;
@@ -208,6 +225,7 @@ text-align: center;
 font-size: 40rpx;
 background: #0085DD;
 color: white;
+margin-top: 10rpx;
 }
 .checkbox{
 margin-left: 10rpx;
@@ -271,15 +289,41 @@ margin-left: 10rpx;
 .pop-btn{
   display: flex;
   flex-direction: row;
-  margin-top: 30rpx;
-  margin-left: 80rpx;
+  margin-top: 20rpx;
+  margin-left: 50rpx;
+}
+.pop-btn2{
+  display: flex;
+  flex-direction: row;
+  margin-top: 50rpx;
+  margin-left: 50rpx;
 }
 .radio-group{
   display: flex;
   flex-direction: column;
-  margin-top: 5rpx;
+  margin-top: 20rpx;
   margin-left: 60rpx;
 }
 .radio{
   margin-top: 10rpx;
+}
+.costomer-num{
+  display: flex;
+  flex-direction: column;
+  margin-top: 50rpx;
+  margin-left: 50rpx;
+}
+.costomer-input{
+  border: 1rpx solid #ccc;
+  width: 400rpx;
+  height: 60rpx;
+  text-align: center;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+.input-txt{
+  font-size: 40rpx;
+}
+.hide{
+  display:none;
 }

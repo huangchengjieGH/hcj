@@ -1,42 +1,48 @@
 <view class="manager-container">
-<view class='seat-top'>
-<text class='seat-txt'>餐桌号</text>
-<!-- <text class='seat-value'>A88</text> -->
+  <view class='seat-top'>
+    <text class='seat-txt'>餐桌号</text>
 
-<text class='seat-status'>状态</text>
-<view class='per-num' bindtap='per_list'>
-<text class='num-value'>{{numValue}}</text>
-<view class="icon"></view>
-</view>
-<view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
-<view class='numList' wx:for="{{content}}" catchtap='onNumTap' data-numId="{{item}}">
-{{item}}
-</view>
-</view>
-</view>
-<view class='spliter-line'></view>
-<scroll-view scroll-y="true" class='seat-line'>
-<view wx:for="{{seatGroup}}" wx:for-item="item">
-<view class='seat-group'>
-<view class="{{item.one.status==0?'seat-one':'seat02'}}" catchtap="onSeatTap" data-seatnum="{{item.one.seatNum}}" data-status="{{item.one.status}}" data-orderid="{{item.one.orderId}}">{{item.one.seatNum}}</view>
-<view class="{{item.two.status==0?'seat-two':'seat02'}}" catchtap="onSeatTap" data-seatnum="{{item.two.seatNum}}" data-status="{{item.two.status}}" data-orderid="{{item.two.orderId}}">{{item.two.seatNum}}</view>
-<view class="{{item.three.status==0?'seat-three':'seat02'}}" catchtap="onSeatTap" data-seatnum="{{item.three.seatNum}}" data-status="{{item.three.status}}" data-orderid="{{item.three.orderId}}">{{item.three.seatNum}}</view>
-</view>
-</view>
-</scroll-view>
+    <text class='seat-status'>状态</text>
+    <view class='per-num' bindtap='per_list'>
+      <text class='num-value'>{{numValue}}</text>
+      <view class="icon"></view>
+    </view>
+    <view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
+      <view class='numList' wx:for="{{content}}" catchtap='onNumTap' data-numId="{{item}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+  <view class='spliter-line'></view>
+
+  <scroll-view scroll-y="true" class="wx-view_TQ4nqD">
+    <view class="view_tdlUCs">
+      <block wx:for="{{tableList}}" wx:key="{{index}}">
+        <view class="bottomGrayboder2 rightGrayboder2 list-items-square2">
+          <view class='tableNum' style="{{item.status==1?'background-color:#bbbbbb;':''}}" catchtap="onSeatTap" data-seatnum="{{item.seatNum}}" data-status="{{item.status}}" data-orderid="{{item.orderId}}">
+            <view class="text_JkhshF2">{{item.seatNum}}</view>
+            <view class="table-size">4人</view>
+          </view>
+
+        </view>
+
+      </block>
+    </view>
+  </scroll-view>
+
 </view>
 
 <view class="bottom-banner">
-   <view class='report' catchtap="onReportTap">
-      <image class='report-img' src='/images/icon/order.png'></image>
-      <text class='report-txt'>{{Flag}}</text>
-   </view>
-   <view class='ordermanage'>
-      <image class='ordermanage-img' src='/images/icon/nearby_hl.png'></image>
-      <text class='ordermanage-txt'>订单管理</text>
-   </view>
-    <view class='my' catchtap="onMyTap">
-      <image class='my-img' src='/images/icon/myorder.png'></image>
-      <text class='my-txt'>我的</text>
-   </view>
+  <view class='report' catchtap="onReportTap">
+    <image class='report-img' src='/images/icon/order.png'></image>
+    <text class='report-txt'>{{Flag}}</text>
+  </view>
+  <view class='ordermanage'>
+    <image class='ordermanage-img' src='/images/icon/nearby_hl.png'></image>
+    <text class='ordermanage-txt'>订单管理</text>
+  </view>
+  <view class='my' catchtap="onMyTap">
+    <image class='my-img' src='/images/icon/myorder.png'></image>
+    <text class='my-txt'>我的</text>
+  </view>
 </view>

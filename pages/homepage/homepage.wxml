@@ -1,7 +1,39 @@
 <import src="../res-list-template/res-list-template.wxml" />
 <import src="../res-template/res-template.wxml" />
 <view class="contrainer">
-  <view class="banner">
+  <swiper autoplay="True" class="swiper_show60" indicator-dots="True" lower-threshold="30" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="rgba(255,255,255,0.6)">
+    <swiper-item wx:for="{{isBannerList}}" wx:for-item="isBanner" wx:key="{{index}}" id="{{index}}" bindtap="bannerJump">
+      <image style="width:100%; height:100%;display:block;" mode="aspectFill" src="{{isBanner.imgUrl}}" />
+    </swiper-item>
+  </swiper>
+   
+  <view class="{{1==1?'hide':'page__bd search-y'}}">
+    <view class="weui_cell searchbar">
+      <view class="weui-cell__hd search_btn" bindtap="onChangeShowState">
+        <image mode="aspectFit" src="/images/icon/list.png" />
+      </view>
+      <view class="weui-cell_bd">
+        <view class="weui_search-bar">
+          <view class="weui-search-bar_form">
+            <view class="weui-search-bar_box">
+              <icon class="weui_icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar_input" confirm-type="search" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="hideInput" bindconfirm="inputTyping" />
+              <view class="weui_icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
+            </view>
+            <label class="weui-search-bar_label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui_icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar_text">搜索</view>
+            </label>
+          </view>
+          <view class="weui-search-bar_cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="{{1==1?'hide':'swiper'}}">
     <swiper class="swiper" indicator-dots="true" autoplay="true" interval="2000">
       <swiper-item>
         <image class="swiper-image" src="/images/image/aizhimian.jpg"></image>
@@ -17,21 +49,30 @@
       </swiper-item>
     </swiper>
 
-    <view class="search-top">
+    <view class="{{1==1?'hide':'search-top'}}">
       <view class="searchlocation" catchtap="searchLocation">
         <text class="search-locationtxt">{{chooseCity}}</text>
         <image class="search-img" src="/images/icon/arrow-down-white2.png"></image>
       </view>
       <view class="search-input">
-      <icon type="search" size="20" color="purple" class="search-icon" />
-     <!--  <input class="search" type="text" maxlength="50" confirm-type="search" placeholder="输入餐厅、菜系、商圈" bindtap="bindFocus" auto-focus>
+        <icon type="search" size="20" color="purple" class="search-icon" />
+        <!--  <input class="search" type="text" maxlength="50" confirm-type="search" placeholder="输入餐厅、菜系、商圈" bindtap="bindFocus" auto-focus>
       </input> -->
-       <text class="search-txt" bindtap="bindFocus">输入餐厅、菜系、商圈</text>
+        <text class="search-txt" bindtap="bindFocus">输入餐厅、菜系、商圈</text>
       </view>
     </view>
   </view>
 
-  <view class="function-contrainer">
+ <view class="icons_panels">
+    <block wx:for="{{isClassifyList}}" wx:key="{{index}}" wx:for-item="isClassify">
+      <view class="icons_3" id="{{index}}" bindtap="classifyJump">
+        <image class="icon_img" mode="aspectFit" src="{{isClassify.imgUrl}}" />
+        <text class="c-block h6 text-center">{{isClassify.name}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="{{1==1?'hide':'function-contrainer'}}">
     <view class="function-area">
       <view class="saoyisao" catchtap="onScanCodeTap">
         <image class="function-img" src="/images/icon/saoyisao.png"></image>
@@ -49,23 +90,21 @@
         <text class="function-txt2">提前预约点餐</text>
       </view>
     </view>
-<text>{{res}}</text>
-   <!--  <view class="find-res">
-      <button class="find-btn" bindtap="FindRes">找餐厅</button>
-    </view> -->
   </view>
-  <view class="hot-res-list">
+
+  <view style='margin-top:20rpx;'>
     <view class="slogan">
+      <view class="line"></view>
       <text class="title">附近热门</text>
     </view>
-   <!--  <block wx:for="{{shotRes}}" wx:for-item="item">
-     <view class="res-list">
-      <template is="res" data="{{item}}" />
-      </view>
-    </block> -->
-     <view >
-        <template is="res" data="{{...shotRes}}" />
-    </view> 
+    <navigator open-type='switchTab' url="../customerbooking/customerbooking">
+      <template is="res" data="{{...shotRes}}" />
+    </navigator>
+     
+<!--    <navigator open-type='switchTab' class="text-center h5" style="padding:12px;color:black" url="../list/list?classifyId={{goods.goodsId}}">查看全部</navigator> -->
+
 
   </view>
+ 
+  
 </view>

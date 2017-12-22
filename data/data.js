@@ -9,7 +9,7 @@ var Data_List = [
       "isHot": 1,   //是否是热门餐厅
       name: "外婆家",
       imgUrl: "/images/image/aizhimian.jpg",
-      score: "4.5",
+      score: "5.0",
       category: "江浙菜",
       perConsume: "100",
       distance: "100",   /*这个餐厅距离是服务器统计还是前端统计 */
@@ -39,7 +39,7 @@ var Data_List = [
       "isHot": 0,   //是否是热门餐厅
       name: "丹桂轩",
       imgUrl: "/images/image/aizhimian.jpg",
-      score: "4.5",
+      score: "5.0",
       category: "江浙菜",
       perConsume: "100",
       distance: "100",   /*这个餐厅距离是服务器统计还是前端统计 */

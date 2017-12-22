@@ -1,0 +1,17 @@
+<scroll-view class="Wrapscroll-view">
+ <scroll-view class="booking-contraioner">
+   <image class="back-img" mode="scaleToFill"  src="/images/image/test.jpg"></image>
+
+  
+
+ </scroll-view>
+ 
+  <scroll-view scroll-x="true" class="scroll" style=" white-space: nowrap; display: flex;width:95%;background:white;margin:18rpx 18rpx;">
+    <view class="classify" wx:for="{{isClassifyList}}" wx:key="{{index}}" wx:for-item="isClassify">
+      <view hover="true" hover-class="green_hover">
+        <text class="classify-txt">{{isClassify.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+</scroll-view>
