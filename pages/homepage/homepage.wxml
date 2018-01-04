@@ -6,7 +6,7 @@
       <image style="width:100%; height:100%;display:block;" mode="aspectFill" src="{{isBanner.imgUrl}}" />
     </swiper-item>
   </swiper>
-   
+
   <view class="{{1==1?'hide':'page__bd search-y'}}">
     <view class="weui_cell searchbar">
       <view class="weui-cell__hd search_btn" bindtap="onChangeShowState">
@@ -32,38 +32,7 @@
       </view>
     </view>
   </view>
-
-  <view class="{{1==1?'hide':'swiper'}}">
-    <swiper class="swiper" indicator-dots="true" autoplay="true" interval="2000">
-      <swiper-item>
-        <image class="swiper-image" src="/images/image/aizhimian.jpg"></image>
-      </swiper-item>
-      <swiper-item>
-        <image class="swiper-image" src="/images/image/Casona.jpg"></image>
-      </swiper-item>
-      <swiper-item>
-        <image class="swiper-image" src="/images/image/siyaocanting.jpg"></image>
-      </swiper-item>
-      <swiper-item>
-        <image class="swiper-image" src="/images/image/lvshishan.jpg"></image>
-      </swiper-item>
-    </swiper>
-
-    <view class="{{1==1?'hide':'search-top'}}">
-      <view class="searchlocation" catchtap="searchLocation">
-        <text class="search-locationtxt">{{chooseCity}}</text>
-        <image class="search-img" src="/images/icon/arrow-down-white2.png"></image>
-      </view>
-      <view class="search-input">
-        <icon type="search" size="20" color="purple" class="search-icon" />
-        <!--  <input class="search" type="text" maxlength="50" confirm-type="search" placeholder="输入餐厅、菜系、商圈" bindtap="bindFocus" auto-focus>
-      </input> -->
-        <text class="search-txt" bindtap="bindFocus">输入餐厅、菜系、商圈</text>
-      </view>
-    </view>
-  </view>
-
- <view class="icons_panels">
+  <view class="icons_panels">
     <block wx:for="{{isClassifyList}}" wx:key="{{index}}" wx:for-item="isClassify">
       <view class="icons_3" id="{{index}}" bindtap="classifyJump">
         <image class="icon_img" mode="aspectFit" src="{{isClassify.imgUrl}}" />
@@ -71,40 +40,16 @@
       </view>
     </block>
   </view>
-
-  <view class="{{1==1?'hide':'function-contrainer'}}">
-    <view class="function-area">
-      <view class="saoyisao" catchtap="onScanCodeTap">
-        <image class="function-img" src="/images/icon/saoyisao.png"></image>
-        <text class="function-txt1">扫一扫</text>
-        <text class="function-txt2">查看菜单、点餐</text>
-      </view>
-      <view class="Lineup" catchtap="onlineupTap">
-        <image class="function-img" src="/images/icon/paiduiquhao.png"></image>
-        <text class="function-txt1">排队取号</text>
-        <text class="function-txt2">火爆餐厅远程取号</text>
-      </view>
-      <view class="Reservation" catchtap="onreserveTap">
-        <image class="function-img" src="/images/icon/yuyuedingzuo.png"></image>
-        <text class="function-txt1">预约订座</text>
-        <text class="function-txt2">提前预约点餐</text>
-      </view>
-    </view>
-  </view>
-
   <view style='margin-top:20rpx;'>
     <view class="slogan">
       <view class="line"></view>
       <text class="title">附近热门</text>
     </view>
     <navigator open-type='switchTab' url="../customerbooking/customerbooking">
-      <template is="res" data="{{...shotRes}}" />
+      <template is="res" data="{{...shopRes}}" />
     </navigator>
-     
-<!--    <navigator open-type='switchTab' class="text-center h5" style="padding:12px;color:black" url="../list/list?classifyId={{goods.goodsId}}">查看全部</navigator> -->
-
 
   </view>
- 
-  
+
+
 </view>

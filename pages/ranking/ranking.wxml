@@ -2,7 +2,6 @@
 <view class='top-page'>
 <view class='date'>
 <view class='date-txt'>日期:</view>
-<!-- <view class='begin-date'>2017-11-16</view> -->
 <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
 <view class="begin-date">
 {{beginDate}}
@@ -10,7 +9,6 @@
 </picker>
 <view class="icon1"></view>
 <text class='icon-txt'>~</text>
-<!-- <view class='end-date'>2017-11-18</view> -->
 <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onEndDateTap">
 <view class="end-date">
 {{endDate}}
@@ -47,10 +45,10 @@
 </view>
 </view>
 <view class='spliter-line'></view>
-<view>
-<view class="dishname">菜名</view>
-<view class="typename">类型</view>
-<view class="num">数量</view>
+<view style='padding-left:120rpx;border-bottom:2rpx solid #ccc'>
+<view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>菜名</view>
+<view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>类型</view>
+<view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>数量</view>
 </view>
 <scroll-view class='scroll' scroll-y="true">
 <view wx:for="{{tableOrder}}" wx:for-item="item">

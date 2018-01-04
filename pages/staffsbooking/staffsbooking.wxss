@@ -108,6 +108,9 @@
   line-height: 15px;
 
 }
+.dishmsg{
+  width:170rpx;background-color:#fff;border-radius:1px;
+}
 .addicon{ 
   height: 60rpx;
   width: 60rpx;
@@ -331,7 +334,7 @@ margin-top: 10rpx;
 /*content*/
 .drawer_box { 
  width: 630rpx; 
- height: 550rpx;
+ height: 560rpx;
  overflow: hidden; 
  position: fixed; 
  top: 50%; 
@@ -437,8 +440,9 @@ radio{
 .saling{
   margin-left: 20rpx;
   font-size: 27rpx;
-  color: #B5B2B2;
+  color: red;
   margin-top: 10rpx;
+  font-weight: 300;
 }
 .ss-price{
   margin-left: 20rpx;
@@ -495,14 +499,15 @@ radio{
 .addcart{
   position: absolute;
   border-radius: 10rpx;
-  bottom: 30rpx;
-  right: 30rpx;
+  bottom: 20rpx;
+  right: 20rpx;
   background-color: #197ef4;
   color: white;
   width: 150rpx;
   height: 60rpx;
   font-size: 25rpx;
-  padding: 10rpx 15rpx;
+  padding-top: 10rpx;
+  padding-left:15rpx;
   font-weight: 500;
 }
 
@@ -670,4 +675,33 @@ radio{
   line-height: 28px;
   color: #09bb07;
   white-space: nowrap;
+}
+
+.soldout{
+  height: 100rpx;
+  width: 100rpx;
+  /* position: absolute;
+  top: 10rpx;
+  margin-left: 60rpx; */
+}
+.taste-contrainer{
+   position: absolute;
+  /* margin-left: 220rpx;  */
+  /* margin-left: 10rpx; */
+  right: 20rpx;s
+  margin-top: 5rpx;
+  display:flex;
+  flex-direction:row;
+  text-align:center;
+  font-size:28rpx;
+  color:black;
+  font-weight:300
+}
+.taste{
+  border:1rpx solid #bbbbbb;
+  height:50rpx;
+  width:110rpx;
+  margin: 0rpx 10rpx;
+  padding-top:0rpx;
+  border-radius: 8rpx;
 }

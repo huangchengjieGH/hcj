@@ -12,7 +12,7 @@
     </view>
 
     <view class='pay-type'>
-      <view class='pay-txt'>支付类型</view>
+      <view class='pay-txt'>支付类型:</view>
 
       <view bindtap='per_list'>
         <view class='pay-value'>{{numValue}}</view>
@@ -41,7 +41,7 @@
   <scroll-view class='scroll' scroll-x="true" style=" white-space: nowrap; display: flex">
     <view wx:for="{{dailyOrder}}" wx:for-item="item">
       <view class="{{index=='0'?'dishValue':'dishValue0'}}" style='white-space: pre-line' catchtap="onOrderTap" data-id="{{item.id}}">
-        <text style=" margin-left:10rpx">{{item.num}}</text>
+        <text style=" margin-left:10rpx;">{{item.num}}</text>
       </view>
       <view class="{{index=='0'?'dishValue6':'dishValue2'}}">{{item.orderPrice}}</view>
       <view class="{{index=='0'?'dishValue6':'dishValue3'}}">{{item.customerNum}}</view>

@@ -11,14 +11,16 @@ Page({
     chartData: ['2012/09', '2013/09', '2014/09', '2015/09', '2016/09', '2017/09', '2018/09', '2019/09'],
     chartValue: [15, 20, 45, 37, 4, 80, 78, 90],
     totalPrice: '0',
+    iconsShow: false,
   },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.formatDate();
     this.getServiceTurnOverData();
+    this.getTodaySituationData();
   },
   /**
    * 生命周期函数--监听页面显示
@@ -42,13 +44,14 @@ Page({
       },
       data: {
         begindate: that.data.beginDate,
-        enddate: that.data.endDate
+        enddate: that.data.endDate,
+        status: 0
       },
     }, function (res) {
       console.log(res.data);
-      that.setData({
+    /*    that.setData({
         "turnOverData" : res.data
-      })
+      })  */
       that.processTurnOverData(res.data)
       wx.hideToast();
 
@@ -58,24 +61,109 @@ Page({
     }
     );
   },
+  getTodaySituationData: function (e) {
+    var that = this;
+    wx.showLoading(
+      {
+        title: "处理中"
+      }
+    )
+    /******添加处理icon */
+    util.requestByLogin({
+      url: app.globalData.domain + '/report/todaysituation',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        date: that.data.today,
+      },
+    }, function (res) {
+      /* console.log("situation");
+      console.log(res); */
+  /*     that.setData({
+        'todaySituation':res.data
+      }) */
+      that.processTodaySituationData(res.data);
+      /*    that.setData({
+          "turnOverData" : res.data
+        })  */
+      wx.hideToast();
+
+    }, function () {
+      console.log("Error: function getTodaySituationData")
+      wx.hideToast();
+    }
+    );
+  }, 
   processTurnOverData:function(data){
     var sum = 0.0;
     var chartData = [];
     var chartValue = [];
+    var turnOverList = [];
+    var temp={};
     var date;
     var count = 0;
+    var time;
     for(var idx in data){
-      date = data[idx].date.toString().substring(5, 10);
+      //date = data[idx].date.toString().substring(5, 10);
+      date = util.formatTime(new Date(data[idx].date)); 
+      time = date.toString().substring(0, 10).split('/').join('-');  
+      date = date.toString().substring(5, 10).split('/').join('-');
+      temp = {
+        id: data[idx].id,
+        date:date,
+        time: time,
+        turnover: data[idx].turnover,
+        orderNum: data[idx].orderNum,
+        customerNum: data[idx].customerNum,
+      }
       chartData.push(date);
       chartValue.push(data[idx].turnover);
       sum += data[idx].turnover;
       ++count;
+      turnOverList.push(temp);
+      temp = {};
     }
     this.setData({
       "totalPrice":sum,
       "chartData": chartData,
       "chartValue": chartValue,
       "count":count,
+      "turnOverList": turnOverList,
+    })
+  },
+  processTodaySituationData: function (data) {
+    var donePrice = 0.0;
+    var undonePrice = 0.0;
+    var totalOrder = 0;
+    var undoneOrder = 0;
+    var totalCustomerNum = 0;
+    var customerNuming = 0;
+    var todaySituation = {};
+    for (var idx in data){
+      if (data[idx].status == 0){
+        donePrice = data[idx].orderprice;
+        totalCustomerNum += data[idx].customerNum;
+        totalOrder += data[idx].orderNum;
+      } 
+      if (data[idx].status == 1){
+        undonePrice = data[idx].orderprice;
+        totalCustomerNum += data[idx].customerNum;
+        undoneOrder += data[idx].orderNum;
+        customerNuming = data[idx].customerNum;
+      }
+    }
+    todaySituation = {
+      'donePrice': donePrice,
+      'undonePrice': undonePrice,
+      'totalOrder': totalOrder,
+      'undoneOrder': undoneOrder,
+      'totalCustomerNum': totalCustomerNum,
+      'customerNuming': customerNuming
+    },
+    this.setData({
+      todaySituation: todaySituation
     })
   },
   powerConfirm: function (e) {
@@ -198,7 +286,8 @@ data: [70, 40, 65, 100, 34, 18,67,90]
     beginDate = year + '-' + month + '-' + day;
     this.setData({
       "beginDate": beginDate,
-      "endDate": beginDate
+      "endDate": beginDate,
+      "today": beginDate
     });
     /* console.log(start_date); */
   },
@@ -229,7 +318,7 @@ data: [70, 40, 65, 100, 34, 18,67,90]
       canvas: 'columnCanvas'
     })
     var currentStatu = e.currentTarget.dataset.id;
-    var length = this.data.turnOverData.length;
+    var length = this.data.turnOverList.length;
     this.showInputSeat(currentStatu);
     if (length>0){
       this.weCharts('columnCanvas', 'column');
@@ -241,7 +330,7 @@ data: [70, 40, 65, 100, 34, 18,67,90]
       canvas: 'lineCanvas'
     })
     var currentStatu = e.currentTarget.dataset.id;
-    var length = this.data.turnOverData.length;
+    var length = this.data.turnOverList.length;
     this.showInputSeat(currentStatu);
     if (length > 0) {
     this.weCharts('lineCanvas', 'line'); 
@@ -263,6 +352,12 @@ data: [70, 40, 65, 100, 34, 18,67,90]
       url: '../my/my',
     })
   },
+  onAddTap:function(e){
+    var iconsShow = !this.data.iconsShow;
+    this.setData({
+      "iconsShow": iconsShow
+    })
+  }
 
 
 })

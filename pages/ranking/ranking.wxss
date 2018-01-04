@@ -8,6 +8,7 @@ flex-direction: column;
 width: 100%;
 height: 365rpx;
 border: 1rpx solid #ccc;
+background-color: #fb8215;
 }
 .date{
 display: flex;
@@ -16,33 +17,38 @@ margin-left: 18rpx;
 margin-top: 20rpx;
 }
 .date-txt{
-border: 1rpx solid #ccc;
-font-size: 40rpx;
+background: white;
+font-size: 38rpx;
+font-weight: 350;
 height: 60rpx;
 width: 160rpx;
-text-align: center
+text-align: center;
+border-radius: 5rpx;
 }
 .begin-date{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
+background: white;
+font-size: 35rpx;
 margin-left: 20rpx;
 height: 60rpx;
-width: 240rpx;
+width: 250rpx;
 text-align: left;
-border-radius: 20rpx;
+border-radius: 5rpx;
+padding: 5rpx 10rpx;
 }
 .icon-txt{
 margin-top: 5rpx;
 margin-left: 8rpx;
+color: white
 }
 .end-date{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
+background: white;
+font-size: 35rpx;
 margin-left: 10rpx;
 height: 60rpx;
-width: 240rpx;
+width: 250rpx;
 text-align: left;
-border-radius: 20rpx;
+border-radius: 5rpx;
+padding: 5rpx 10rpx;
 }
 .icon1{
 position: absolute;
@@ -58,7 +64,7 @@ display: inline-block;
 border: 4px solid transparent;
 border-top: 4px solid #9b9b9b;
 margin-top: 25rpx;
-right: 30rpx;
+right: 25rpx;
 }
 .icon3{
 position: absolute;
@@ -75,38 +81,37 @@ margin-left: 18rpx;
 margin-top: 20rpx;
 }
 .type-txt{
-border: 1rpx solid #ccc;
-font-size: 40rpx;
+background: white;
+font-size: 38rpx;
+font-weight: 350;
 height: 60rpx;
 width: 160rpx;
 text-align: center;
+border-radius: 5rpx;
 }
 .type-value{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
+background: white;
+font-size: 35rpx;
 margin-left: 20rpx;
 height: 60rpx;
 width: 300rpx;
-border-radius: 20rpx;
+border-radius: 5rpx;
 text-align: center;
+padding-top: 5rpx;
 }
 .search{
-border: 1rpx solid #ccc;
 height: 80rpx;
 width: 180rpx;
-border-radius: 30rpx;
+border-radius: 10rpx;
 font-size: 40rpx;
 margin-top: 18rpx;
-background-color: #8bc34a;
+background-color: #fffbb4;
 margin-left: 280rpx;
+color: black;
+text-align: center;
+padding-top: 10rpx;
 }
-.search-txt{
-position: absolute;
-color: white;
-font-weight: 100rpx;
-margin-top: 10rpx;
-margin-left: 50rpx;
-}
+
 .spliter-line{
 height: 10rpx;
 width: 100%;
@@ -137,23 +142,44 @@ text-align: center;
 font-size: 38rpx;
 }
 .dishValue{
-background: white; width: 255rpx; height: 80rpx; display: inline-block;
+/* background: white; width: 255rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx; */
+/* color: #0b5dd9; */
+width: 33.33%;
+display: inline-block;
 border: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
-/* color: #0b5dd9; */
+color: #0b5dd9;
+padding: 10rpx;
 }
 .dishValue1{
-background: white; width: 240rpx; height: 80rpx; display: inline-block;
+/* background: white; width: 240rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx; */
+width: 33.33%;
+display: inline-block;
 border: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
+color: #0b5dd9;
+padding: 10rpx;
 }
 .dishValue2{
-background: white; width: 245rpx; height: 80rpx; display: inline-block;
+/* background: white; width: 245rpx; height: 80rpx; display: inline-block;
+border: 1rpx solid #ccc;
+text-align: center;
+font-size: 38rpx; */
+width: 33.33%;
+display: inline-block;
 border: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
+color: #0b5dd9;
+padding: 10rpx;
 }
 .range{
 position: fixed;
@@ -183,7 +209,7 @@ z-index: 4;
 }
 .temp1{
 display: none;
-width: 270rpx;
+width: 300rpx;
 margin-left: 10rpx;
 /* max-height: 550rpx; */
 overflow-y: scroll;
@@ -223,8 +249,8 @@ transform: translateY(-3%);
 }
 }
 .numList{
-background: #faf7f7;
-/* border-bottom: 2rpx solid #b1adad; */
+/* background: #faf7f7; */
+/*  border-bottom: 2rpx solid #b1adad;  */
 }
 .disappear{
 display: none;

@@ -1,7 +1,3 @@
-// pages/booking/booking.js
-var postsdatabase = require('../../data/posts-data.js');
-var resdatabase = require('../../data/data.js');
-var goodsdatabase = require('../../data/goods.js');
 var util = require('../../utils/util.js');
 var app = getApp();
 Page({
@@ -15,6 +11,7 @@ Page({
     /*每道菜下单数目 */
     Order_num: 0,
     /*记录点的菜数目 */
+    totalCount: 0,
     totalnum: 0,
     /*总价格 */
     totalprice: 0,
@@ -29,9 +26,15 @@ Page({
     showModalStatus: false,
     orderStatus: '0',
     orderMsg: '',
-    cashPay: false,
+    cashPay: true,
     detailDish: {},
     popFlag: 1,
+    tasteList:[
+      "微辣",
+      "辣",
+      "不辣"
+    ],
+    taste:''
   },
   GetQueryString: function (url, key) {
     var theRequest = new Object();
@@ -70,8 +73,9 @@ Page({
     var url = decodeURIComponent(options.q);
     console.log(url);
     var tableNum = this.GetQueryString(url, 'tableNum');
+    //测试屏蔽扫码，给定默认座位号10
     this.setData({
-      tableNum: tableNum
+      tableNum: 15
     })
     console.log("this.data.tableNum:" + this.data.tableNum);
     var open_res_Id = app.globalData.resId;
@@ -79,10 +83,6 @@ Page({
     var Detail = {};
     var goods = {};
     this.GetData();
-    /* goods = this.data.goods_msg.data[0].goods;
-    this.processGoodsData(goods); */
-    /*  this.processOrderList(this.data.goods_msg);  */
-    /* this.setData({ goods: goods });  */
   },
 
   onShow: function () {
@@ -91,7 +91,7 @@ Page({
     this.setData({ 'open_res_Id': open_res_Id });
 
   },
-  /*Get local database */
+  /*Get data */
   GetData: function (event) {
     var that = this;
     var res_msg = {};
@@ -101,9 +101,6 @@ Page({
     var ServiceGoodsMsg = {};
     var resMsg = {};
 
-
-    /*获取商家信息 */
-    res_msg = resdatabase.Data_List[0];
     /*获取商品信息 */
     util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
@@ -121,11 +118,11 @@ Page({
         goods_msg: ServiceGoodsMsg,
         resMsg: ServiceGoodsMsg.extra
       })
-      that.processGoodsMsgData(ServiceGoodsMsg);
+      // that.processGoodsMsgData(ServiceGoodsMsg);
       that.processGoodsData(that.data.goods_msg.data[0]);
       that.processOrderList(that.data.goods_msg);
-      that.setData({ classify: ServiceGoodsMsg.data[0].classifyName });
-      console.log(res.extra.seller.payType);
+      that.setData({ classify: ServiceGoodsMsg.data[0].classifyname });
+      //console.log(res.extra.seller.payType);
       if (res.extra.seller.payType == 3) {
         that.setData({
           cashPay: true
@@ -142,108 +139,44 @@ Page({
       wx.hideToast();
     }
     );
-    this.setData(
-      {
-        res_msg: res_msg,
-      },
-    );
-    this.setData(
-      {
-        stars: util.convertToStarsArray(this.data.res_msg.message.score),
-        score: this.data.res_msg.message.score
-      })
+
   },
-  /* */
+  /**
+   * 获取不同类型菜品
+  */
   processGoodsData: function (goodsList) {
     var temp = {};
     var order_num = 0;
     var Goods = [];
     var goodLists = [];
-    console.log("ddd");
     console.log(goodsList.classifyName);
-   var classifyName =goodsList.classifyName;
-   for (var idx in goodsList.goods) {
-     var goods = goodsList.goods;
+    var classifyName = goodsList.classifyName;
+    for (var idx in goodsList.goods) {
+      var goods = goodsList.goods;
       temp = {
         id: goods[idx].id,
         name: goods[idx].name,
-        isHot: goods[idx].isHot,
-        seq: goods[idx].seq,
         brief: goods[idx].brief,
         price: goods[idx].price,
         sales: goods[idx].sales,
-        imgUrl: goods[idx].imgUrl,
+        imgUrl: app.globalData.imgDomain+goods[idx].imgUrl,
         status: goods[idx].status,
-        taste: goods[idx].taste,
-        order_num: goods[idx].order_num,
+        soldout: goods[idx].soldout,
+        classifyId: goods[idx].classifyId
       }
-     
+
       Goods.push(temp);
     }
-   temp = {
+    temp = {
       classifyName: classifyName,
       goodLists: Goods
     }
-   goodLists.push(temp);
+    goodLists.push(temp);
     this.setData(
       {
         Goods: goodLists
       }
     )
-  },
-  /* goodsmsg添加order_num字段*/
-  processGoodsMsgData: function (goods_msg) {
-    var temp = {};
-    var order_num = 0;
-    var data = [];
-    var goods = [];
-    var order_num = 0;
-    var status = goods_msg.status;
-    var msg = goods_msg.msg;
-    var extra = goods_msg.extra;
-    for (var idx in goods_msg.data) {
-      var subject = goods_msg.data[idx];
-      var classifyName = goods_msg.data[idx].classifyName;
-      for (var idx2 in goods_msg.data[idx].goods) {
-        var subject2 = goods_msg.data[idx].goods[idx2]
-        temp = {
-          classifyName: classifyName,
-          id: subject2.id,
-          name: subject2.name,
-          isHot: subject2.isHot,
-          seq: subject2.seq,
-          brief: subject2.brief,
-          price: subject2.price,
-          sales: subject2.sales,
-          imgUrl: subject2.imgUrl,
-          status: subject2.status,
-          taste: subject2.taste,
-          order_num: order_num,
-        }
-        goods.push(temp);
-
-      }
-      temp = {};
-      var temp2 = {
-        classifyName: classifyName,
-        goods: goods,
-      }
-      data.push(temp2);
-      //清空 
-      temp2 = {};
-      goods = [];
-    }
-    var readyData = {
-      status: status,
-      msg: msg,
-      data: data,
-      extra: extra,
-    };
-    //清空
-    data = [];
-    this.setData({
-      goods_msg: readyData
-    })
   },
   /*获取已点菜单 */
   processOrderList: function (goods_msg) {
@@ -269,99 +202,146 @@ Page({
       orderList: orderList
     })
   },
-  /*清空购物车 */
-  clearUpCart: function (goods_msg, Goods) {
-    /*  var that = this;   */
-    var structureString = '';
-    var structureString2 = '';
-    var param = {};
-    var param2 = {};
-    for (var idx in goods_msg.data) {
-      for (var idx2 in goods_msg.data[idx].goods) {
-        if (goods_msg.data[idx].goods[idx2].order_num > 0) {
-          structureString = "goods_msg.data[" + idx + "].goods[" + idx2 + "].order_num";
-          param[structureString] = 0;
-          this.setData(param);
+
+  /*****点菜或者退菜
+   * style:  0 加菜   1 退菜
+   * dishId: 菜品id
+   */
+  processServiceOrder(style, goodId) {
+    var that = this;
+    var good = [];
+    var goodsArray = [];
+    if (style == 0) {
+      /***加菜 */
+      wx.showLoading(
+        {
+          title: "处理中"
         }
+      )
+      good = [
+        {
+          goodsId: goodId,
+          count: 1,
+        }
+      ]
+      /******添加处理icon */
+      util.requestByLogin({
+        url: app.globalData.domain + '/wx/order',
+        method: 'POST',
+        data: {
+          tableNum: that.data.tableNum,
+          customerNum: 0,
+          goodsList: good
+        },
+      }, function (res) {
+        // console.log(res);
+        that.setData({
+          orderLists: res.data,
+          orderId: res.data.id
+        })
+        that.processGoodsListOrder(res.data);
+        goodsArray = res.data.goodsList;
+        that.getTotalCount(goodsArray);
+        wx.hideToast();
+      }, function () {
+        console.log("Error: function onactionTap")
+        wx.hideToast();
       }
-    }
-    for (var idx3 in Goods) {
-      console.log("Test");
-      if (Goods[idx3].order_num > 0) {
-        console.log(Goods[idx3].order_num);
-        structureString2 = "Goods[" + idx3 + "].order_num";
-        console.log(structureString2);
-        param2[structureString2] = 0;
-        this.setData(param2);
+      );
+    } else if (style == 1) {
+      wx.showLoading(
+        {
+          title: "处理中"
+        }
+      )
+      /******添加处理icon */
+      util.requestByLogin({
+        url: app.globalData.domain + '/ordermanage/deldish',
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          id: that.data.orderId,
+          goodsId: goodId
+        },
+      }, function (res) {
+        console.log(res);
+        that.setData({
+          orderLists: res.data,
+        })
+        goodsArray = res.data.goodsList;
+        that.getTotalCount(goodsArray);
+        wx.hideToast();
+
+      }, function () {
+        console.log("Error: function onDeleteDishTap")
+        wx.hideToast();
       }
+      );
     }
+
+
   },
-  /*获取订单列表，反馈服务器 */
-  getGoodsList: function (orderList) {
-    var temp = {};
-    var temp2 = {};
+  processGoodsListOrder(data) {
     var goodsList = [];
-    for (var idx in orderList) {
-      var subject = orderList[idx]
-      temp = {
-        goodsId: subject.id,
-        count: subject.order_num,
+    var orderPrice = 0.0;
+    for (var idx in data.goodsList){
+      if (data.goodsList[idx].commited == 0){
+        goodsList.push(data.goodsList[idx]);
+        orderPrice += data.goodsList[idx].price * data.goodsList[idx].count
       }
-      goodsList.push(temp);
-      temp = {};
     }
-    /*   temp2 = {
-       tableNum: 'A40',
-       goodsList: goodsList
-     }  */
     this.setData({
-      "GoodsList": goodsList
+      goodsList: goodsList,
+      orderPrice: orderPrice
     })
   },
-  /****getDishlocation */
-  getDishlocation: function (goods_msg, adddishId) {
-    var flag = false;
-    for (var idx in goods_msg.data) {
-      var subject = goods_msg.data[idx];
-      var classIndex2 = idx;
-      for (var idx2 in goods_msg.data[idx].goods) {
-        var num2 = idx2
-        var subject2 = goods_msg.data[idx].goods[idx2]
-        if (adddishId == subject2.id) {
-          flag = true;
-          break;
+  getTotalCount: function (goodsArray) {
+    var totalCount = 0;
+    if (goodsArray.length > 0) {
+      for (var idx in goodsArray) {
+        if (goodsArray[idx].commited ==0){
+          totalCount += goodsArray[idx].count
+          console.log(goodsArray[idx].count);
         }
+        
       }
-      if (flag) {
-        break;
-      }
+      this.setData({
+        totalCount: totalCount
+      })
+    } else {
+      this.setData({
+        totalCount: 0
+      })
     }
-    console.log("afternum:" + num2);
-    console.log("afterclassIndex:" + classIndex2)
+
+    /*改变状态*/
+    if (this.data.totalCount == 0) {
+      this.setData({ 'actionflag': '请点餐' })
+    } else {
+      this.setData({ 'actionflag': '选好了' })
+    }
   },
   /*click the classify button */
   onclassiTap: function (event) {
     var id = event.currentTarget.dataset.id;
     var name = event.currentTarget.dataset.name;
-     console.log("buttonId:" + name);
-    console.log("buttonId:" + id);  
+    console.log("buttonId:" + name);
+    console.log("buttonId:" + id);
     this.setData({ 'classify': name }),
-    this.processGoodsData(this.data.goods_msg.data[id]);
-    
-   
+      this.processGoodsData(this.data.goods_msg.data[id]);
+
+
   },
   /*click the button to del the ordered dish */
   DelDishTap: function (event) {
+    var that = this;
     var deldishId = event.currentTarget.dataset.deldishid;
-    /*   console.log(deldishId); */
-    /*  var num = deldishId.toString().substring(4);
-     var classIndex = deldishId.toString().substring(0, 1); */
     var param = {};
     var param1 = {};
     var totalnum = 0;
     var totalPrice = 0;
-    /*     num = num - 1;
-        classIndex = classIndex - 1; */
     /****识别菜所在位置 */
     var flag = false;
     var goodsMsg = this.data.goods_msg.data;
@@ -381,34 +361,12 @@ Page({
           break;
         }
       }
-      console.log("afternum:" + num);
-      console.log("afterclassIndex:" + classIndex)
-       
-      var string = "Goods[0].goodLists[" + num + "].order_num";
-     // var string = "Goods[" + num + "].order_num";
-      param[string] = this.data.Goods[0].goodLists[num].order_num - 1;
-      this.setData(param);
-      /*获取用户点的菜数目 */
-      app.globalData.totalnum = app.globalData.totalnum - 1;
-      totalnum = app.globalData.totalnum;
-      this.setData({ 'totalnum': totalnum });
-
-      /*获取分类点菜数目 */
-      var class_param = {};
-      var class_string = "class_Dish[" + classIndex + "]";
-      class_param[class_string] = this.data.class_Dish[classIndex] - 1;
-      this.setData(class_param);
-      var string1 = "goods_msg.data[" + classIndex + "].goods[" + num + "].order_num"
-      param1[string1] = this.data.goods_msg.data[classIndex].goods[num].order_num - 1;
-      totalPrice = this.data.totalprice - this.data.goods_msg.data[classIndex].goods[num].price
-      this.setData(param1);;
-      this.setData({
-        totalprice: totalPrice
-      })
+      /****退菜 */
+      that.processServiceOrder(1, deldishId);
       /*同步菜单列表 */
-      this.processOrderList(this.data.goods_msg);
+      //   this.processOrderList(this.data.goods_msg);
       /*改变状态*/
-      if (totalnum == 0) {
+      if (this.data.totalCount == 0) {
         this.setData({
           'actionflag': '请点餐',
           'showcartList': false
@@ -425,21 +383,10 @@ Page({
     var adddishId = event.currentTarget.dataset.adddishid;
     console.log(adddishId);
     this.showInputSeat('close');
-    /* var num = adddishId.toString().substring(4);
-   var classIndex = adddishId.toString().substring(0, 1);  */
-    var param = {};
-    var param1 = {};
-    var totalnum = 0;
-    var totalPrice = 0;
-    /* num = num - 1;
-    classIndex = classIndex - 1; */
-    /* console.log("beforenum:" + num);
-   console.log("beforeclassIndex:" + classIndex);  */
-    /*****获取 num classIndex */
-    /*  this.getDishlocation(this.data.goods_msg, adddishId); */
     var flag = false;
     if (this.data.orderStatus == '0') {
       var goodsMsg = this.data.goods_msg.data;
+      //识别菜品位置
       for (var idx in goodsMsg) {
         var subject = goodsMsg[idx];
         var classIndex = idx;
@@ -455,42 +402,20 @@ Page({
           break;
         }
       }
-      console.log("classIndex:" + classIndex);
-      console.log("afternum:" + num);
-      //console.log("afterclassIndex:" + classIndex)
-
-     // var string = "Goods[" + num + "].order_num";
-      var string = "Goods[0].goodLists[" + num + "].order_num";
-      /* console.log(string); */
-      /*获取每道菜下单数目 */
-      param[string] = this.data.Goods[0].goodLists[num].order_num + 1;
-      this.setData(param);
-      var string1 = "goods_msg.data[" + classIndex + "].goods[" + num + "].order_num";
-      console.log(string1);
-      param1[string1] = this.data.goods_msg.data[classIndex].goods[num].order_num + 1;
-      totalPrice = this.data.totalprice + this.data.goods_msg.data[classIndex].goods[num].price;
-      this.setData(param1);
-      this.setData({
-        totalprice: totalPrice
-      })
-      /*同步菜单列表 */
-      this.processOrderList(this.data.goods_msg);
-      /*获取用户点的菜数目 */
-      app.globalData.totalnum = app.globalData.totalnum + 1;
-      totalnum = app.globalData.totalnum;
-      this.setData({ 'totalnum': totalnum });
-      /*获取分类点菜数目 */
-      var class_param = {};
-      var class_string = "class_Dish[" + classIndex + "]";
-      class_param[class_string] = this.data.class_Dish[classIndex] + 1;
-      this.setData(class_param);
-
-      /*改变状态*/
-      if (totalnum == 0) {
-        this.setData({ 'actionflag': '请点餐' })
-      } else {
-        this.setData({ 'actionflag': '选好了' })
+     if (this.data.tableNum != null && this.data.tableNum != '') {
+        console.log("已经扫码");
+        /***点菜 */
+         that.processServiceOrder(0, adddishId);
+        var class_param = {};
+        var class_string = "class_Dish[" + classIndex + "]";
+        class_param[class_string] = this.data.class_Dish[classIndex] + 1;
+        this.setData(class_param); 
+      }else{
+        wx.showToast({
+          title: '请扫买再点餐',
+        })
       }
+   
 
     }
   },
@@ -528,15 +453,6 @@ Page({
 
     }
     else if (actionId == '结账') {
-      /*  paymsg = this.getPaymentMsg();
-       let str = JSON.stringify(paymsg);
-       this.setData({
-         orderStatus: '0',
-       })
-       wx.navigateTo({
-         url: '../pay/pay?str=' + str
-       }) */
-
 
     }
   },
@@ -545,27 +461,52 @@ Page({
     var temp = {
       name: this.data.resMsg.seller.name,
       imgUrl: this.data.resMsg.seller.imgUrl,
-      orderList: this.data.orderList,
-      orderMsg: this.data.orderMsg,
+      customerNum: this.data.customerNum,
+      orderList: this.data.orderLists,
       cashPay: this.data.cashPay
     }
     //console.log(temp);
     return temp;
   },
   /*点击了清空，清空购物车 */
-  onOrderListTap: function (event) {
-    if (this.data.orderStatus == '0') {
-      this.clearUpCart(this.data.goods_msg, this.data.Goods);
-      /*全局变量统计点菜数量，清0 */
-      app.globalData.totalnum = 0;
-      this.setData({
-        orderList: [],
-        totalnum: 0,
-        totalprice: 0,
-        showcartList: false,
-        class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      })
-    }
+  clearUpCart: function (event) {
+    var that = this;
+    wx.showModal({
+      title: '清空购物车',
+      content: '确定清空购物车?',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          util.requestByLogin({
+            url: app.globalData.domain + '/ordermanage/delorder',
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+              orderId: that.data.orderId,
+            },
+          }, function (res) {
+            // console.log(res);
+            that.setData({
+              totalCount: 0,
+              orderLists: {},
+              showcartList: false,
+              class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              actionflag: '请点餐',
+            })
+            wx.hideToast();
+          }, function () {
+            console.log("Error: function onactionTap")
+            wx.hideToast();
+          }
+          );
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
   /*呼叫服务员 */
   callingService: function (event) {
@@ -593,17 +534,7 @@ Page({
       url: '../shopmsg/shopmsg?str=' + str,
     })
   },
-  /*   seatInput: function (e) {
-      var that = this;
-      console.log(e.detail.value);
-       if (e.detail.value != ''){
-       that.setData({
-         tableNum: e.detail.value,
-      }) 
-  
-      } 
-    }, */
-  costomerNumInput: function (e) {
+  seatInput: function (e) {
     var that = this;
     console.log(e.detail.value);
     if (e.detail.value != '') {
@@ -613,14 +544,25 @@ Page({
 
     }
   },
+  costomerNumInput: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+    if (e.detail.value != '') {
+      that.setData({
+        customerNum: e.detail.value,
+      })
+
+    }
+  },
 
   onImgTap: function (e) {
     var imgId = e.currentTarget.dataset.imgid;
+    var soldout = e.currentTarget.dataset.soldout;
+    if (soldout == 0){
     this.setData({
       popFlag: 0
     })
     var temp = {};
-    console.log('点击了' + imgId);
     for (var idx in this.data.Goods[0].goodLists) {
       if (this.data.Goods[0].goodLists[idx].id == imgId) {
         temp = {
@@ -636,8 +578,8 @@ Page({
         break;
       }
     }
-    console.log(temp);
     this.showInputSeat('open')
+    }
   },
   powerDrawer: function (e) {
     var that = this;
@@ -704,14 +646,11 @@ Page({
     var paymsg = {};
     this.showInputSeat('close')
     //正常场景
-    if (that.data.tableNum != null && that.data.tableNum != '' && !this.data.cashPay && that.data.customerNum != '') {
+    if (that.data.tableNum != null && that.data.tableNum != '' && that.data.customerNum != '') {
 
-      /* this.setData({
-        'actionflag': '结账',
+      this.setData({
         orderStatus: '1'
-      }) */
-      this.getGoodsList(this.data.orderList);
-      let Test = this.data.GoodsList;
+      })
       wx.showLoading(
         {
           title: "处理中"
@@ -720,20 +659,19 @@ Page({
 
       /******添加处理icon */
       util.requestByLogin({
-        url: app.globalData.domain + '/wx/order',
-        method: 'POST',
+        url: app.globalData.domain + '/ordermanage/submit',
+        method: 'PUT',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
         data: {
+          orderId: that.data.orderId,
           tableNum: that.data.tableNum,
-          goodsList: Test
+          customerNum: that.data.customerNum,
         },
       }, function (res) {
         console.log(res);
-        /* orderId = data.id; */
         wx.hideToast();
-        that.setData({
-          orderId: res.data.id,
-          orderMsg: res.data
-        });
 
         /**订单提交后转到订单页面 */
         paymsg = that.getPaymentMsg();
@@ -741,19 +679,17 @@ Page({
         that.setData({
           orderStatus: '0',
         })
-        /*订单提交后清空列表 */
-        that.clearUpCart(that.data.goods_msg, that.data.Goods);
         /*全局变量统计点菜数量，清0 */
         app.globalData.totalnum = 0;
         that.setData({
-          orderList: [],
-          totalnum: 0,
-          totalprice: 0,
+          totalCount: 0,
+          orderLists: {},
           showcartList: false,
           class_Dish: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          actionflag: '请点餐',
         })
         /*改变状态*/
-        if (that.data.totalnum == 0) {
+        if (that.data.totalCount == 0) {
           that.setData({ 'actionflag': '请点餐' })
         } else {
           that.setData({ 'actionflag': '选好了' })
@@ -765,23 +701,23 @@ Page({
 
       }, function () {
         console.log("Error: function onactionTap")
-        wx.hideToast();
+        // wx.hideToast();
       }
       );
     }
     else {
       console.log("seat is null");
-      /* if (that.data.totalnum > 0 && !that.data.cashPay) {
-        that.showInputSeat('open')
-      } */
+      wx.showToast({
+        title: '请到店内扫码就餐',
+      })
     }
     //屏蔽结帐功能场景
-    if (that.data.tableNum != null && that.data.tableNum != '' && that.data.cashPay && that.data.customerNum != '') {
+    if (that.data.tableNum != null && that.data.tableNum != '' && that.data.cashPay && that.data.customerNum != '' && 1 == 0) {
       that.setData({
         orderStatus: '1'
       })
-      that.getGoodsList(that.data.orderList);
-      let Test = that.data.GoodsList;
+      //  that.getGoodsList(that.data.orderList);
+      //  let Test = that.data.GoodsList;
       wx.showLoading(
         {
           title: "处理中"
@@ -794,6 +730,7 @@ Page({
         method: 'POST',
         data: {
           tableNum: that.data.tableNum,
+          customerNum: that.data.customerNum,
           goodsList: Test
         },
       }, function (res) {
@@ -811,11 +748,11 @@ Page({
           orderStatus: '0',
         })
         /*订单提交后清空列表 */
-        that.clearUpCart(that.data.goods_msg, that.data.Goods);
+        //   that.clearUpCart(that.data.goods_msg, that.data.Goods);
         /*全局变量统计点菜数量，清0 */
         app.globalData.totalnum = 0;
         that.setData({
-          orderList: [],
+          orderLists: [],
           totalnum: 0,
           totalprice: 0,
           showcartList: false,
@@ -838,6 +775,13 @@ Page({
       );
 
     }
+  },
+
+  onTasteTap:function(e){
+    var taste = e.currentTarget.dataset.taste;
+    this.setData({
+      taste: taste
+    })
   }
 
 })

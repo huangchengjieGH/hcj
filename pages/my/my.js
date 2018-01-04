@@ -127,22 +127,21 @@ setRole: function (e) {
     })
   },
   onReportTap: function (e) {
-    /*  wx.redirectTo({
-       url: '../report/report',
-     })
-   }, */
-
+    console.log("onReportTap");
+    console.log(app.globalData.role);
     if (app.globalData.role == '0') {
       wx.redirectTo({
         url: '../report/report',
       })
     } else if (app.globalData.role == '1') {
+      console.log("1");
       wx.redirectTo({
-        url: '../staffbooking/staffbooking',
+        url: '../staffsbooking/staffsbooking',
       })
     } else if (app.globalData.role == '2') {
+      console.log("2");
       wx.redirectTo({
-        url: '../staffbooking/staffbooking',
+        url: '../staffsbooking/staffsbooking',
       })
     }
   }

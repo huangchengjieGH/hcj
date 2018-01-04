@@ -29,14 +29,14 @@ Page({
    
   },
   getServiceSeatData:function(){ 
-    console.log("test");  
+   // console.log("test");  
     var that = this;
     /******添加处理icon */
     util.requestByLogin({
       url: app.globalData.domain + '/ordermanage/seat',
       method: 'GET',
     }, function (res) {
-     // console.log(res.data);
+      console.log(res.data);
       that.setData({
         seat:res.data
       })
@@ -59,12 +59,12 @@ Page({
         break;
 
       } else if (this.data.numValue == '使用中'){
-        if (seat[idx].status == '0'){
+        if (seat[idx].status == '1'){
           tableList.push(seat[idx]);
         }
 
       } else if (this.data.numValue == '空闲'){
-        if (seat[idx].status == '1') {
+        if (seat[idx].status == '0') {
           tableList.push(seat[idx]);
         }
       }
@@ -81,13 +81,13 @@ onSeatTap: function (event) {
     console.log(orderId);
     console.log(status);
     console.log(seatNum);
-    if (status==0){
+    if (status==1){
       wx.navigateTo({
         url: '../checkorder/checkorder?orderId=' + orderId
       })
     }
 
-    if (status==1){
+    if (status == 0 || status == 2){
 
       wx.navigateTo({
         url: '../staffsbooking/staffsbooking?seatNum=' + seatNum
@@ -128,11 +128,11 @@ onSeatTap: function (event) {
       })
   } else if (app.globalData.role == '1'){
     wx.redirectTo({
-      url: '../staffbooking/staffbooking',
+      url: '../staffsbooking/staffsbooking',
     })
   } else if (app.globalData.role == '2'){
     wx.redirectTo({
-      url: '../staffbooking/staffbooking',
+      url: '../staffsbooking/staffsbooking',
     })
   }
 

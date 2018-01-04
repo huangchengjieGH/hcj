@@ -19,9 +19,9 @@
     <view class="view_tdlUCs">
       <block wx:for="{{tableList}}" wx:key="{{index}}">
         <view class="bottomGrayboder2 rightGrayboder2 list-items-square2">
-          <view class='tableNum' style="{{item.status==1?'background-color:#bbbbbb;':''}}" catchtap="onSeatTap" data-seatnum="{{item.seatNum}}" data-status="{{item.status}}" data-orderid="{{item.orderId}}">
-            <view class="text_JkhshF2">{{item.seatNum}}</view>
-            <view class="table-size">4人</view>
+          <view class='tableNum' style="{{item.status==1?'background-color:#0085DD;':''}}" catchtap="onSeatTap" data-seatnum="{{item.tableNum}}" data-status="{{item.status}}" data-orderid="{{item.orderId}}">
+            <view class="text_JkhshF2">{{item.tableNum}}</view>
+            <view class="table-size">{{item.tableSize}}人</view>
           </view>
 
         </view>

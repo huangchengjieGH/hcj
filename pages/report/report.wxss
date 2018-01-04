@@ -24,11 +24,6 @@ background: #FAFAFA;
 margin: -150px 50rpx 0 50rpx;
 border-radius: 3px;
 }
-/* .drawer_title{
-padding:15px;
-font: 20px "microsoft yahei";
-text-align: center;
-} */
 .drawer_content {
 height: 100%;
 overflow-y: scroll; /*超出父盒子高度可滚动*/
@@ -41,14 +36,14 @@ flex-direction: column;
 }
 .top-page{
 width: 100%;
-height: 200rpx;
+height: 130rpx;
 border: 1rpx solid #ccc;
+background-color: #fb8215;
 }
 .date{
 display: flex;
 flex-direction: row;
-margin-left: 15rpx;
-margin-top: 20rpx;
+padding: 30rpx 20rpx 10rpx 10rpx;
 }
 .date-txt{
 border: 1rpx solid #ccc;
@@ -58,26 +53,31 @@ width: 140rpx;
 text-align: center
 }
 .begin-date{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
-margin-left: 15rpx;
+background-color:white;
+font-size: 35rpx;
+font-weight: 380;
+margin-left: 10rpx;
 height: 60rpx;
-width: 260rpx;
-border-radius: 20rpx;
-text-align: center;
+width: 250rpx;
+border-radius: 5rpx;
+padding: 4rpx 15rpx;
+text-align: left;
 }
 .icon-txt{
 margin-top: 5rpx;
-margin-left: 5rpx;
+margin-left: 10rpx;
+color: white
 }
 .end-date{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
-margin-left: 10rpx;
+/* border: 1rpx solid #ccc; */
+background-color:white;
+font-size: 35rpx;
+margin-left: 15rpx;
 height: 60rpx;
-width: 260rpx;
-border-radius: 20rpx;
-text-align: center;
+width: 250rpx;
+border-radius: 5rpx;
+padding: 4rpx 15rpx;
+text-align: left;
 }
 .icon1{
 position: absolute;
@@ -85,7 +85,7 @@ display: inline-block;
 border: 4px solid transparent;
 border-top: 4px solid #9b9b9b;
 margin-top: 25rpx;
-right: 320rpx;
+right: 490rpx;
 }
 .icon2{
 position: absolute;
@@ -93,24 +93,26 @@ display: inline-block;
 border: 4px solid transparent;
 border-top: 4px solid #9b9b9b;
 margin-top: 25rpx;
-right: 20rpx;
+right: 190rpx;
 }
 .search{
-border: 1rpx solid #ccc;
-height: 80rpx;
-width: 180rpx;
-border-radius: 30rpx;
-font-size: 40rpx;
-margin-top: 18rpx;
-background-color: #8bc34a;
-margin-left: 280rpx;
+/* border: 1rpx solid #ccc; */
+height: 60rpx;
+width: 150rpx;
+border-radius: 10rpx;
+font-size: 35rpx;
+font-weight: 380;
+background-color: #fffbb4;
+color: black;
+text-align: center;
+padding: 5rpx;
+margin-left: 15rpx;
 }
 .search-txt{
-position: absolute;
-color: white;
+/* position: absolute;
 font-weight: 100rpx;
 margin-top: 10rpx;
-margin-left: 50rpx;
+margin-left: 50rpx; */
 }
 .spliter-line{
 height: 10rpx;
@@ -121,43 +123,47 @@ border-bottom: 1rpx solid #bbbbbb;
 
 .scroll{
 width: 100%;
-height: 700rpx;
+height: 570rpx;
+/*  border: 2rpx solid red;  */
 }
 .time{
-background: white; width: 370rpx; height: 80rpx; display: inline-block;
-border: 1rpx solid black;
-/* border-bottom: 1rpx solid black; */
-text-align: center;
+ background: white; width: 370rpx; height: 80rpx; display: inline-block;
 font-size: 38rpx;
-background: #5ed925;
+border-bottom: 1rpx solid #ccc;
+border-right: 1rpx solid #ccc;
 }
 .money{
 background: white; width: 370rpx; height: 80rpx; display: inline-block;
-border: 1rpx solid black;
-text-align: center;
+border-bottom: 1rpx solid #ccc;
 font-size: 38rpx;
-background: #5ed925;
 }
 .dishValue{
-background: white; width: 370rpx; height: 80rpx; display: inline-block;
+/* background: white; 
+width: 370rpx; 
+height: 80rpx; */
+width: 25%;
+display: inline-block;
 border: 1rpx solid #ccc;
-/* border-right: 1rpx solid black; */
 text-align: center;
 font-size: 38rpx;
 color: #0b5dd9;
+padding: 10rpx;
 }
 .dishValue1{
-background: white; width: 370rpx; height: 80rpx; display: inline-block;
+ width: 25%;
+ display: inline-block;
 border: 1rpx solid #ccc;
-/* border-right: 1rpx dashed #ccc; */
 text-align: center;
 font-size: 38rpx;
+padding: 10rpx;
 }
 .dishValue2{
-background: white; width: 370rpx; height: 80rpx; display: inline-block;
+width: 25%;
+display: inline-block;
 border: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
+padding: 10rpx;
 }
 .range{
 position: fixed;
@@ -259,4 +265,35 @@ font-size: 40rpx;
 margin-left: 20rpx;
 color: red;
 margin-top: 5rpx;
+}
+.line{
+  height: 5rpx;
+  width: 200rpx;
+  border-bottom: 2rpx solid #ccc;
+  margin-top: 20rpx;
+}
+.line-column{
+  height: 100px;
+  width: 10rpx;
+  border-bottom: 2rpx solid red;
+}
+.today-txt{
+  font-size: 14px;
+  font-weight: 300;
+  padding: 0rpx 30rpx;
+}
+.icons{
+  width:60rpx;
+  height:60rpx;
+  margin-left:100rpx
+}
+.hide{
+  display: none
+}
+.add{
+  position: absolute;
+  width:60rpx;
+  height:60rpx;
+  left: 560rpx;
+  bottom: 8rpx;
 }

@@ -6,27 +6,13 @@ Page({
   * 页面的初始数据
   */
   data: {
-    content: ['全部', '支付宝', '微信', '银联','现金','其他'],
+    content: ['全部', '支付宝', '微信', '银联','现金','挂帐','其他'],
     openList: true,
     showList: true,
     numValue: '全部',
     order: '',
     beginDate:'',
-    dailyOrder: [
-      { id:'-1',num: '订单号', orderPrice: '金额', customerNum: '用餐人数', payType: '支付方式', operator: '收银员' },
-      { id: '2',num: '10011711132010030409', orderPrice: '320', customerNum: '6', payType: '支付宝', operator: '小白' },
-      { id: '2',num: '10011711132010030408', orderPrice: '230', customerNum: '4', payType: '支付宝', operator: '小白' },
-      { id: '2',num: '10011711132010030407', orderPrice: '220', customerNum: '5', payType: '支付宝', operator: '小白' },
-      { id: '2',num: '10011711132010030405', orderPrice: '222', customerNum: '4', payType: '支付宝', operator: '小白' },
-      { id: '2',num: '10011711132010030404', orderPrice: '231', customerNum: '3', payType: '微信', operator: '小白' },
-      { id: '2',num: '10011711132010030402', orderPrice: '222', customerNum: '4', payType: '微信', operator: '小白' },
-      { id: '2',num: '10011711132010030406', orderPrice: '333', customerNum: '5', payType: '支付宝', operator: '小白' },
-      { id: '2',num: '10011711132010030401', orderPrice: '323', customerNum: '6', payType: '现金', operator: '小白' },
-      { id: '2',num: '10011711132010030489', orderPrice: '222', customerNum: '4', payType: '现金', operator: '小白' },
-      { id: '2',num: '10011711132010030459', orderPrice: '210', customerNum: '3', payType: '银联', operator: '小白' },
-      { id: '2',num: '10011711132010030459', orderPrice: '210', customerNum: '3', payType: '银联', operator: '小白' },
-      { id: '2',num: '10011711132010030439', orderPrice: '230', customerNum: '4', payType: '银联', operator: '小白' },
-    ]
+    dailyOrder: []
   },
 
   /**

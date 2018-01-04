@@ -15,18 +15,7 @@ Page({
     numValue02: '倒序',
     order: '0',
     classifyid:'-1',
-    tableOrder: [
-      { one: '4', two: '5', three: '3' },
-      { one: '8', two: '9', three: '3' },
-      { one: '8', two: '9', three: '3' },
-      { one: '8', two: '9', three: '3' },
-      { one: '118', two: '9', three: '3' },
-      { one: '118', two: '9', three: '3' },
-      { one: '118', two: '9', three: '3' },
-      { one: '118', two: '9', three: '3' },
-      { one: '118', two: '9', three: '3' },
-      { one: '6', two: '9', three: '3' },
-    ],
+    tableOrder: [],
   },
 
   /**
@@ -63,7 +52,7 @@ Page({
         order: that.data.order,
       },
     }, function (res) {
-     // console.log(res.data);
+      console.log(res.data);
       that.setData({
         tableOrder:res.data
       })

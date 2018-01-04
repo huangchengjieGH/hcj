@@ -31,8 +31,8 @@ Page({
         this.setData({payWay: '餐后请找服务员结帐'})
       }
      // console.log(orderId);
-    util.requestByLogin({
-        url: app.globalData.domain + '/wx/order/' + that.data.paymsg.orderMsg.id,
+  /*   util.requestByLogin({
+      url: app.globalData.domain + '/wx/order/' + that.data.paymsg.orderList.id,
         method: 'GET',
       }, function (res) {
         console.log(res);
@@ -40,11 +40,11 @@ Page({
           order: res.data
         })
       }
-      ); 
+      ); */ 
     this.changeTimeFormat();
   },
   changeTimeFormat:function(e){
-    var orderDate = util.formatTime(new Date(this.data.paymsg.orderMsg.createdAt));
+    var orderDate = util.formatTime(new Date(this.data.paymsg.orderList.createdAt));
     this.setData({
       orderDate: orderDate
     })
@@ -111,7 +111,7 @@ Page({
   onPaytap:function(event){
     console.log('点击了付款按钮');
    if(this.data.paymsg.cashPay==false){
-        this.pay(this.data.order.id, function (res) {
+     this.pay(this.data.paymsg.orderList.id, function (res) {
         console.log("res="+res);
       })
     } 

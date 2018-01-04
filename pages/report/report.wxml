@@ -18,10 +18,50 @@
 </view>
 
 <view class="{{user!=0?'hide':'boss-page'}}">
+  <view>
+    <view style='display:flex;flex-direction:row;padding:0rpx 60rpx;'>
+      <view class='line'></view>
+      <view class='today-txt'>今日实时概况</view>
+      <view class='line'></view>
+    </view>
+
+    <view style='display:flex;flex-direction:row;padding:20rpx 160rpx;text-align:center'>
+      <view>
+        <view style='font-size:38rpx;font-weight:380;'>{{todaySituation.donePrice}}</view>
+        <view style='font-size:30rpx;font-weight:200;'>实收金额</view>
+      </view>
+      <view style='margin-left:150rpx;'>
+        <view style='font-size:38rpx;font-weight:380;'>{{todaySituation.undonePrice}}</view>
+        <view style='font-size:30rpx;font-weight:200;'>未收金额</view>
+      </view>
+    </view>
+
+    <view style='display:flex;flex-direction:row;text-align:center;padding:10rpx 28rpx 30rpx 28rpx;'>
+      <view style='margin:0 30rpx;'>
+        <view style='font-size:30rpx;font-weight:380'>{{todaySituation.totalOrder}}</view>
+        <view style='font-size:30rpx;font-weight:200;'>订单数</view>
+      </view>
+      <view style='margin:0 30rpx;'>
+        <view style='font-size:30rpx;font-weight:380'>{{todaySituation.undoneOrder}}</view>
+        <view style='font-size:30rpx;font-weight:200;'>未结订单</view>
+      </view>
+      <view style='margin:0 30rpx;'>
+        <view style='font-size:30rpx;font-weight:380'>{{todaySituation.totalCustomerNum}}</view>
+        <view style='font-size:30rpx;font-weight:200;'>就餐人数</view>
+      </view>
+      <view style='margin:0 30rpx;'>
+        <view style='font-size:30rpx;font-weight:380'>{{todaySituation.customerNuming}}</view>
+        <view style='font-size:30rpx;font-weight:200;'>正在就餐</view>
+      </view>
+    </view>
+    <view style='display:flex;flex-direction:row;'>
+      <view style='height:5rpx;width:200rpx;border-top:1rpx solid #ccc;padding:10rpx;margin-left:50rpx;'></view>
+      <view style='height:5rpx;width:200rpx;border-top:1rpx solid #ccc;padding:10rpx;margin-left:230rpx;'></view>
+    </view>
+
+  </view>
   <view class='top-page'>
     <view class='date'>
-      <view class='date-txt'>日期:</view>
-      <!--  <view class='begin-date' catchtap='onBeginDateTap'>2017-11-16</view> -->
       <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
         <view class="begin-date">
           {{beginDate}}
@@ -29,36 +69,40 @@
       </picker>
       <view class="icon1"></view>
       <text class='icon-txt'>~</text>
-      <!-- <view class='end-date'>2017-11-18</view> -->
       <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onEndDateTap">
         <view class="end-date">
           {{endDate}}
         </view>
       </picker>
       <view class="icon2"></view>
-    </view>
-    <view class='search' catchtap='onSearchTap'>
-      <text class='search-txt'>查询</text>
+
+      <view class='search' catchtap='onSearchTap'>
+        <text class='search-txt'>查询</text>
+      </view>
     </view>
   </view>
   <view class='spliter-line'></view>
-  <view class='total-count'>
-    <text class='total-txt'>营业总额:</text>
-    <text class='total-value'>{{totalPrice}}</text>
-  </view>
-  <view>
-    <view class="time">时间</view>
-    <view class="money">营业额</view>
+  <view style='padding:10rpx 10rpx 10rpx 40rpx;border-bottom:2rpx solid #ccc'>
+    <view style='width:25%;display:inline-block;vertical-align: top;'>时间</view>
+    <view style='width:25%;display:inline-block;vertical-align: top;'>营业额</view>
+    <view style='width:25%;display:inline-block;vertical-align: top;'>订单数</view>
+    <view style='width:25%;display:inline-block;vertical-align: top;'>用餐人数</view>
   </view>
   <scroll-view class='scroll' scroll-y="true">
-    <view wx:for="{{turnOverData}}" wx:for-item="item">
-      <view class="{{item.date=='总计'?'dishValue1':'dishValue'}}" catchtap="ontimeTap" data-id="{{item.date}}">{{item.date}}</view>
+    <view wx:for="{{turnOverList}}" wx:for-item="item">
+      <view class="dishValue" catchtap="ontimeTap" data-id="{{item.time}}">{{item.date}}</view>
       <view class="dishValue2">{{item.turnover}}</view>
+      <view class="dishValue2">{{item.orderNum}}</view>
+      <view class="dishValue2">{{item.customerNum}}</view>
     </view>
   </scroll-view>
-  <view class='range' catchtap='onRankTap'>排行榜</view>
-  <image class='chart-icon' src='/images/icon/chart.png' catchtap="onColumnTap" data-id="open"></image>
-  <image class='chart-icon2' src='/images/icon/line.png' catchtap="onLineTap" data-id="open"></image>
+  <view style='position:fixed;bottom:100rpx;padding:0rpx; 0rpx 10rpx 20rpx'>
+  <image class="{{iconsShow?'icons':'hide'}}" src="/images/icon/tttop.jpg"  catchtap='onRankTap'></image>
+  <image class="{{iconsShow?'icons':'hide'}}" src='/images/icon/column.jpg' catchtap="onColumnTap" data-id="open"></image>
+  <image class="{{iconsShow?'icons':'hide'}}" src='/images/icon/zhe-line.png' catchtap="onLineTap" data-id="open"></image>
+  <image class="add" src='/images/icon/add+.jpg' catchtap="onAddTap"></image>
+  </view>
+ 
 </view>
 
 <view class="bottom-banner">

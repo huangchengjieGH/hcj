@@ -1,6 +1,6 @@
 // pages/nearby/nearby.js
 var cityData = require('../../utils/util.js');
-var postsdatabase = require('../../data/posts-data.js');
+//var postsdatabase = require('../../data/posts-data.js');
 var util = require('../../utils/util.js');
 Page({
 

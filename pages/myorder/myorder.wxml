@@ -32,10 +32,10 @@
  <scroll-view scroll-y="true" class="subject-msg"> 
 <view wx:for="{{orderData}}" wx:for-item="item">
   <view class='order-msg' catchtap='onOrderTap' data-Id="{{item.id}}">
-    <image class='res-img' src='/images/image/aizhimian.jpg'></image>
+    <image class='res-img' src="{{item.imgUrl}}"></image>
     <view class='order-msg2'>
       <text class='res-name'>{{shopMsg.name}}</text>
-      <text class='order-time'>2017-09-23 12:14</text>
+      <text class='order-time'>{{item.time}}</text>
       <view class='order-time'>
         <text>{{item.goodsList[0].name}}</text>
         <text>等商品</text>

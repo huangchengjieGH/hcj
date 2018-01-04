@@ -1,6 +1,6 @@
 // pages/Onlinereservation/Onlinereservation.js
-var postsdatabase = require('../../data/posts-data.js');
-var resdatabase = require('../../data/data.js');
+//var postsdatabase = require('../../data/posts-data.js');
+//var resdatabase = require('../../data/data.js');
 var app = getApp();
 Page({
 

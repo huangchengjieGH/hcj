@@ -55,6 +55,7 @@ function convertToStarsArray(stars) {
 function requestByLogin(request, callback, errCallback) {
   var _self = this;
   var token = wx.getStorageSync('token');
+  console.log(token);
   var flag = '?';
   if (request.url.indexOf('?') !== -1) {
     flag = '&';
@@ -67,6 +68,7 @@ function requestByLogin(request, callback, errCallback) {
     method: request.method,
     dataType: request.dataType,
     success: function (res) {
+      console.log("hcj");
       console.log(res);
      /*   if (res.data.status == 1) {
         callback(res.data);
@@ -103,7 +105,7 @@ function requestByLogin(request, callback, errCallback) {
   })
   return;
   } else{
-    console.log("token.length=0")
+   // console.log("token.length=0")
     _self.login(function (token) {
       wx.request({
         url: request.url + "?token=" + token,
@@ -126,12 +128,12 @@ function requestByLogin(request, callback, errCallback) {
   }
 }
 function login(callback) {
-  console.log("login begin");
   async: false,
+  //  console.log("login begin");
   wx.login({  
     success: function (res) {
-      console.log('utils.js+login+108')
-      console.log(res);
+    //  console.log('utils.js+login+108')
+     // console.log(res);
       wx.request({  
         url: setting.domain + '/wx/user/login?code=' + res.code + '&sellerId=' + setting.shopId,
         data: {},
@@ -139,8 +141,10 @@ function login(callback) {
         // header: {}, // 设置请求的 header
         success: function (res) {
           // success
+         // console.log("hahaha");
           console.log(res);
           wx.setStorageSync('token', res.data.data);
+          console.log(wx.getStorageSync('token'));
           callback(res.data.data);
           console.log('login success')
         },
@@ -167,7 +171,7 @@ function login(callback) {
 }
 function uploadUserInfo() {
   var _self = this;
-  async: false,
+   // async: false,
    wx.getUserInfo({
     success: function (res) {
       _self.requestByLogin({

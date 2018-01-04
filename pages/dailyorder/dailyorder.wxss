@@ -4,34 +4,36 @@ display: flex;
 flex-direction: column;
 }
 .top-page{
-/* position: fixed; */
-/* top: 0rpx; */
 width: 100%;
 height: 310rpx;
 border: 1rpx solid #ccc;
+background-color: #fb8215;
 }
 .date{
 display: flex;
 flex-direction: row;
 margin-left: 60rpx;
 margin-top: 20rpx;
+padding-top:10rpx;
+text-align: center;
 }
 .date-txt{
-border: 1rpx solid #ccc;
+background: white;
 font-size: 40rpx;
 height: 70rpx;
 width: 200rpx;
+border-radius: 5rpx;
+padding-top: 5rpx;
 text-align: center;
-border-radius: 4rpx;
 }
 .begin-date{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
+ background: white;
+font-size: 36rpx;
 margin-left: 60rpx;
 height: 70rpx;
 width: 350rpx;
-text-align: center;
-border-radius: 10rpx;
+border-radius: 5rpx;
+padding-top: 10rpx;
 }
 .icon-txt{
 margin-top: 5rpx;
@@ -46,21 +48,24 @@ margin-top: 30rpx;
 right: 100rpx;
 }
 .search{
-border: 1rpx solid #ccc;
 height: 80rpx;
 width: 480rpx;
-border-radius: 30rpx;
-font-size: 40rpx;
 margin-top: 25rpx;
-background-color: #8bc34a;
 margin-left: 120rpx;
+border-radius: 10rpx;
+font-size: 40rpx;
+font-weight: 380;
+background-color: #fffbb4;
+color: black;
+text-align: center;
+padding-top: 10rpx;
 }
 .search-txt{
-position: absolute;
+/* position: absolute;
 color: white;
 font-weight: 100rpx;
 margin-top: 10rpx;
-margin-left: 200rpx;
+margin-left: 200rpx; */
 }
 .pay-type{
 display: flex;
@@ -70,37 +75,39 @@ margin-top: 20rpx;
 }
 
 .pay-txt{
-border: 1rpx solid #ccc;
-font-size: 40rpx;
+background: white;
+font-size: 38rpx;
 height: 70rpx;
 width: 200rpx;
 text-align: center;
-border-radius: 4rpx;
+border-radius: 5rpx;
+padding-top: 5rpx;
 }
 .pay-value{
-border: 1rpx solid #ccc;
-font-size: 38rpx;
+background: white;
+font-size: 35rpx;
 margin-left: 60rpx;
 height: 70rpx;
 width: 350rpx;
 text-align: center;
-border-radius: 10rpx;
+border-radius: 5rpx;
+padding: 8rpx;
 }
 .temp{
 position: absolute;
 top:190rpx;
-right: 100rpx;
+right: 80rpx;
 z-index: 4;
 }
 .temp1{
 display: none;
-width: 300rpx;
+width: 350rpx;
 margin-left: 10rpx;
 /* max-height: 550rpx; */
 overflow-y: scroll;
 padding: 0 0 0 20rpx;
 line-height:60rpx;
-background: #fff;
+ background: #fff; 
 border: 1px solid #42a4e2;
 }
 .slidown{
@@ -128,7 +135,7 @@ transform: translateY(-3%);
 }
 }
 .numList{
-background: #faf7f7;
+/* background: #faf7f7; */
 /* border-bottom: 2rpx solid #b1adad; */
 }
 .disappear{
@@ -143,8 +150,6 @@ background: #F3F3F3;
 border-bottom: 1rpx solid #bbbbbb;
 }
 .total-count{
-/* position: fixed;
-margin-top: 330rpx; */
 height: 65rpx;
 width: 100%;
 border: 1rpx solid #ccc;
@@ -152,10 +157,12 @@ border: 1rpx solid #ccc;
 .total-order{
   font-size: 30rpx;
   margin-left: 20rpx;
+  font-weight: 300
 }
 .total-txt{
 font-size: 30rpx;
 margin-left: 280rpx;
+font-weight: 300
 }
 .total-value{
 font-size: 40rpx;
@@ -171,57 +178,67 @@ margin-bottom: 50rpx;
 }
 .dishValue6{
 background: white; width: 200rpx; height: 70rpx; display: inline-block;
-border: 1rpx solid black;
+/* border-bottom: 1rpx solid #ccc;
+border-right: 1rpx solid #ccc; */
+border-bottom: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
-background: #5ed925;
+padding-top: 5rpx;
+border-right: 1rpx solid #ccc;
 }
 .dishValue0{
 background: white; width: 300rpx; height: 70rpx; display: inline-block;
-border: 1rpx solid #ccc;
+border-bottom: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
 color:#42a4e2;
+border-right: 1rpx solid #ccc;
 }
 .dishValue{
 background: white; 
 width: 300rpx; 
 height: 70rpx; 
 display: inline-block;
-border: 1rpx solid black;
+/* border-bottom: 1rpx solid #ccc;
+border-right: 1rpx solid #ccc; */
 text-align: center;
 font-size: 38rpx;
-background: #5ed925;
-
+padding-top: 5rpx;
+border-bottom: 1rpx solid #ccc;
+border-right: 1rpx solid #ccc;
 }
 .dishValue2{
 background: white; 
 width: 200rpx; 
 height: 70rpx;
 display: inline-block;
-border: 1rpx solid #ccc;
+border-bottom: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
+border-right: 1rpx solid #ccc;
 }
 .dishValue3{
 background: white;
 width: 200rpx; 
 height: 70rpx; 
 display: inline-block;
-border: 1rpx solid #ccc;
+border-bottom: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
+border-right: 1rpx solid #ccc;
 }
 .dishValue4{
 background: white; width: 200rpx; height: 70rpx; display: inline-block;
-border: 1rpx solid #ccc;
+border-bottom: 1rpx solid #ccc;
 text-align: center;
 font-size: 38rpx;
+border-right: 1rpx solid #ccc;
 }
 .dishValue5{
 background: white; width: 200rpx; height: 70rpx; display: inline-block;
-border: 1rpx solid #ccc;
+border-bottom: 1rpx solid #ccc;
 /* border-right: 1rpx dashed #ccc; */
 text-align: center;
 font-size: 38rpx;
+border-right: 1rpx solid #ccc;
 }

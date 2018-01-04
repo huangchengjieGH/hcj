@@ -1,6 +1,6 @@
 // pages/homepage/homepage.js
-var postsdatabase = require('../../data/posts-data.js');
-var resdatabase = require('../../data/data.js');
+//var postsdatabase = require('../../data/posts-data.js');
+//var resdatabase = require('../../data/data.js');
 var util = require('../../utils/util.js');
 var bmap = require('../../libs/bmap-wx/bmap-wx.min.js')
 var app = getApp();
@@ -12,11 +12,11 @@ Page({
     isClassifyList: [
       {
         "name": "扫一扫",
-        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540752899_e94cb34b8a13e0ca337a69ba60051f85.png",
+        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540788289_3b7635520c14a19ccc3dbb11f316d402.png",
       },
       {
         "name": "排队取号",
-        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540788289_3b7635520c14a19ccc3dbb11f316d402.png",
+        "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540752899_e94cb34b8a13e0ca337a69ba60051f85.png",
       },
       {
         "name": "预约订座",
@@ -35,11 +35,8 @@ Page({
    cityInfo: {},     //城市信息  
    chooseCity:'',
    isBannerList: [
-     {"imgUrl": "/images/image/banner01.jpeg" },
-     { "imgUrl": "/images/image/banner02.jpg" },
-     { "imgUrl": "/images/image/canzhuo.jpeg" },
-     
-
+     { "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507540733424_4f0691cfe48c8f74fe413c7b92391ff4.jpg" },
+     { "imgUrl": "http://shopphoto.oss-cn-shenzhen.aliyuncs.com/image/layout/1507545709856_f8d8153fb4f29d3af15276db22435d48.jpg" },    
    ],
   },
 
@@ -48,10 +45,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    this.setData({
-      posts_key: postsdatabase.postList
-    });
-    /* this.processResData("HotRes","附近热门"); */
     this.getHotResData("hotRes");
     this.located();
     this.getServiceResData();
@@ -62,7 +55,6 @@ Page({
     var hotRes = [];
     var resData = {};
     var tempResData = {};
-    resData = resdatabase.Data_List;
     console.log("resData");
     console.log(resData);
     for (var idx in resData) {
@@ -133,7 +125,7 @@ Page({
       describe: '鸡公煲是重庆烧鸡公...',
       stars: util.convertToStarsArray('5'),
     }
-    this.setData({ shotRes: temp });
+    this.setData({ shopRes: temp });
   },
   /*Get the local database data and process the data */
   processResData: function (settedKey, categoryTitle) {

@@ -97,12 +97,16 @@
   font-weight: 400;
 }
 .dish-price{
+  position: absolute;
   color: red;
-  margin-left: 380rpx;
+  left: 520rpx;
   font-size: 28rpx;
   font-weight: 200;
+  margin-top: 5rpx;
 }
 .dish-price2{
+  position: absolute;
+  left: 550rpx;
   color: red;
   font-size: 35rpx;
 }

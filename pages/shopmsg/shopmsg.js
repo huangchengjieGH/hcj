@@ -1,6 +1,6 @@
 // pages/shopmsg/shopmsg.js
 var cityData = require('../../utils/util.js');
-var resdatabase = require('../../data/data.js');
+//var resdatabase = require('../../data/data.js');
 Page({
 
   /**

@@ -119,127 +119,13 @@
 width:100%;      
 height:360rpx;   
 }
-.swiper-image{
-  width:100%;   
-  height:100%;
-}
+
 .swiper_show60 {
   height:60vw;
   width: 100%;
   background-position: 50% 50%;
 }
 
-.search-top{
- position:absolute;
- display:flex;                 
- flex-direction:row; 
- top: 20rpx;
- margin-left:20rpx;
-}
-.search-locationtxt{
-  margin-top: 20rpx;
-  margin-left: 1rpx;
-  font-size: 30rpx;
-  color: #ffffff;
-}
-.search-img{
-  height: 15rpx;
-  width: 25rpx;
-  /* margin-top: 10rpx; */
-  margin-left: 5rpx;
-}
-.search-input{
-  display:flex;                 
- flex-direction:row; 
-  background-color: white;
-  border-radius:4px;
-  margin-left: 40rpx;
-  width: 500rpx;
-  height: 60rpx;
-}
-.search{
- flex-direction:row; 
- width: 400rpx;
- height: 60rpx;
- margin-left:10rpx;
- top: 20rpx;
- opacity: 1;
- border:#ffffff 1px solid;
- color:#000000; 
- background-color:#ffffff;
-}
-.search-txt{
-  font-size: 35rpx;
-  margin-top: 5rpx;
-  color: #bbbbbb;
-  margin-left: 10rpx;
-}
-.search-icon{
-/*  display: inline-block;
- position:absolute; */
- margin-top:10rpx;
- margin-left:10rpx;
-}
-.function-contrainer
-{
-  /* border-bottom: 1px solid #ededed;
-  border-top: 1px solid #ededed;
-  padding-bottom: 5px;
-   background-color:#f2f2f2; */
-    display: flex;
-  flex-direction: row; 
-}
-.function-area{
-  /* display: flex;
-  flex-direction:row; 
-  margin-bottom: 20rpx;
-  background-color: #fff; */
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-   padding: 15px 0 0;
-
-}
-.saoyisao{
-  display: flex;
-  flex-direction:column; 
-}
-.Lineup{
-   display: flex;
-  flex-direction:column; 
-}
-.Reservation{
-  display: flex;
-  flex-direction:column; 
-}
-.function-img{
-  margin-top: 20rpx;
-  margin-left: 70rpx;
-  height: 110rpx;
-  width: 110rpx;
-}
-.function-txt1{
-  font-size: 35rpx;
-  font-weight: 400;
-  margin-top: 10rpx;
-  margin-left: 65rpx;
-}
-.function-txt2{
-  margin-top:10rpx;
-  margin-bottom: 30rpx;
-  font-size: 28rpx;
-  margin-left: 40rpx;
-  color: #8e9094;
-}
-.find-res{
-  background-color: #fff; 
-}
-.find-btn{
-/* size: default;*/
- width: 700rpx;
- background-color: #f15454;
- color: white;
-}
 .slogan{
   display: flex;
   flex-direction: row;

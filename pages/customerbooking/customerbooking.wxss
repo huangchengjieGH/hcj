@@ -4,6 +4,13 @@
 .booking-contrainer{
   background: #fff;
 }
+.column2{
+  background-color: white;
+  border:3rpx solid #fff;
+  margin-left: 25rpx;
+  height: 30rpx;
+  margin-top: 12rpx;
+}
 .scroll-classify{
   white-space: nowrap; 
   display: flex;
@@ -11,7 +18,7 @@
   background:#197ef4;
   margin:10rpx 20rpx;
   position: fixed;
-  top: 10rpx;
+  top: 120rpx;
   border-radius: 5px 
 }
 .classify{
@@ -41,7 +48,7 @@
 
 .wx-view_TQ4nqD {
    color:white;
-   margin-top: 120rpx;
+   margin-top: 100rpx;
    width: 100%;
    height: 900rpx;
 }
@@ -54,13 +61,13 @@
   color: black;
 }
 .view_tdlUCs {
-  padding: 6px;
+   padding: 6px; 
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;/*自动换行*/
 }
 
-.bottomGrayboder2 {
+ .bottomGrayboder2 {
   border-bottom: 1px solid rgb(237, 237, 237);
   border-bottom-color: rgba(237, 237, 237, 1);
 }
@@ -70,13 +77,13 @@
   border-right-color: rgb(237, 237, 237);
   border-right-style: solid;
   
-}
+} 
 .list-items-square2 {
   width: 33%;
   text-align: center;
   padding: 6px;
   color: rgb(33, 33, 33);
-  border: none;
+  border: none; 
   border-radius:2px;
 }
 .image_HsAX8s {
@@ -108,13 +115,14 @@
   line-height: 15px;
 
 }
+.dishmsg{
+  width:170rpx;background-color:#fff;border-radius:1px;
+}
+  
 .addicon{ 
   height: 60rpx;
   width: 60rpx;
   margin-top: 10rpx;
-}
-.body{
-  border-radius: 5rpx;
 }
 
 .bottom-view{
@@ -331,7 +339,7 @@ margin-top: 10rpx;
 /*content*/
 .drawer_box { 
  width: 630rpx; 
- height: 550rpx;
+ height: 560rpx;
  overflow: hidden; 
  position: fixed; 
  top: 50%; 
@@ -342,11 +350,6 @@ margin-top: 10rpx;
  border-radius: 3px; 
 } 
   
-/* .drawer_title{ 
- padding:15px; 
- font: 20px "microsoft yahei"; 
- text-align: center; 
-}  */
 .drawer_content { 
  height: 100%; 
  /* overflow-y: scroll;  *//*超出父盒子高度可滚动*/
@@ -380,54 +383,10 @@ margin-top: 10rpx;
  font: 300 28rpx/30px "microsoft yahei"; 
 } 
   
-.input_base { 
- border: 2rpx solid #ccc; 
- padding-left: 10rpx; 
- margin-right: 50rpx; 
-} 
-.input_h30{ 
- height: 30px; 
- line-height: 30px; 
-} 
-.input_h60{ 
- height: 60px; 
-} 
-.input_view{ 
- font: 12px "microsoft yahei"; 
- background: #fff; 
- color:#000; 
- line-height: 30px; 
-} 
-  
-input { 
- font: 12px "microsoft yahei"; 
- background: #fff; 
- color:#000 ; 
-} 
-radio{ 
- margin-right: 20px; 
-} 
-.grid {
-  /*  display: -webkit-box; display: box; */
-    } 
-.col-0 {
- /*  -webkit-box-flex:0;box-flex:0; */
-  } 
-.col-1 {
- /*  -webkit-box-flex:1;box-flex:1; */
-  } 
-.fl { float: left;} 
-.fr { float: right;}
 
 .dish-img{
    width:100%;   
   height:400rpx;
-}
-
-.cls-btn{
-   position: absolute;
-   bottom: 10rpx; 
-  margin-left: 280rpx; 
 }
 .dish-name2{
    margin-left: 20rpx;
@@ -437,8 +396,9 @@ radio{
 .saling{
   margin-left: 20rpx;
   font-size: 27rpx;
-  color: #B5B2B2;
+  color: red;
   margin-top: 10rpx;
+  font-weight: 300;
 }
 .ss-price{
   margin-left: 20rpx;
@@ -495,13 +455,42 @@ radio{
 .addcart{
   position: absolute;
   border-radius: 10rpx;
-  bottom: 30rpx;
-  right: 30rpx;
+  bottom: 20rpx;
+  right: 20rpx;
   background-color: #197ef4;
   color: white;
-  width: 150rpx;
+  width: 160rpx;
   height: 60rpx;
   font-size: 25rpx;
-  padding: 10rpx 15rpx;
+   padding-top: 10rpx;
+   padding-left: 20rpx;
+  margin-left: 20rpx;
   font-weight: 500;
+}
+.soldout{
+  height: 100rpx;
+  width: 100rpx;
+  /* position: absolute; 
+  top: 0rpx;  */
+ /*  margin-left: 60rpx; */
+}
+.taste-contrainer{
+  position: absolute;
+  /* margin-left: 220rpx;  */
+  right: 10rpx;
+  margin-top: 5rpx;
+  display:flex;
+  flex-direction:row;
+  text-align:center;
+  font-size:28rpx;
+  color:black;
+  font-weight:300
+}
+.taste{
+  border:1rpx solid #bbbbbb;
+  height:50rpx;
+  width:110rpx;
+  margin: 0rpx 10rpx;
+  padding-top:2rpx;
+  border-radius: 8rpx;
 }

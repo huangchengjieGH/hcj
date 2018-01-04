@@ -37,6 +37,7 @@ App({
     domain:setting.domain,
     shopId: setting.shopId,
     role:0,
+    imgDomain: setting.imgDomain
   },
   // onLaunch(){
   //   util.uploadUserInfo();

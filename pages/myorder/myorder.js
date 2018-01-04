@@ -49,7 +49,7 @@ Page({
       url: app.globalData.domain + '/wx/order',
       method: 'GET',
     }, function (res) {
-      //console.log(res); 
+      console.log(res); 
        that.processOrderData(res.data);  
    /*     that.setData({
         orderList:data
@@ -106,6 +106,7 @@ Page({
     var temp = {};
     var orderList = [];
     for (var idx in data) {
+      var time = util.formatTime(new Date(data[idx].lastOrderStream.updatedAt));
       switch (data[idx].lastOrderStream.type) {
         case 0:
           temp = {
@@ -115,6 +116,7 @@ Page({
             tableNum: data[idx].tableNum,
             orderState: '订单已完成',  
             orderFunc: '开发票',
+            time: time,
             goodsList: data[idx].goodsList,
             lastOrderStream:data[idx].lastOrderStream,
           }
@@ -127,6 +129,8 @@ Page({
             tableNum: data[idx].tableNum,
             orderState: '未支付',
             orderFunc: '支付',
+            time: time,
+            status: data[idx].status,
             goodsList: data[idx].goodsList,
             lastOrderStream:data[idx].lastOrderStream,
           }
@@ -139,6 +143,8 @@ Page({
             tableNum: data[idx].tableNum,
             orderState: '订单已取消',
             orderFunc: '再来一单',
+            time: time,
+            status: data[idx].status,
             goodsList: data[idx].goodsList,
             lastOrderStream:data[idx].lastOrderStream,
           }
@@ -151,6 +157,8 @@ Page({
             tableNum: data[idx].tableNum,
             orderState: '预约成功',
             orderFunc: '点餐',
+            time: time,
+            status: data[idx].status,
             goodsList: data[idx].goodsList,
             lastOrderStream:data[idx].lastOrderStream,
           }
@@ -163,6 +171,8 @@ Page({
             tableNum: data[idx].tableNum,
             orderState: '线下支付',
             orderFunc: '再来一单',
+            time: time,
+            status: data[idx].status,
             goodsList: data[idx].goodsList,
             lastOrderStream: data[idx].lastOrderStream,
           }
