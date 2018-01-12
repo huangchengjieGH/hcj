@@ -121,7 +121,7 @@ function requestByLogin(request, callback, errCallback) {
             console.log(res.data);
           }
         },
-        fail: function (res) { },
+        fail: function (res) {},
         complete: function (res) { },
       })
     })
@@ -141,7 +141,6 @@ function login(callback) {
         // header: {}, // 设置请求的 header
         success: function (res) {
           // success
-         // console.log("hahaha");
           console.log(res);
           wx.setStorageSync('token', res.data.data);
           console.log(wx.getStorageSync('token'));

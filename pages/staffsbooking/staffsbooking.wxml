@@ -1,7 +1,8 @@
+<!-- <view class='background'></view> -->
 <scroll-view class="booking-contrainer">
   <scroll-view scroll-x="true" class="scroll-classify">
-    <view class="classify" wx:for="{{goods_msg.data}}" wx:key="{{index}}" wx:for-item="isClassify">
-      <view class="classify-txt" catchtap="onclassiTap" data-Name="{{isClassify.classifyname}}" data-Id="{{index}}">
+    <view class="classify" wx:for="{{goods_msg.data}}" wx:key="{{index}}" wx:for-item="isClassify" catchtap="onclassiTap" data-Name="{{isClassify.classifyname}}" data-Id="{{index}}">
+      <view class="classify-txt">
         <text style="{{isClassify.classifyname == classify?'color:#16dc19':'color:white'}}">{{isClassify.classifyname}}</text>
         <icon class="{{class_Dish[index]==0?'hide':'success-icon'}}" type="success" size="11" color="red" />
         <view class="line"></view>
@@ -17,7 +18,12 @@
       <view class="view_tdlUCs">
         <block wx:for="{{goods.goodLists}}" wx:key="{{index}}">
           <view class="bottomGrayboder2 rightGrayboder2 list-items-square2">
-            <image class="image_HsAX8s" style="{{item.soldout==1?'opacity: 0.6':''}};" mode="aspectFill" src="{{item.imgUrl}}" catchtap="onImgTap" data-imgId="{{item.id}}" data-soldout="{{item.soldout}}" />
+            <view style='position: absolute;margin-left:20rpx;'>
+              <image class="{{item.soldout==1?'soldout':'hide'}}" src="/images/icon/soldout2.png"></image>
+            </view>
+            <view style='height:150rpx;'>
+              <image class="dish_image" style="{{item.soldout==1?'opacity: 0.6':''}};" src="{{item.imgUrl}}" catchtap="onImgTap" data-imgId="{{item.id}}" data-soldout="{{item.soldout}}" data-specId="{{item.specId}}" />
+            </view>
             <view style='display: flex;flex-direction: row;'>
               <view class='dishmsg' style="{{item.soldout==1?'opacity: 0.6':''}};">
                 <view class="text_JkhshF2">{{item.name}}</view>
@@ -25,11 +31,11 @@
                   <text> ￥{{item.price}}</text>
                 </view>
               </view>
-              <image class="addicon" src="/images/icon/add.png" style="{{item.soldout==1?'opacity: 0.6':''}};" catchtap="onImgTap" data-imgId="{{item.id}}" data-soldout="{{item.soldout}}"></image>
+              <image class="addicon" src="/images/icon/add.png" style="{{item.soldout==1?'opacity: 0.6':''}};" catchtap="onImgTap" data-imgId="{{item.id}}" data-soldout="{{item.soldout}}" data-specId="{{item.specId}}"></image>
             </view>
-            <view style='position: absolute;top:10rpx;margin-left:10rpx;'>
+            <!-- <view style='position: absolute;top:10rpx;margin-left:10rpx;'>
               <image class="{{item.soldout==1?'soldout':'hide'}}" src="/images/icon/soldout2.png"></image>
-            </view>
+            </view> -->
           </view>
         </block>
       </view>
@@ -77,38 +83,38 @@
       <text class='order-name'>{{item.name}}</text>
       <text class='price'>￥</text>
       <text class='price-value'>{{item.price}}</text>
-      <image class='order-del' src="/images/icon/jian.png" catchtap="DelDishTap" data-deldishId="{{item.goodsId}}"></image>
+      <image class='order-del' src="/images/icon/jian.png" catchtap="DelDishTap" data-deldishId="{{item.goodsId}}" data-specId="{{item.specId}}"></image>
       <text class='order-num'>{{item.count}}</text>
-      <image class='order-add' src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{item.goodsId}}"></image>
+      <image class='order-add' src="/images/icon/add.png" catchtap="AddDishTap" data-adddishId="{{item.goodsId}}" data-specId="{{item.specId}}"></image>
     </view>
   </view>
 </scroll-view>
 
-  <view class="{{1==0?'hide':'page__bd search-y'}}">
-    <view class="weui_cell searchbar">
-      <view class="weui-cell__hd search_btn" bindtap="onChangeShowState">
-        <image mode="aspectFit" src="/images/icon/list.png" />
-      </view>
-      <view class="weui-cell_bd">
-        <view class="weui_search-bar">
-          <view class="weui-search-bar_form">
-            <view class="weui-search-bar_box">
-              <icon class="weui_icon-search_in-box" type="search" size="14"></icon>
-              <input type="text" class="weui-search-bar_input" confirm-type="search" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindconfirm="inputTyping" confirm-type='confirm' />
-              <view class="weui_icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                <icon type="clear" size="14"></icon>
-              </view>
+<view class="{{1==0?'hide':'page__bd search-y'}}">
+  <view class="weui_cell searchbar">
+    <view class="weui-cell__hd search_btn" bindtap="onChangeShowState">
+      <image mode="aspectFit" src="/images/icon/list.png" />
+    </view>
+    <view class="weui-cell_bd">
+      <view class="weui_search-bar">
+        <view class="weui-search-bar_form">
+          <view class="weui-search-bar_box">
+            <icon class="weui_icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar_input" confirm-type="search" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindconfirm="inputTyping" confirm-type='confirm' />
+            <view class="weui_icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
             </view>
-            <label class="weui-search-bar_label" hidden="{{inputShowed}}" bindtap="showInput">
-              <icon class="weui_icon-search" type="search" size="14"></icon>
-              <view class="weui-search-bar_text">请输入菜品编号或首字母</view>
-            </label>
           </view>
-          <view class="weui-search-bar_cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+          <label class="weui-search-bar_label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui_icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar_text">请输入菜品编号或首字母</view>
+          </label>
         </view>
+        <view class="weui-search-bar_cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
       </view>
     </view>
   </view>
+</view>
 
 <!--mask-->
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
@@ -120,7 +126,7 @@
     <view class="{{popFlag==0?'top grid':'hide'}}">
       <image class='dish-img' src="{{detailDish.imgUrl}}"></image>
       <view style='display: flex;flex-direction: row;margin-top:10rpx;'>
-        <text class='dish-name2'>{{detailDish.name}}</text>
+        <text class='dish-name2'>{{detailDish.totalname}}</text>
         <view class='taste-contrainer'>
           <!-- <view style='padding-top:2rpx;font-size:25rpx;color:black;font-weight:400;'>做法:</view> -->
           <view wx:for="{{tasteList}}" catchtap="onTasteTap" data-taste="{{item}}">
@@ -140,7 +146,7 @@
         </view>
 
       </view>
-      <view class="addcart" catchtap="AddDishTap" data-adddishId="{{detailDish.id}}">加入购物车</view>
+      <view class="addcart" catchtap="AddDishTap" data-adddishId="{{detailDish.id}}" data-specId="{{detailDish.specId}}">加入购物车</view>
     </view>
 
     <view class="{{popFlag==1?'pop-content':'hide'}}">

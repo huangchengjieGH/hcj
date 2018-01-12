@@ -2,7 +2,6 @@
 var app = getApp();
 var util = require('../../utils/util.js');
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -141,8 +140,8 @@ Page({
             num: data[idx].num,
             orderPrice: data[idx].orderPrice,
             tableNum: data[idx].tableNum,
-            orderState: '订单已取消',
-            orderFunc: '再来一单',
+            orderState: '点餐中',
+            orderFunc: '点餐中',
             time: time,
             status: data[idx].status,
             goodsList: data[idx].goodsList,
@@ -155,8 +154,8 @@ Page({
             num: data[idx].num,
             orderPrice: data[idx].orderPrice,
             tableNum: data[idx].tableNum,
-            orderState: '预约成功',
-            orderFunc: '点餐',
+            orderState: '订单已取消',
+            orderFunc: '再来一单',
             time: time,
             status: data[idx].status,
             goodsList: data[idx].goodsList,
@@ -235,21 +234,6 @@ Page({
       paying_flag: false,
       cancel_flag: false,
     })
-    /*** */
-    /* var temp = {};
-    var orderData = [];
-    var data = this.data.orderList;
-    for (var idx in data) {
-      if (data[idx].lastOrderStream.status == 1) {
-        temp = data[idx];
-      }
-      orderData.push(temp);
-      temp = {};
-    }
-  //  this.setData({
-   //     orderList: orderList
-   //   }) 
-    console.log(orderData) */
     this.getOrderData(this.data.orderList,0);
   },
   /*点击了待付款 */
@@ -274,7 +258,7 @@ Page({
       paying_flag: false,
       cancel_flag: true,
       });
-    this.getOrderData(this.data.orderList,2);
+    this.getOrderData(this.data.orderList,3);
   },
 /*点击了设置 */
 onsettingTap:function(event){
@@ -328,7 +312,7 @@ onActionTap:function(event){
  }
   else{
     wx.switchTab({
-      url: '../booking/booking'
+      url: '../customerbooking/customerbooking'
     }) 
   }
 },

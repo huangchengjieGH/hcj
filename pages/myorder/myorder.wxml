@@ -1,4 +1,5 @@
 <!--pages/myorder/myorder.wxml-->
+<view class='bakckground'></view>
 <view class='myorder-contrainer'>
   <view class='myorder'>
     <view class='setting' catchtap='onsettingTap'>
@@ -14,14 +15,15 @@
           <text class='mobile-value'>15889668184</text>  -->
         </view>
       </view>
-      <view class="{{login_flag?'hide':'Login'}}" catchtap="onLoginTap">
-        <text class="Login-txt1">立即登陆</text>
-        <text class="Login-txt2">登录之后获取更多权益</text>
+      <view class="{{login_flag?'Login':'Login'}}" catchtap="onLoginTap">
+        <!-- <text class="Login-txt1">立即登陆</text> -->
+        <text class="Login-txt2">登录之后获取积分</text>
       </view>
-      <image class='arrow-right' src='/images/icon/right.png'></image>
+       <!-- <image class='arrow-right' src='/images/icon/right.png'></image>  -->
+       
     </view>
   </view>
-  <view class='spliter-line'></view>
+   <view class='spliter-line'></view> 
 
   <view class='function-class'>
     <text class="{{total_flag?'total-order':'total-order2'}}" catchtap="ontotalTap" data-Id="10001">全部</text>
@@ -29,33 +31,33 @@
     <text class="{{paying_flag?'paying-order':'paying-order2'}}" catchtap="onpayTap" data-Id="10003">待付款</text>
     <text class="{{cancel_flag?'cancel-order':'cancel-order2'}}" catchtap="oncancelTap" data-Id="10004">已取消</text>
   </view>
- <scroll-view scroll-y="true" class="subject-msg"> 
-<view wx:for="{{orderData}}" wx:for-item="item">
-  <view class='order-msg' catchtap='onOrderTap' data-Id="{{item.id}}">
-    <image class='res-img' src="{{item.imgUrl}}"></image>
-    <view class='order-msg2'>
-      <text class='res-name'>{{shopMsg.name}}</text>
-      <text class='order-time'>{{item.time}}</text>
-      <view class='order-time'>
-        <text>{{item.goodsList[0].name}}</text>
-        <text>等商品</text>
+  <scroll-view scroll-y="true" class="subject-msg">
+    <view wx:for="{{orderData}}" wx:for-item="item">
+      <view class='order-msg' catchtap='onOrderTap' data-Id="{{item.id}}">
+        <image class='res-img' src="{{item.imgUrl}}"></image>
+        <view class='order-msg2'>
+          <text class='res-name'>{{shopMsg.name}}</text>
+          <text class='order-time'>{{item.time}}</text>
+          <view class='order-time'>
+            <text>{{item.goodsList[0].name}}</text>
+            <text>等商品</text>
+          </view>
+        </view>
+        <view>
+          <view class='state'>
+            <image class='arrow' src='/images/icon/arrow-right.png'> </image>
+            <text class='order-state'>{{item.orderState}}</text>
+          </view>
+          <view class='price'>
+            <text class='price-symbol'>￥</text>
+            <text>{{item.orderPrice}}</text>
+          </view>
+          <view class='invoice' catchtap='onActionTap' data-Id="{{item.id}}" data-status="{{item.lastOrderStream.type}}">
+            <text class='invoice-txt'>{{item.orderFunc}}</text>
+          </view>
+        </view>
       </view>
+      <view class='spliter-line'></view>
     </view>
-    <view>
-      <view class='state'>
-        <image class='arrow' src='/images/icon/arrow-right.png'> </image>
-        <text class='order-state'>{{item.orderState}}</text>
-      </view>
-      <view class='price'>
-        <text class='price-symbol'>￥</text>
-        <text>{{item.orderPrice}}</text>
-      </view>
-      <view class='invoice' catchtap='onActionTap' data-Id="{{item.id}}" data-status="{{item.lastOrderStream.type}}">
-        <text class='invoice-txt'>{{item.orderFunc}}</text>
-      </view>
-    </view>
-  </view>
-  <view class='spliter-line'></view>
-  </view>
-</scroll-view>
+  </scroll-view>
 </view>

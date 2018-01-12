@@ -1,19 +1,10 @@
 <!--pages/report/report.wxml-->
 <!--mask-->
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
-<!--content-->
-<!--使用animation属性指定需要执行的动画-->
 <view animation="{{animationData}}" class="drawer_box" scroll-y="true" wx:if="{{showModalStatus}}">
-  <!-- <view class="drawer_content" wx:if="{{user!=0}}">
-     <view class="top grid">
-      <label class="title col-0">座位号</label>
-      <input placeholder="请输入您的座位号" class="input_base input_h30 col-1" bindinput="seatInput" confirm-type='confirm'></input>
-      <view class="btn_ok" catchtap="powerConfirm" data-statu="close">确定</view>
-    </view> 
-  </view> -->
+
   <view class='charts' wx:if="{{user==0}}">
     <canvas style="width: 630rpx; height: 550rpx;" canvas-id="{{canvas}}"></canvas>
-    <!-- <canvas style="width: 630rpx; height: 550rpx;" canvas-id="lineCanvas"></canvas> -->
   </view>
 </view>
 
@@ -82,7 +73,7 @@
     </view>
   </view>
   <view class='spliter-line'></view>
-  <view style='padding:10rpx 10rpx 10rpx 40rpx;border-bottom:2rpx solid #ccc'>
+  <view style='padding:10rpx 10rpx 10rpx 40rpx;border-bottom:2rpx solid #ccc;font-size:35rpx;'>
     <view style='width:25%;display:inline-block;vertical-align: top;'>时间</view>
     <view style='width:25%;display:inline-block;vertical-align: top;'>营业额</view>
     <view style='width:25%;display:inline-block;vertical-align: top;'>订单数</view>
@@ -97,12 +88,12 @@
     </view>
   </scroll-view>
   <view style='position:fixed;bottom:100rpx;padding:0rpx; 0rpx 10rpx 20rpx'>
-  <image class="{{iconsShow?'icons':'hide'}}" src="/images/icon/tttop.jpg"  catchtap='onRankTap'></image>
-  <image class="{{iconsShow?'icons':'hide'}}" src='/images/icon/column.jpg' catchtap="onColumnTap" data-id="open"></image>
-  <image class="{{iconsShow?'icons':'hide'}}" src='/images/icon/zhe-line.png' catchtap="onLineTap" data-id="open"></image>
-  <image class="add" src='/images/icon/add+.jpg' catchtap="onAddTap"></image>
+    <image class="{{iconsShow?'icons':'hide'}}" src="/images/icon/tttop.jpg" catchtap='onRankTap'></image>
+    <image class="{{iconsShow?'icons':'hide'}}" src='/images/icon/column.jpg' catchtap="onColumnTap" data-id="open"></image>
+    <image class="{{iconsShow?'icons':'hide'}}" src='/images/icon/zhe-line.png' catchtap="onLineTap" data-id="open"></image>
+    <image class="add" src='/images/icon/add+.jpg' catchtap="onAddTap"></image>
   </view>
- 
+
 </view>
 
 <view class="bottom-banner">

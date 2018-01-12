@@ -99,7 +99,7 @@ Page({
     var tableNum = this.GetQueryString(url, 'tableNum');
     //测试屏蔽扫码，给定默认座位号10
     this.setData({
-     // tableNum: 14
+      //tableNum: 8
     })
     console.log("this.data.tableNum:" + this.data.tableNum);
     var open_res_Id = app.globalData.resId;
@@ -170,29 +170,44 @@ Page({
     );
 
   },
-  /* */
   processGoodsData: function (goodsList) {
     var temp = {};
     var order_num = 0;
     var Goods = [];
     var goodLists = [];
+    var specsList = [];
     console.log(goodsList.classifyName);
-    var classifyName = goodsList.classifyName;
+    var classifyName = goodsList.classifyname;
+    var name = '';
+    var totalname = '';
     for (var idx in goodsList.goods) {
       var goods = goodsList.goods;
-      temp = {
-        id: goods[idx].id,
-        name: goods[idx].name,
-        brief: goods[idx].brief,
-        price: goods[idx].price,
-        sales: goods[idx].sales,
-        imgUrl: app.globalData.imgDomain + goods[idx].imgUrl,
-        status: goods[idx].status,
-        soldout: goods[idx].soldout,
-        classifyId: goods[idx].classifyId
+      specsList = goods[idx].specs;
+      for (var index in specsList) {
+        totalname = goods[idx].name + '(' + specsList[index].name + ')';
+        if (totalname.length > 8) {
+          name = totalname.substring(0, 7);
+          name = name + '..'
+        } else {
+          name = totalname;
+        }
+        temp = {
+          id: goods[idx].id,
+          name: name,
+          totalname: totalname,
+          brief: goods[idx].brief,
+          classifyId: goods[idx].classifyId,
+          imgUrl: app.globalData.imgDomain + goods[idx].imgUrl,
+          status: goods[idx].status,
+          specId: specsList[index].id,
+          specName: specsList[index].name,
+          price: specsList[index].price,
+          vipPrice: specsList[index].vipPrice,
+          sales: specsList[index].sales,
+          soldout: specsList[index].soldout,
+        }
+        Goods.push(temp);
       }
-
-      Goods.push(temp);
     }
     temp = {
       classifyName: classifyName,
@@ -235,7 +250,7 @@ Page({
   * style:  0 加菜   1 退菜
   * dishId: 菜品id
   */
-  processServiceOrder(style, goodId) {
+  processServiceOrder(style, goodId, specId) {
     var that = this;
     var good = [];
     var goodsArray = [];
@@ -249,6 +264,7 @@ Page({
       good = [
         {
           goodsId: goodId,
+          specId: specId,
           count: 1,
         }
       ]
@@ -269,8 +285,6 @@ Page({
         })
         that.processGoodsListOrder(res.data);
         goodsArray = res.data.goodsList;
-        console.log("goodsArray");
-        console.log(goodsArray);
         that.getTotalCount(goodsArray);
         wx.hideToast();
       }, function () {
@@ -293,16 +307,16 @@ Page({
         },
         data: {
           id: that.data.orderId,
-          goodsId: goodId
+          goodsId: goodId,
+          specId: specId
         },
       }, function (res) {
         console.log(res);
         that.setData({
           orderLists: res.data,
         })
+        that.processGoodsListOrder(res.data);
         goodsArray = res.data.goodsList;
-        console.log("goodsArray");
-        console.log(goodsArray);
         that.getTotalCount(goodsArray);
         wx.hideToast();
 
@@ -415,6 +429,7 @@ Page({
   DelDishTap: function (event) {
     var that = this;
     var deldishId = event.currentTarget.dataset.deldishid;
+    var specId = event.currentTarget.dataset.specid;
     var param = {};
     var param1 = {};
     var totalnum = 0;
@@ -462,8 +477,12 @@ Page({
       /*   this.setData({
            totalprice: totalPrice
          })*/
+      var class_param = {};
+      var class_string = "class_Dish[" + classIndex + "]";
+      class_param[class_string] = this.data.class_Dish[classIndex] - 1;
+      this.setData(class_param);
       /****退菜 */
-      that.processServiceOrder(1, deldishId);
+      that.processServiceOrder(1, deldishId, specId);
       /*同步菜单列表 */
       //   this.processOrderList(this.data.goods_msg);
       /*改变状态*/
@@ -482,6 +501,7 @@ Page({
   AddDishTap: function (event) {
     var that = this;
     var adddishId = event.currentTarget.dataset.adddishid;
+    var specId = event.currentTarget.dataset.specid;
     console.log(adddishId);
     this.showInputSeat('close');
     var param = {};
@@ -520,7 +540,7 @@ Page({
       //     totalprice: totalPrice
       //   })
       /***点菜 */
-      that.processServiceOrder(0, adddishId);
+      that.processServiceOrder(0, adddishId, specId);
       /*同步菜单列表 */
       //  this.processOrderList(this.data.goods_msg);
       /*获取用户点的菜数目 */
@@ -612,21 +632,27 @@ Page({
     })
   },
  
-  onImgTap: function (e) {
+onImgTap: function (e) {
     var imgId = e.currentTarget.dataset.imgid;
     var soldout = e.currentTarget.dataset.soldout;
+    var specId = e.currentTarget.dataset.specid;
+    console.log("specId");
+    console.log(specId);
     if (soldout == 0) {
       this.setData({
         popFlag: 0
       })
       var temp = {};
       for (var idx in this.data.Goods[0].goodLists) {
-        if (this.data.Goods[0].goodLists[idx].id == imgId) {
+        if (this.data.Goods[0].goodLists[idx].id == imgId && this.data.Goods[0].goodLists[idx].specId == specId) {
           temp = {
             id: imgId,
+            specId: this.data.Goods[0].goodLists[idx].specId,
             name: this.data.Goods[0].goodLists[idx].name,
+            totalname: this.data.Goods[0].goodLists[idx].totalname,
             sales: this.data.Goods[0].goodLists[idx].sales,
             price: this.data.Goods[0].goodLists[idx].price,
+            vipPrice: this.data.Goods[0].goodLists[idx].vipPrice,
             imgUrl: this.data.Goods[0].goodLists[idx].imgUrl
           }
           this.setData({
@@ -708,7 +734,8 @@ Page({
     })
   },
   getFlag: function (e) {
-    if (app.globalData.role == '0') {
+    var role = wx.getStorageSync('role');
+    if (role == '0') {
       this.setData({
         funcFlag: '报表'
       })

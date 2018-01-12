@@ -121,16 +121,16 @@ onSeatTap: function (event) {
     }
   },
   onReportTap: function (e) {
-    console.log(app.globalData.role);
-  if (app.globalData.role == '0'){
+  var role = wx.getStorageSync('role');
+  if (role == '0'){
       wx.redirectTo({
         url: '../report/report',
       })
-  } else if (app.globalData.role == '1'){
+  } else if (role == '1'){
     wx.redirectTo({
       url: '../staffsbooking/staffsbooking',
     })
-  } else if (app.globalData.role == '2'){
+  } else if (role == '2'){
     wx.redirectTo({
       url: '../staffsbooking/staffsbooking',
     })
@@ -143,7 +143,8 @@ onSeatTap: function (event) {
     })
   },
   getFlag: function (e) {
-    if (app.globalData.role == '0') {
+    var role = wx.getStorageSync('role');
+    if (role == '0') {
       this.setData({
         Flag: '报表'
       })

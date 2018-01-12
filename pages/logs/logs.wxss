@@ -1,8 +1,19 @@
-.log-list {
+/* .log-list {
   display: flex;
   flex-direction: column;
   padding: 40rpx;
 }
 .log-item {
   margin: 10rpx;
+} */
+.test{
+  height:1334rpx;
+  width:750rpx;
+  background-image: url('http://wegtech.oss-cn-shenzhen.aliyuncs.com/image/1513943032560_41531395a5681ab9f304a666cdd99ead.jpeg');  
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+  background-color: black;
+  background-attachment:fixed;
+  /* opacity: 0.6; */
+  filter: blur(5rpx);
 }

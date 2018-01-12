@@ -63,6 +63,7 @@ margin-top: 10rpx;
 text-align: center;
 padding-top: 5rpx;
 border-radius: 5rpx;
+font-size: 35rpx;
 }
 .seat-num{
 /* font-size: 40rpx;

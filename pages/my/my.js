@@ -86,21 +86,27 @@ setRole: function (e) {
     }
   },
 
-  getFlag:function(e){
-    if (app.globalData.role == '0') {
-      this.setData({
-        Flag: '报表'
-      })
-    } else if(app.globalData.role == '3'){
-        
-    }else{
+getFlag: function (e) {
+  var role = wx.getStorageSync('role');
+  this.setData({
+    role: role
+  })
+  if (this.data.role == '0') {
+    this.setData({
+      Flag: '报表'
+    })
 
-     this.setData({
-        Flag: '点餐'
-      })
-     }
-    
-  },
+  } else if (this.data.role == '3') {
+
+  } else {
+    this.setData({
+      Flag: '点餐'
+    })
+
+
+  }
+
+},
   onLoginTap: function () {
     console.log("点击了登录");
     wx.navigateTo({
@@ -128,17 +134,17 @@ setRole: function (e) {
   },
   onReportTap: function (e) {
     console.log("onReportTap");
-    console.log(app.globalData.role);
-    if (app.globalData.role == '0') {
+    
+    if (this.data.role == '0') {
       wx.redirectTo({
         url: '../report/report',
       })
-    } else if (app.globalData.role == '1') {
+    } else if (this.data.role == '1') {
       console.log("1");
       wx.redirectTo({
         url: '../staffsbooking/staffsbooking',
       })
-    } else if (app.globalData.role == '2') {
+    } else if (this.data.role == '2') {
       console.log("2");
       wx.redirectTo({
         url: '../staffsbooking/staffsbooking',

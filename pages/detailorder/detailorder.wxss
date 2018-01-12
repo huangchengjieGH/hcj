@@ -8,7 +8,7 @@
 .res-msg{
   display: flex;
   flex-direction: column;
-  border: 2rpx solid #b1adad;
+  border-bottom: 2rpx solid #b1adad;
   width: 100%;
   height: 310rpx;
   text-align: center
@@ -147,23 +147,30 @@
   color: #101010;
 }
 .dish-num{
-  margin-left: 300rpx;
+  position: absolute;
+  right: 300rpx;
+  margin-top: 5rpx;
   font-size: 25rpx;
   font-weight: 300;
 }
 .dish-num2{
+  position: absolute;
   font-size: 35rpx;
   font-weight: 300;
+  right: 280rpx;
 }
 .dish-price{
+  position: absolute;
   color: red;
-  margin-left: 50rpx;
+  right: 200rpx;
   font-size: 35rpx;
   font-weight: 600;
 }
 .dish-price2{
+  position: absolute;
   color: red;
   font-size: 35rpx;
+   right: 140rpx;
 }
 .chawei-fee{
   display: flex;

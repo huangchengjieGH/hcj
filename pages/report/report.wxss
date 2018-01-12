@@ -93,7 +93,7 @@ display: inline-block;
 border: 4px solid transparent;
 border-top: 4px solid #9b9b9b;
 margin-top: 25rpx;
-right: 190rpx;
+right: 200rpx;
 }
 .search{
 /* border: 1rpx solid #ccc; */

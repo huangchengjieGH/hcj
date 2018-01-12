@@ -11,7 +11,7 @@
 .mycollect{
   display: flex;
   flex-direction: row;
-  border: 1rpx solid #bbbbbb;
+  border-bottom: 1rpx solid #bbbbbb;
   height: 80rpx;
   width: 100%;
 }
@@ -36,7 +36,7 @@
 .cooperation{
   display: flex;
   flex-direction: row;
-  border: 1rpx solid #bbbbbb;
+  border-bottom: 1rpx solid #bbbbbb;
   height: 80rpx;
   width: 100%;
 }
@@ -53,7 +53,7 @@
 .about{
   display: flex;
   flex-direction: row;
-  border: 1rpx solid #bbbbbb;
+  border-bottom: 1rpx solid #bbbbbb;
   height: 80rpx;
   width: 100%;
 }
@@ -70,7 +70,7 @@
 .cache{
   display: flex;
   flex-direction: row;
-  border: 1rpx solid #bbbbbb;
+  border-bottom: 1rpx solid #bbbbbb;
   height: 80rpx;
   width: 100%;
 }
@@ -88,7 +88,7 @@
 .contact{
   display: flex;
   flex-direction: row;
-  border: 1rpx solid #bbbbbb;
+  border-bottom: 1rpx solid #bbbbbb;
   height: 80rpx;
   width: 100%;
 }
@@ -120,7 +120,7 @@ font-size: 35rpx;
 width: 100%;
 display: flex;
 flex-direction: row;
-/* border: 1rpx solid #1e89e0 */
+border-bottom: 1rpx solid #bbbbbb;
 }
 .role{
 margin-top: 10rpx;
@@ -149,4 +149,79 @@ color: black;
 .radio-group{
 display: flex;
 flex-direction: column;
+}
+/*mask*/
+.drawer_screen { 
+ width: 100%; 
+ height: 100%; 
+ position: fixed; 
+ top: 0; 
+ left: 0; 
+  z-index: 1000;  
+ background: #000; 
+ opacity: 0.5; 
+ overflow: hidden; 
+} 
+  
+/*content*/
+.drawer_box { 
+ width: 630rpx; 
+ height: 560rpx;
+ overflow: hidden; 
+ position: fixed; 
+ top: 50%; 
+ left: 0; 
+  z-index: 1001;  
+ background: #FAFAFA; 
+ margin: -150px 50rpx 0 50rpx;  
+ border-radius: 3px; 
+} 
+  
+.drawer_content { 
+ height: 100%; 
+ /* overflow-y: scroll;  *//*超出父盒子高度可滚动*/
+ display: flex;
+ flex-direction: column;
+} 
+.pop-content{
+  margin-top: 50rpx;
+}
+.input-txt{
+  margin-left: 20rpx;
+  font-size: 35rpx;
+  margin-top: 12rpx;
+}
+.seat-input{
+  height: 60rpx;
+  width: 500rpx;
+  font-size: 40rpx;
+  text-align: center;
+  border: 1rpx solid #bbbbbb;
+  margin-top: 10rpx;
+  margin-left: 60rpx;
+}
+.pop-btn{
+  display: flex;
+  flex-direction: row;
+  margin-top: 50rpx;
+  margin-left: 80rpx;
+}
+.cancel-btn{
+  border: 1rpx solid white;
+  height: 80rpx;
+  width: 200rpx;
+  background-color: #b1adad;
+  color: white;
+  text-align: center;
+  font-size: 45rpx;
+}
+.confirm-btn{
+  border: 1rpx solid white;
+  height: 80rpx;
+  width: 200rpx;
+  background-color: #0085DD;
+  color: white;
+  text-align: center;
+  margin-left: 50rpx;
+  font-size: 45rpx;
 }

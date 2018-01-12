@@ -1,61 +1,61 @@
 <view class='ranking-contrainer'>
-<view class='top-page'>
-<view class='date'>
-<view class='date-txt'>日期:</view>
-<picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
-<view class="begin-date">
-{{beginDate}}
-</view>
-</picker>
-<view class="icon1"></view>
-<text class='icon-txt'>~</text>
-<picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onEndDateTap">
-<view class="end-date">
-{{endDate}}
-</view>
-</picker>
-<view class="icon2"></view>
-</view>
+  <view class='top-page'>
+    <view class='date'>
+      <view class='date-txt'>日期:</view>
+      <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
+        <view class="begin-date">
+          {{beginDate}}
+        </view>
+      </picker>
+      <view class="icon1"></view>
+      <text class='icon-txt'>~</text>
+      <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onEndDateTap">
+        <view class="end-date">
+          {{endDate}}
+        </view>
+      </picker>
+      <view class="icon2"></view>
+    </view>
 
-<view class='func-area'>
-<view class='type-txt'>类型:</view>
-<view class='type-value' bindtap='perList01'>{{numValue01}}</view>
-<view class="icon3"></view>
-</view>
+    <view class='func-area'>
+      <view class='type-txt'>类型:</view>
+      <view class='type-value' bindtap='perList01'>{{numValue01}}</view>
+      <view class="icon3"></view>
+    </view>
 
-<view class="temp temp1 {{openList01 ? 'slidown' : 'slidup'}} {{showList01 ? 'disappear':''}}">
-<view class='numList' wx:for="{{goodsClassify}}" catchtap='onNumTap01' data-numId="{{item.id}}">
-{{item.name}}
-</view>
-</view>
+    <view class="temp temp1 {{openList01 ? 'slidown' : 'slidup'}} {{showList01 ? 'disappear':''}}">
+      <view class='numList' wx:for="{{goodsClassify}}" catchtap='onNumTap01' data-numId="{{item.id}}">
+        {{item.name}}
+      </view>
+    </view>
 
-<view class='func-area'>
-<view class='type-txt'>排名:</view>
-<view class='type-value'bindtap='perList02'>{{numValue02}}</view>
-<view class="icon3"></view>
-</view>
-<view class="temp2 temp1 {{openList02 ? 'slidown' : 'slidup'}} {{showList02 ? 'disappear':''}}">
-<view class='numList' wx:for="{{rankValue}}" catchtap='onNumTap02' data-numId="{{item}}">
-{{item}}
-</view>
-</view>
+    <view class='func-area'>
+      <view class='type-txt'>排名:</view>
+      <view class='type-value' bindtap='perList02'>{{numValue02}}</view>
+      <view class="icon3"></view>
+    </view>
+    <view class="temp2 temp1 {{openList02 ? 'slidown' : 'slidup'}} {{showList02 ? 'disappear':''}}">
+      <view class='numList' wx:for="{{rankValue}}" catchtap='onNumTap02' data-numId="{{item}}">
+        {{item}}
+      </view>
+    </view>
 
-<view class='search' catchtap='onSearchTap'>
-<text class='search-txt'>查询</text>
-</view>
-</view>
-<view class='spliter-line'></view>
-<view style='padding-left:120rpx;border-bottom:2rpx solid #ccc'>
-<view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>菜名</view>
-<view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>类型</view>
-<view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>数量</view>
-</view>
-<scroll-view class='scroll' scroll-y="true">
-<view wx:for="{{tableOrder}}" wx:for-item="item">
-<view class="dishValue" catchtap="ontimeTap" data-id="{{item.one}}">{{item.name}}</view>
-<view class="dishValue2">{{item.classify}}</view>
-<view class="dishValue1">{{item.count}}</view>
-</view>
-</scroll-view>
+    <view class='search' catchtap='onSearchTap'>
+      <text class='search-txt'>查询</text>
+    </view>
+  </view>
+  <view class='spliter-line'></view>
+  <view style='padding-left:120rpx;border-bottom:2rpx solid #ccc'>
+    <view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>菜名</view>
+    <view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>类型</view>
+    <view style='width:33%;display:inline-block;vertical-align:top;padding:15rpx'>数量</view>
+  </view>
+  <scroll-view class='scroll' scroll-y="true">
+    <view wx:for="{{tableOrder}}" wx:for-item="item">
+      <view class="dishValue" catchtap="ontimeTap" data-id="{{item.one}}">{{item.name}}</view>
+      <view class="dishValue2">{{item.classify}}</view>
+      <view class="dishValue1">{{item.count}}</view>
+    </view>
+  </scroll-view>
 
 </view>

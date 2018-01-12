@@ -1,34 +1,34 @@
 <view class='checkorder-contrainer'>
 
-<scroll-view class='scroll' scroll-x="true" style=" white-space: nowrap; display: flex">
-<view wx:for="{{tableOrder}}" wx:for-item="item">
-<view class="dishValue">{{item.name}}</view>
-<view class="dishValue2">{{item.price}}</view>
-<view class="dishValue3">{{item.count}}</view>
-<view class="dishValue4">{{item.totalPrice}}</view>
-<view class="dishValue6">{{item.time}}</view>
+  <scroll-view class='scroll' scroll-x="true" style=" white-space: nowrap; display: flex">
+    <view wx:for="{{tableOrder}}" wx:for-item="item">
+      <view class="dishValue">{{item.name}}</view>
+      <view class="dishValue2">{{item.price}}</view>
+      <view class="dishValue3">{{item.count}}</view>
+      <view class="dishValue4">{{item.totalPrice}}</view>
+      <view class="dishValue6">{{item.time}}</view>
 
-</view>
-</scroll-view>
+    </view>
+  </scroll-view>
 
-<view class='seat-top'>
-<view style='display: flex;flex-direction: row;'>
-  <view class='order-txt'>订单号:</view>
-  <view class='order-num'>{{num}}</view>   
-</view>
-<view style='display:flex;flex-direction:row;margin-top:10rpx;'>
- <view style='display: flex;flex-direction:row;'>
-   <view class='seat-txt'>座位号:</view>
-  <view class='seat-num'>{{tableNum}}</view>
- </view>
-  <view style='display: flex;flex-direction:row;'>
-  <text class='customer-txt'>用餐人数:</text>
-  <text class='seat-num'>{{customerNum}}</text>
+  <view class='seat-top'>
+    <view style='display: flex;flex-direction: row;'>
+      <view class='order-txt'>订单号:</view>
+      <view class='order-num'>{{num}}</view>
+    </view>
+    <view style='display:flex;flex-direction:row;margin-top:10rpx;'>
+      <view style='display: flex;flex-direction:row;'>
+        <view class='seat-txt'>座位号:</view>
+        <view class='seat-num'>{{tableNum}}</view>
+      </view>
+      <view style='display: flex;flex-direction:row;'>
+        <text class='customer-txt'>用餐人数:</text>
+        <text class='seat-num'>{{customerNum}}</text>
+      </view>
+
+    </view>
+
   </view>
-  
-</view>
-
-</view>
 
 
 </view>

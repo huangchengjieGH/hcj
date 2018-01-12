@@ -2,12 +2,28 @@
 .myorder-contrainer{
   display: flex;
   flex-direction: column;
-  /* height: 1100rpx; */
+  border: none;
+}
+.bakckground{
+ height:1334rpx;
+  width:750rpx;
+background-image: url('http://wegtech.oss-cn-shenzhen.aliyuncs.com/image/1513943032560_41531395a5681ab9f304a666cdd99ead.jpeg');  
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+  background-color: black;
+  background-attachment:fixed;
+  /* opacity: 0.6; */
+  filter: blur(50rpx); 
 }
 .myorder{
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 200rpx;
-  background: #1e89e0;
+ /*  background: #1e89e0; */
+ border: 2rpx solid white
+ 
+  
 }
 .setting{
 /*   margin-top: 10rpx; */
@@ -16,21 +32,22 @@
   margin-top: 28rpx;
   height: 45rpx;
   width: 45rpx;
-  margin-left: 620rpx;
+  margin-left: 590rpx;
 }
 .setting-txt{
   position: absolute;
   top: 20rpx;
-  right: 10rpx;
+  right: 30rpx;
   font-size: 40rpx;
   color: white;
-  margin-left: 10rpx;
 }
 .userinfo-avatar {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
-  margin-left: 50rpx;
+  position: absolute;
+  top: 60rpx;
+  left: 50rpx;
 }
 .user-msg{
   display: flex;
@@ -40,6 +57,9 @@
   margin-left: 30rpx;
 }
 .userinfo-nickname {
+  position: absolute;
+  top: 60rpx;
+  left: 160rpx;
   color: #fff;
   font-size: 40rpx;
 }
@@ -67,26 +87,31 @@
 .Login-txt2{
   color: white;
   font-size: 30rpx;
+  margin-left: 80rpx;
+  margin-top: 30rpx;
 }
 .arrow-right{
   position: absolute;
   height: 50rpx;
   width: 50rpx;
-  right: 20rpx;
-  margin-top: 20rpx;
+  right: 40rpx;
+  margin-top: 10rpx;
 }
 .spliter-line{
   height: 10rpx;
   width: 100%;
   background: #F3F3F3;
-  border-bottom: 1rpx solid #bbbbbb;
+  /*  border-bottom: 1rpx solid #bbbbbb;  */
 }
 .function-class{
   display: flex;
   flex-direction: row;
-  border: 2rpx solid #bbbbbb;
+  border-bottom: 1rpx solid #bbbbbb; 
   width: 100%;
   height: 70rpx;
+  position: fixed;
+  top: 200rpx;
+  background-color: white;
 }
 .total-order{
   font-size: 36rpx;
@@ -136,10 +161,17 @@
   margin-left: 80rpx;
   margin-top: 8rpx;
 }
+.subject-msg{
+  position: fixed;
+  top: 280rpx;
+  width: 100%;
+  height: 800rpx;
+  
+}
 .order-msg{
   display: flex;
   flex-direction: row;
-  border-bottom: 1rpx solid #b1adad;
+/*   border-bottom: 1rpx solid #b1adad; */
   height: 185rpx;
   width: 100%;
 }
@@ -158,55 +190,50 @@
 .res-name{
   font-size: 35rpx;
   font-weight: 320;
-  color: black;
+  color: white;
   margin-top: 10rpx;
 }
 .order-time{
   font-size: 30rpx;
-  color: black;
+  color: white;
   margin-top: 8rpx;
 }
 .state{
-  margin-left: 60rpx;
-  margin-top: 10rpx;
+  text-align: center;
 }
 .arrow{
   height: 35rpx;
   width: 35rpx;
+  margin-left: 60rpx;
+  margin-top: 10rpx;
 }
 .order-state{
   font-size: 35rpx;
-  position: absolute;
-  margin-left: 15rpx;
+  color: white
 }
 .price{
   margin-left: 55rpx;
   font-size: 40rpx;
+  color: white;
 }
 .price-symbol{
-  color: red;
+  color: white;
   font-weight: 550rpx;
 }
 .invoice{
-  margin-left: 60rpx;
+  text-align: center;
   background-color: #faf7f7;
-  border: 2rpx solid #bbbbbb;
-  height: 55rpx;
+  height: 60rpx;
   width: 180rpx;
-  margin-top: 3rpx;
   border-radius: 5rpx;
+  margin-left: 50rpx;
+  padding-top: 5rpx;
 }
 .invoice-txt{
   font-size: 30rpx;
   color: red;
-  position: absolute;
-  margin-left: 60rpx;
-  margin-top: 5rpx;
 }
-.subject-msg{
-  width: 100%;
-  height: 1000rpx;
-}
+
 .hide{
   display: none;
 }

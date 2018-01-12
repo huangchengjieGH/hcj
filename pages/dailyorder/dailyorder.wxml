@@ -1,8 +1,8 @@
 <view class='daily-order'>
+
   <view class='top-page'>
     <view class='date'>
       <view class='date-txt'>日期:</view>
-      <!-- <view class='begin-date'>2017-11-16</view> -->
       <picker mode="date" value="{{date}}" start="{{2017-01-01}}" end="2040-01-01" bindchange="onBeginDateTap">
         <view class="begin-date">
           {{beginDate}}
@@ -38,17 +38,17 @@
     <text class='total-txt'>营业总额:</text>
     <text class='total-value'>{{totalPrice}}</text>
   </view>
-  <scroll-view class='scroll' scroll-x="true" style=" white-space: nowrap; display: flex">
+
+  <view class='spliter-line'></view>
+  <scroll-view scroll-x="true" style="white-space: nowrap; display: flex;margin-bottom:50rpx;">
     <view wx:for="{{dailyOrder}}" wx:for-item="item">
-      <view class="{{index=='0'?'dishValue':'dishValue0'}}" style='white-space: pre-line' catchtap="onOrderTap" data-id="{{item.id}}">
+      <view class="{{index=='0'?'dishValue':'dishValue font-color'}}" catchtap="onOrderTap" data-id="{{item.id}}">
         <text style=" margin-left:10rpx;">{{item.num}}</text>
       </view>
-      <view class="{{index=='0'?'dishValue6':'dishValue2'}}">{{item.orderPrice}}</view>
-      <view class="{{index=='0'?'dishValue6':'dishValue3'}}">{{item.customerNum}}</view>
-      <view class="{{index=='0'?'dishValue6':'dishValue4'}}">{{item.payType}}</view>
-      <view class="{{index=='0'?'dishValue6':'dishValue5'}}">{{item.operator}}</view>
+      <view class="dishValue">{{item.orderPrice}}</view>
+      <view class="dishValue">{{item.customerNum}}</view>
+      <view class="dishValue">{{item.payType}}</view>
+      <view class="dishValue">{{item.operator}}</view>
     </view>
   </scroll-view>
-
-
 </view>

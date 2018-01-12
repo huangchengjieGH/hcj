@@ -85,10 +85,10 @@
           </view>
           <!--   下拉框   -->
           <view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
-           <scroll-view scroll-y="true"  style='height: 120px'>
-            <view class='numList' wx:for="{{accountList}}" catchtap='chooseCompany' data-company="{{item.company}}" data-name="{{item.name}}">
-              {{item.company}}
-            </view>
+            <scroll-view scroll-y="true" style='height: 120px'>
+              <view class='numList' wx:for="{{accountList}}" catchtap='chooseCompany' data-company="{{item.company}}" data-name="{{item.name}}">
+                {{item.company}}
+              </view>
             </scroll-view>
           </view>
           <view style="{{accountStyle == 1?'padding-top:10rpx;':'display: none;'}}">

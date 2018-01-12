@@ -1,10 +1,13 @@
 {
   "pages":[
-    "pages/ordermanager/ordermanager",
-    "pages/customerbooking/customerbooking",
-    "pages/staffsbooking/staffsbooking",
-    "pages/report/report",
+    "pages/register/register",
     "pages/myorder/myorder",
+    "pages/customerbooking/customerbooking",
+    "pages/settings/setting",
+    "pages/staffsbooking/staffsbooking",
+    "pages/logs/logs",
+    "pages/report/report",
+    "pages/ordermanager/ordermanager",
     "pages/homepage/homepage",    
     "pages/checkorder/checkorder",
     "pages/bosscheck/bosscheck",  
@@ -12,11 +15,9 @@
     "pages/ranking/ranking", 
     "pages/pay/pay",
     "pages/my/my", 
-    "pages/settings/setting",
     "pages/detailorder/detailorder",
     "pages/shopmsg/shopmsg",
     "pages/choosecity/inputcity/inputcity",
-    "pages/register/register",
     "pages/cooperation/cooperation",
     "pages/choosecity/choosecity",
     "pages/nearby/nearby",
@@ -24,8 +25,7 @@
     "pages/reservation/reservation",
     "pages/homepage/search/search",
     "pages/index/index",
-    "pages/lineup/lineup",
-    "pages/logs/logs"
+    "pages/lineup/lineup"
   ],
   "window":{
     "backgroundTextStyle":"light",

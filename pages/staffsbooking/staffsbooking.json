@@ -1,5 +1,5 @@
 {
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "点餐快点",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
 }

@@ -46,7 +46,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     this.getHotResData("hotRes");
-    this.located();
+  //  this.located();
     this.getServiceResData();
     console.log("onLoad")
   },

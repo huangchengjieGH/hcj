@@ -1,25 +1,25 @@
 <!--pages/pay/pay.wxml-->
 <view class='pay-contrainer'>
-   <view class='res-msg'>
+  <view class='res-msg'>
     <image class='res-img' src='/images/image/aizhimian.jpg'></image>
     <view class='status'>
-    <text class='res-txt'>{{orderStatus}}</text>
-    <image class='arrow-right' src="/images/icon/arrow-right.png"></image>
+      <text class='res-txt'>{{orderStatus}}</text>
+      <image class='arrow-right' src="/images/icon/arrow-right.png"></image>
     </view>
     <text class="thanks">感谢对点餐快点系统信任，期待下一次光临</text>
     <view class="again">再来一单</view>
-  </view> 
+  </view>
   <view class='basic-msg'>
     <text class='basic'>基本信息</text>
   </view>
-   <view>
+  <view>
     <view class="order-num1">
       <text class='order-num'>订单号</text>
       <text class='order-value'>{{ordermsg.orderMsg.num}}</text>
     </view>
     <view class='order-time'>
       <text class='time'>下单时间：</text>
-      <text class='time-value'>{{ordermsg.orderMsg.lastOrderStream.createdAt}}</text>
+      <text class='time-value'>{{ordermsg.orderMsg.time}}</text>
     </view>
     <view class='seat-msg'>
       <text class='seat'>座位号：</text>
@@ -29,20 +29,20 @@
       <text class='pay-txt'>支付方式：</text>
       <text class='pay-value'>{{payWay}}</text>
     </view>
-  </view> 
+  </view>
   <view class='order-msg'>
     <text class='basic'>订单信息</text>
   </view>
- <view wx:for="{{ordermsg.orderMsg.goodsList}}" wx:for-item="item"> 
-   <view class='dish-list'>
-    <text class='dish-name'>{{item.name}}</text>
-    <text class='dish-num'>X</text>
-    <text class='dish-num2'>{{item.count}}</text>
-    <text class='dish-price'>￥</text>
-    <text class='dish-price2'>{{item.price}}</text>
-  </view> 
-    </view> 
-<!--    <view class='chawei-fee' bindtap='per_list'>
+  <view wx:for="{{ordermsg.orderMsg.goodsList}}" wx:for-item="item">
+    <view class='dish-list'>
+      <text class='dish-name'>{{item.name}}</text>
+      <text class='dish-num'>X</text>
+      <text class='dish-num2'>{{item.count}}</text>
+      <text class='dish-price'>￥</text>
+      <text class='dish-price2'>{{item.price}}</text>
+    </view>
+  </view>
+  <!--    <view class='chawei-fee' bindtap='per_list'>
     <view class='per-num'>
       <text class='num-value'>{{numValue}}</text>
       <view class="icon"></view>
@@ -52,13 +52,13 @@
     <text class='unit-desc'>元/茶位费</text>
     
   </view>  -->
-  
-<!--   <view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
+
+  <!--   <view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
      <view class='numList' wx:for="{{content}}" catchtap='onNumTap' data-numId="{{item}}">
             {{item}}
         </view>  
   </view> -->
-<view class='spliter-line'></view>
+  <view class='spliter-line'></view>
   <view class='service'>
     <text class='service-txt'>服务费</text>
     <text class='service-value'>0</text>
@@ -81,8 +81,3 @@
     <button class='pay-btn' catchtap='onPaytap'>{{payWay}}</button>
   </view> -->
 </view>
-
-
-
-
-

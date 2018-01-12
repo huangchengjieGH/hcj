@@ -14,4 +14,6 @@
     </view>
   </view>
   <button class="login-btn" type="primary" bindtap="submit">登录</button>
+
+  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">hhh</button>
 </view>

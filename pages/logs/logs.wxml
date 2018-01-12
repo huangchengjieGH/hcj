@@ -1,6 +1,9 @@
 <!--logs.wxml-->
 <view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log" wx:key="*this">
+  <!-- <block wx:for="{{logs}}" wx:for-item="log" wx:key="*this">
     <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+  </block> -->
+  <view class='test'>   
+  <text style='color:white'>测试背景图片</text> 
+  </view>
 </view>

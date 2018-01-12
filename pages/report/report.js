@@ -228,7 +228,8 @@ Page({
     var timeId = event.currentTarget.dataset.id;
     console.log(timeId);
     wx.navigateTo({
-      url: '../dailyorder/dailyorder?timeId=' + timeId,
+       url: '../dailyorder/dailyorder?timeId=' + timeId, 
+      //url: '../hcj/hcj?timeId=' + timeId,
     })
   },
   onRankTap: function (event) {

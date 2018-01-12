@@ -1,4 +1,4 @@
-// pages/register/register.js
+var WXBizDataCrypt = require('../../libs/WXBizDataCrypt/WXBizDataCrypt.js')
 Page({
 
   /**
@@ -9,6 +9,7 @@ Page({
     code: '',
     getCodeFlag:false,
   },
+
   
   phoneInput(e) {
     this.setData({
@@ -35,11 +36,46 @@ Page({
       url: '../myorder/myorder'
     })
   },
+  getPhoneNumber: function (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+    var sessionKey = 'sw2IFQscaHyEQqh3iwr+KA==';
+    var appId = 'wx8f6bfc2c9922c895';
+    var encryptedData = e.detail.encryptedData;
+    var iv = e.detail.iv;
+    /* var pc = new WXBizDataCrypt(appId, sessionKey);
+    var data = pc.decryptData(encryptedData, iv);
+    console.log(data); */
+   
+    /*获取商品信息 */
+    util.requestByLogin({
+      url: app.globalData.domain + '/wx/user/userphone',
+      method: 'POST',
+      data: {
+        encryptedData: encryptedData,
+        iv: iv,
+        session_key: session_key
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+    }, function (res) {
+      console.log(res);
+      wx.hideToast();
+    }, function () {
+      console.log("Error:function GetData")
+      wx.hideToast();
+    }
+    );
+
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+   
   },
 
   /**

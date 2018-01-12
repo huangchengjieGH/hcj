@@ -12,7 +12,16 @@ Page({
     numValue: '全部',
     order: '',
     beginDate:'',
-    dailyOrder: []
+    dailyOrder: [
+      {
+        id: '-1',
+        num: '订单号',
+        orderPrice: '金额',
+        customerNum: '用餐人数',
+        payType: '支付方式',
+        operator: '收银员'
+      }
+      ]
   },
 
   /**
@@ -20,7 +29,6 @@ Page({
   */
   onLoad: function (options) {
     var timeId = options.timeId;
-    console.log(timeId);
     this.setData({
       beginDate: timeId
     })
@@ -72,7 +80,7 @@ Page({
     dailyOrder.push(temp);
     for (var idx in data){
       if (data[idx].customerNum == "")
-        data[idx].customerNum = null;
+        data[idx].customerNum = 0;
       if (data[idx].payType == "")
         data[idx].payType = null;
       if (data[idx].operator == "")
@@ -107,7 +115,6 @@ Page({
       "beginDate": beginDate,
       "endDate": beginDate
     });
-    /* console.log(start_date); */
   },
   onBeginDateTap: function (e) {
     var dates = e.detail.value;
@@ -152,45 +159,7 @@ Page({
     console.log('click search');
     this.getServiceDailyOrderData();
   },
-  /**
-  * 生命周期函数--监听页面初次渲染完成
-  */
-  onReady: function () {
-  },
 
-  /**
-  * 生命周期函数--监听页面显示
-  */
-  onShow: function () {
-  },
 
-  /**
-  * 生命周期函数--监听页面隐藏
-  */
-  onHide: function () {
-  },
 
-  /**
-  * 生命周期函数--监听页面卸载
-  */
-  onUnload: function () {
-  },
-
-  /**
-  * 页面相关事件处理函数--监听用户下拉动作
-  */
-  onPullDownRefresh: function () {
-  },
-
-  /**
-  * 页面上拉触底事件的处理函数
-  */
-  onReachBottom: function () {
-  },
-
-  /**
-  * 用户点击右上角分享
-  */
-  onShareAppMessage: function () {
-  }
 })

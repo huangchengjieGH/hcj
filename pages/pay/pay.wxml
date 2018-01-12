@@ -26,27 +26,27 @@
     </view>
   </view>
   <view class='order-msg'>
-  <view class="line"></view>
+    <view class="line"></view>
     <text class='basic'>订单信息</text>
   </view>
 
-<scroll-view scroll-y="true" style='width:100%;height:600rpx;'>
- <view wx:for="{{paymsg.orderList.goodsList}}" wx:for-item="item">
-  <view class='dish-list'>
-    <text class='dish-name'>{{item.name}}</text>
-    <text class='dish-num'>X</text>
-    <text class='dish-num2'>{{item.count}}</text>
-    <text class='dish-price'>￥</text>
-    <text class='dish-price2'>{{item.price}}</text>
-  </view>
- </view>
+  <scroll-view scroll-y="true" style='width:100%;height:600rpx;'>
+    <view wx:for="{{paymsg.orderList.goodsList}}" wx:for-item="item">
+      <view class='dish-list'>
+        <text class='dish-name'>{{item.name}}</text>
+        <text class='dish-num'>X</text>
+        <text class='dish-num2'>{{item.count}}</text>
+        <text class='dish-price'>￥</text>
+        <text class='dish-price2'>{{item.price}}</text>
+      </view>
+    </view>
 
-  <view class='total'>
-    <text class='total-txt'>总计：</text>
-    <text class='price-symbol'>￥</text>
-    <text class='total-value'>{{paymsg.orderList.orderPrice}}</text>
-  </view>
-</scroll-view>
+    <view class='total'>
+      <text class='total-txt'>总计：</text>
+      <text class='price-symbol'>￥</text>
+      <text class='total-value'>{{paymsg.orderList.orderPrice}}</text>
+    </view>
+  </scroll-view>
   <view class="{{1==1?'hide':'chawei-fee'}}" bindtap='per_list'>
     <view class='per-num'>
       <text class='num-value'>{{numValue}}</text>
@@ -57,11 +57,11 @@
     <text class='unit-desc'>元/茶位费</text>
     <!-- <text>/茶位费</text> -->
   </view>
-  
+
   <view class="temp temp1 {{openList ? 'slidown' : 'slidup'}} {{showList ? 'disappear':''}}">
-     <view class='numList' wx:for="{{content}}" catchtap='onNumTap' data-numId="{{item}}">
-            {{item}}
-        </view>  
+    <view class='numList' wx:for="{{content}}" catchtap='onNumTap' data-numId="{{item}}">
+      {{item}}
+    </view>
   </view>
 
   <view class="{{1==1?'hide':'service'}}">
@@ -76,13 +76,9 @@
     <text class='zhe'>折</text>
   </view>
 
- 
+
 
   <view class='pay'>
     <button class='pay-btn' catchtap='onPaytap'>{{payWay}}</button>
   </view>
 </view>
-
-
-
-

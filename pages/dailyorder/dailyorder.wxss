@@ -171,74 +171,20 @@ color: red;
 margin-top: 5rpx;
 }
 .scroll{
-width: 100%;
-/* height: 400rpx; */
-/* margin-top: 450rpx; */
-margin-bottom: 50rpx;
+margin-bottom: 200rpx;
+margin-top:50rpx;
 }
-.dishValue6{
-background: white; width: 200rpx; height: 70rpx; display: inline-block;
-/* border-bottom: 1rpx solid #ccc;
-border-right: 1rpx solid #ccc; */
-border-bottom: 1rpx solid #ccc;
-text-align: center;
-font-size: 38rpx;
-padding-top: 5rpx;
-border-right: 1rpx solid #ccc;
-}
-.dishValue0{
-background: white; width: 300rpx; height: 70rpx; display: inline-block;
-border-bottom: 1rpx solid #ccc;
-text-align: center;
-font-size: 38rpx;
-color:#42a4e2;
-border-right: 1rpx solid #ccc;
+.font-color{
+ color:#42a4e2;
 }
 .dishValue{
 background: white; 
 width: 300rpx; 
 height: 70rpx; 
 display: inline-block;
-/* border-bottom: 1rpx solid #ccc;
-border-right: 1rpx solid #ccc; */
 text-align: center;
 font-size: 38rpx;
 padding-top: 5rpx;
 border-bottom: 1rpx solid #ccc;
-border-right: 1rpx solid #ccc;
-}
-.dishValue2{
-background: white; 
-width: 200rpx; 
-height: 70rpx;
-display: inline-block;
-border-bottom: 1rpx solid #ccc;
-text-align: center;
-font-size: 38rpx;
-border-right: 1rpx solid #ccc;
-}
-.dishValue3{
-background: white;
-width: 200rpx; 
-height: 70rpx; 
-display: inline-block;
-border-bottom: 1rpx solid #ccc;
-text-align: center;
-font-size: 38rpx;
-border-right: 1rpx solid #ccc;
-}
-.dishValue4{
-background: white; width: 200rpx; height: 70rpx; display: inline-block;
-border-bottom: 1rpx solid #ccc;
-text-align: center;
-font-size: 38rpx;
-border-right: 1rpx solid #ccc;
-}
-.dishValue5{
-background: white; width: 200rpx; height: 70rpx; display: inline-block;
-border-bottom: 1rpx solid #ccc;
-/* border-right: 1rpx dashed #ccc; */
-text-align: center;
-font-size: 38rpx;
 border-right: 1rpx solid #ccc;
 }

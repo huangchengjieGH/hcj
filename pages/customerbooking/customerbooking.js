@@ -54,8 +54,6 @@ Page({
    */
   onLoad: function (options) {
     console.log("onLoad");
-    //  console.log(app.globalData.domain);
-    //   console.log(app.globalData.shopId);
     /****获取二维码信息 */
     // var scene = decodeURIComponent(options.scene);
     //   console.log(options);
@@ -75,7 +73,7 @@ Page({
     var tableNum = this.GetQueryString(url, 'tableNum');
     //测试屏蔽扫码，给定默认座位号10
     this.setData({
-      tableNum: 15
+      tableNum: 8
     })
     console.log("this.data.tableNum:" + this.data.tableNum);
     var open_res_Id = app.globalData.resId;
@@ -83,6 +81,7 @@ Page({
     var Detail = {};
     var goods = {};
     this.GetData();
+    this.getDataBySalse();
   },
 
   onShow: function () {
@@ -100,7 +99,12 @@ Page({
     var order_num = 0;
     var ServiceGoodsMsg = {};
     var resMsg = {};
-
+    
+    wx.showLoading(
+      {
+        title: "处理中"
+      }
+    )
     /*获取商品信息 */
     util.requestByLogin({
       url: app.globalData.domain + '/wx/goods',
@@ -122,6 +126,7 @@ Page({
       that.processGoodsData(that.data.goods_msg.data[0]);
       that.processOrderList(that.data.goods_msg);
       that.setData({ classify: ServiceGoodsMsg.data[0].classifyname });
+      that.getSellerClassify(ServiceGoodsMsg.data);
       //console.log(res.extra.seller.payType);
       if (res.extra.seller.payType == 3) {
         that.setData({
@@ -133,13 +138,115 @@ Page({
           cashPay: true
         })
       }
-
+      wx.hideToast();
     }, function () {
       console.log("Error:function GetData")
       wx.hideToast();
     }
     );
 
+  },
+  getDataBySalse:function(e){
+    var that = this;
+    /*获取商品信息 */
+    util.requestByLogin({
+      url: app.globalData.domain + '/wx/goods/sales',
+      method: 'GET',
+      data: {
+        sellerId: app.globalData.shopId,
+      },
+      header: {
+        'content-type': 'application/xml'
+      },
+    }, function (res) {
+      that.setData({
+        goodsSales:res.data
+      })    
+     
+    }, function () {
+      console.log("Error:function GetData")
+    }
+    );
+  },
+  getSellerClassify:function(data){
+     var sellerClassify={};
+     var classifyGroupOne = [];
+     var classifyGroupTwo = [];
+     var temp = {};
+     for( var idx in data){
+       if(idx < 2){
+         temp = {
+           'classifyname': data[idx].classifyname
+           }
+         classifyGroupOne.push(temp); 
+       }else{
+         temp = {
+           'classifyname': data[idx].classifyname
+         }
+         classifyGroupTwo.push(temp);
+       }
+     }
+     temp = {
+       'classifyname': '热销榜单'
+     }
+     classifyGroupOne.push(temp);
+    /*  sellerClassify = {
+       classifyGroupOne,
+       classifyGroupTwo
+     } */
+     this.setData({
+       'classifyGroupOne': classifyGroupOne,
+       'classifyGroupTwo': classifyGroupTwo
+     })
+  },
+  processGoodsSalesData: function (goodsList){
+    var temp = {};
+    var order_num = 0;
+    var Goods = [];
+    var goodLists = [];
+    var name = '';
+    var totalname = '';
+    var classifyName = '热销榜单';
+    for (var idx in goodsList) {
+      totalname = goodsList[idx].name + '(' + goodsList[idx].specName + ')';
+      if (totalname.length > 8) {
+        name = totalname.substring(0, 4);
+        name = name + '..'
+      } else {
+        name = totalname;
+      }
+      if(idx < 30){
+          temp = {
+            id: goodsList[idx].goodsId,
+            name: name,
+            totalname: totalname,
+            brief: goodsList[idx].brief,
+            classifyId: goodsList[idx].classifyId,
+            imgUrl: app.globalData.imgDomain + goodsList[idx].imgUrl,
+            status: goodsList[idx].status,
+            specId: goodsList[idx].specId,
+            specName: goodsList[idx].specName,
+            price: goodsList[idx].price,
+            vipPrice: goodsList[idx].vipPrice,
+            sales: goodsList[idx].sales,
+            soldout: goodsList[idx].soldout,
+          }
+          Goods.push(temp);
+      } else{
+        break;
+      }
+      
+    }
+    temp = {
+      classifyName: classifyName,
+      goodLists: Goods
+    }
+    goodLists.push(temp);
+    this.setData(
+      {
+        Goods: goodLists
+      }
+    )
   },
   /**
    * 获取不同类型菜品
@@ -149,23 +256,39 @@ Page({
     var order_num = 0;
     var Goods = [];
     var goodLists = [];
+    var specsList=[];
     console.log(goodsList.classifyName);
-    var classifyName = goodsList.classifyName;
+    var classifyName = goodsList.classifyname;
+    var name = '';
+    var totalname = '';
     for (var idx in goodsList.goods) {
       var goods = goodsList.goods;
-      temp = {
-        id: goods[idx].id,
-        name: goods[idx].name,
-        brief: goods[idx].brief,
-        price: goods[idx].price,
-        sales: goods[idx].sales,
-        imgUrl: app.globalData.imgDomain+goods[idx].imgUrl,
-        status: goods[idx].status,
-        soldout: goods[idx].soldout,
-        classifyId: goods[idx].classifyId
-      }
-
-      Goods.push(temp);
+      specsList = goods[idx].specs;
+      for (var index in specsList){
+        totalname = goods[idx].name + '(' + specsList[index].name + ')';
+        if (totalname.length > 8) {
+          name = totalname.substring(0, 7);
+          name = name + '..'
+        } else {
+          name = totalname;
+        }
+        temp = {
+          id: goods[idx].id,
+          name: name,
+          totalname: totalname,
+          brief: goods[idx].brief,
+          classifyId: goods[idx].classifyId,
+          imgUrl: app.globalData.imgDomain + goods[idx].imgUrl,
+          status: goods[idx].status,
+          specId: specsList[index].id,
+          specName: specsList[index].name,
+          price: specsList[index].price,
+          vipPrice: specsList[index].vipPrice,
+          sales: specsList[index].sales,
+          soldout: specsList[index].soldout,
+        }
+        Goods.push(temp);
+      }  
     }
     temp = {
       classifyName: classifyName,
@@ -207,7 +330,7 @@ Page({
    * style:  0 加菜   1 退菜
    * dishId: 菜品id
    */
-  processServiceOrder(style, goodId) {
+  processServiceOrder(style, goodId, specId) {
     var that = this;
     var good = [];
     var goodsArray = [];
@@ -221,6 +344,7 @@ Page({
       good = [
         {
           goodsId: goodId,
+          specId: specId,
           count: 1,
         }
       ]
@@ -263,13 +387,15 @@ Page({
         },
         data: {
           id: that.data.orderId,
-          goodsId: goodId
+          goodsId: goodId,
+          specId: specId
         },
       }, function (res) {
         console.log(res);
         that.setData({
           orderLists: res.data,
         })
+        that.processGoodsListOrder(res.data);
         goodsArray = res.data.goodsList;
         that.getTotalCount(goodsArray);
         wx.hideToast();
@@ -327,17 +453,39 @@ Page({
   onclassiTap: function (event) {
     var id = event.currentTarget.dataset.id;
     var name = event.currentTarget.dataset.name;
+    id+=2;
     console.log("buttonId:" + name);
-    console.log("buttonId:" + id);
     this.setData({ 'classify': name }),
-      this.processGoodsData(this.data.goods_msg.data[id]);
-
-
+    this.processGoodsData(this.data.goods_msg.data[id]);
+  },
+  onTopClassiTap: function (event) {
+    var name = event.currentTarget.dataset.name;
+    var hotSales = [];
+    var temp = {};
+    console.log("buttonId:" + name);
+    this.setData({ 'classify': name });
+    if (name == this.data.classifyGroupOne[0].classifyname)
+      this.processGoodsData(this.data.goods_msg.data[0]);
+    else if ( name == this.data.classifyGroupOne[1].classifyname)
+      this.processGoodsData(this.data.goods_msg.data[1]);
+    else if (name == '热销榜单'){
+      console.log('热销榜单');
+     /*  temp = {
+        'classifyName':'热销榜单',
+        'goodLists': this.data.goodsSales
+      }
+      hotSales.push(temp);
+      this.setData({
+        Goods: hotSales
+      })*/
+      this.processGoodsSalesData(this.data.goodsSales);
+    }     
   },
   /*click the button to del the ordered dish */
   DelDishTap: function (event) {
     var that = this;
     var deldishId = event.currentTarget.dataset.deldishid;
+    var specId = event.currentTarget.dataset.specid;
     var param = {};
     var param1 = {};
     var totalnum = 0;
@@ -362,7 +510,7 @@ Page({
         }
       }
       /****退菜 */
-      that.processServiceOrder(1, deldishId);
+      that.processServiceOrder(1, deldishId,specId);
       /*同步菜单列表 */
       //   this.processOrderList(this.data.goods_msg);
       /*改变状态*/
@@ -381,6 +529,7 @@ Page({
   AddDishTap: function (event) {
     var that = this;
     var adddishId = event.currentTarget.dataset.adddishid;
+    var specId = event.currentTarget.dataset.specid;
     console.log(adddishId);
     this.showInputSeat('close');
     var flag = false;
@@ -405,7 +554,7 @@ Page({
      if (this.data.tableNum != null && this.data.tableNum != '') {
         console.log("已经扫码");
         /***点菜 */
-         that.processServiceOrder(0, adddishId);
+         that.processServiceOrder(0, adddishId,specId);
         var class_param = {};
         var class_string = "class_Dish[" + classIndex + "]";
         class_param[class_string] = this.data.class_Dish[classIndex] + 1;
@@ -558,18 +707,24 @@ Page({
   onImgTap: function (e) {
     var imgId = e.currentTarget.dataset.imgid;
     var soldout = e.currentTarget.dataset.soldout;
+    var specId = e.currentTarget.dataset.specid;
+    console.log("specId");
+    console.log(specId);
     if (soldout == 0){
     this.setData({
       popFlag: 0
     })
     var temp = {};
     for (var idx in this.data.Goods[0].goodLists) {
-      if (this.data.Goods[0].goodLists[idx].id == imgId) {
-        temp = {
+      if (this.data.Goods[0].goodLists[idx].id == imgId && this.data.Goods[0].goodLists[idx].specId == specId) {
+        temp = {   
           id: imgId,
+          specId: this.data.Goods[0].goodLists[idx].specId,
           name: this.data.Goods[0].goodLists[idx].name,
+          totalname: this.data.Goods[0].goodLists[idx].totalname,
           sales: this.data.Goods[0].goodLists[idx].sales,
           price: this.data.Goods[0].goodLists[idx].price,
+          vipPrice: this.data.Goods[0].goodLists[idx].vipPrice,
           imgUrl: this.data.Goods[0].goodLists[idx].imgUrl
         }
         this.setData({
